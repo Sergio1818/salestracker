@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SalesTracker — Globant · Salesforce</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#ffffff;--bg2:#f7f7f5;--bg3:#f1efe8;
+  --text:#1a1a18;--text2:#5f5e5a;--text3:#888780;
+  --border:rgba(0,0,0,0.12);--border2:rgba(0,0,0,0.22);
+  --blue:#185fa5;--blue-light:#e6f1fb;--blue-dark:#0c447c;
+  --green:#1d9e75;--green-light:#eaf3de;--green-dark:#3b6d11;
+  --amber:#ba7517;--amber-light:#faeeda;--amber-dark:#854f0b;
+  --red:#e24b4a;--red-light:#fcebeb;--red-dark:#a32d2d;
+  --gray-light:#f1efe8;--gray-dark:#5f5e5a;
+  --radius:8px;--radius-lg:12px;
+  --font:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+}
+@media(prefers-color-scheme:dark){:root{
+  --bg:#1c1c1a;--bg2:#242422;--bg3:#2c2c2a;
+  --text:#f0efe8;--text2:#b4b2a9;--text3:#888780;
+  --border:rgba(255,255,255,0.1);--border2:rgba(255,255,255,0.2);
+  --blue-light:#0c2d4a;--green-light:#0a3324;--amber-light:#3d2400;--red-light:#3d1010;
+  --gray-light:#2c2c2a;
+}}
+body{font-family:var(--font);font-size:14px;color:var(--text);background:var(--bg3);height:100vh;display:flex;flex-direction:column}
+.app{display:flex;flex:1;overflow:hidden;max-width:1400px;width:100%;margin:0 auto;background:var(--bg);border-left:0.5px solid var(--border);border-right:0.5px solid var(--border)}
+.sidebar{width:200px;border-right:0.5px solid var(--border);background:var(--bg2);flex-shrink:0;display:flex;flex-direction:column}
+.sidebar-logo{padding:16px;border-bottom:0.5px solid var(--border)}
+.sidebar-logo strong{font-size:15px;font-weight:600;display:block;color:var(--text)}
+.sidebar-logo span{font-size:11px;color:var(--text3)}
+.nav{flex:1;padding:8px 0;overflow-y:auto}
+.nav-item{display:flex;align-items:center;gap:9px;padding:9px 16px;cursor:pointer;font-size:13px;color:var(--text2);border-left:2px solid transparent;transition:all 0.1s;text-decoration:none}
+.nav-item:hover{background:var(--bg);color:var(--text)}
+.nav-item.active{background:var(--bg);color:var(--text);font-weight:500;border-left-color:var(--blue)}
+.nav-item i{font-size:17px}
+.sync-bar{padding:10px 14px;border-top:0.5px solid var(--border);font-size:11px;color:var(--text3);display:flex;align-items:center;gap:7px}
+.sync-dot{width:6px;height:6px;border-radius:50%;background:#639922;flex-shrink:0;transition:background 0.3s}
+.sync-dot.syncing{background:var(--amber);animation:pulse 1s infinite}
+.sync-dot.error{background:var(--red)}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
+.main{flex:1;overflow-y:auto;padding:24px;min-width:0}
+.page{display:none}.page.active{display:block}
+h2{font-size:20px;font-weight:600;margin-bottom:18px;color:var(--text)}
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:18px}
+.metric{background:var(--bg2);border-radius:var(--radius);padding:14px 16px;border:0.5px solid var(--border)}
+.metric .lbl{font-size:11px;color:var(--text3);margin-bottom:5px;text-transform:uppercase;letter-spacing:0.5px;font-weight:500}
+.metric .val{font-size:24px;font-weight:600;color:var(--text)}
+.metric .sub{font-size:11px;color:var(--text3);margin-top:3px}
+.card{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:18px;margin-bottom:16px}
+.card-title{font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:14px}
+.two-col{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
+table{width:100%;border-collapse:collapse;font-size:13px;table-layout:fixed}
+th{text-align:left;font-weight:500;color:var(--text3);padding:7px 10px;border-bottom:0.5px solid var(--border);font-size:11px;text-transform:uppercase;letter-spacing:0.4px}
+td{padding:9px 10px;border-bottom:0.5px solid var(--border);vertical-align:middle;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--text)}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:var(--bg2)}
+.badge{display:inline-flex;align-items:center;padding:2px 9px;border-radius:20px;font-size:11px;font-weight:500;white-space:nowrap}
+.b-blue{background:var(--blue-light);color:var(--blue)}
+.b-green{background:var(--green-light);color:var(--green-dark)}
+.b-amber{background:var(--amber-light);color:var(--amber-dark)}
+.b-red{background:var(--red-light);color:var(--red-dark)}
+.b-gray{background:var(--gray-light);color:var(--gray-dark)}
+.alert-bar{background:var(--amber-light);border:0.5px solid #e5c07a;border-radius:var(--radius);padding:11px 16px;margin-bottom:16px;font-size:13px;display:none;gap:10px;align-items:flex-start}
+.alert-bar.visible{display:flex}
+.pipeline{display:flex;gap:12px;overflow-x:auto;padding-bottom:8px}
+.pcol{min-width:155px;flex-shrink:0}
+.pcol-hdr{font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:0.5px;padding:6px 10px;background:var(--bg2);border-radius:var(--radius);margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;border:0.5px solid var(--border)}
+.pcard{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--radius);padding:11px;margin-bottom:8px;transition:border-color 0.15s}
+.pcard:hover{border-color:var(--border2)}
+.pcard .pclient{font-size:12px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--text)}
+.pcard .pservice{font-size:11px;color:var(--text3);margin:3px 0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pcard .pamount{font-size:12px;color:var(--blue);font-weight:600}
+.pcard-actions{display:flex;justify-content:flex-end;gap:4px;margin-top:7px}
+.act-item{display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-bottom:0.5px solid var(--border)}
+.act-item:last-child{border-bottom:none}
+.act-dot{width:7px;height:7px;border-radius:50%;margin-top:5px;flex-shrink:0}
+.dot-call{background:var(--blue)}.dot-email{background:var(--green)}.dot-meet{background:var(--amber)}.dot-prop{background:#993556}.dot-other{background:var(--text3)}
+.act-text{font-size:13px;flex:1;overflow:hidden;color:var(--text)}
+.act-date{font-size:11px;color:var(--text3);white-space:nowrap;flex-shrink:0}
+.bar-wrap{display:flex;flex-direction:column;gap:11px}
+.bar-row{display:flex;align-items:center;gap:9px}
+.bar-lbl{width:90px;font-size:12px;color:var(--text2);text-align:right;flex-shrink:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bar-bg{flex:1;height:8px;background:var(--bg2);border-radius:20px;overflow:hidden}
+.bar-fill{height:100%;border-radius:20px;transition:width 0.4s}
+.bar-val{width:46px;font-size:12px;font-weight:500;flex-shrink:0;color:var(--text)}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:7px 13px;font-size:13px;border:0.5px solid var(--border2);border-radius:var(--radius);cursor:pointer;background:transparent;color:var(--text);font-family:var(--font);transition:background 0.1s}
+.btn:hover{background:var(--bg2)}
+.btn-primary{background:var(--blue);color:#fff;border-color:var(--blue)}
+.btn-primary:hover{background:var(--blue-dark);border-color:var(--blue-dark)}
+.btn-sm{padding:4px 9px;font-size:12px}
+.row-btn{background:none;border:none;cursor:pointer;color:var(--text3);padding:3px 5px;font-size:13px;border-radius:5px;transition:all 0.1s}
+.row-btn:hover{color:var(--text);background:var(--bg2)}
+.row-actions{opacity:0;transition:opacity 0.1s;display:flex;gap:4px}
+tr:hover .row-actions{opacity:1}
+/* Account Plans */
+.ae-card{border:0.5px solid var(--border);border-radius:var(--radius-lg);margin-bottom:14px;overflow:hidden}
+.ae-header{padding:13px 16px;display:flex;align-items:center;gap:10px;cursor:pointer;background:var(--bg2)}
+.ae-header:hover{filter:brightness(0.97)}
+.ae-chevron{font-size:15px;color:var(--text3);transition:transform 0.2s;flex-shrink:0}
+.ae-chevron.open{transform:rotate(90deg)}
+.ae-info{flex:1;min-width:0}
+.ae-info strong{font-size:14px;font-weight:600;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--text)}
+.ae-info span{font-size:12px;color:var(--text2)}
+.ae-meta{display:flex;align-items:center;gap:7px;flex-shrink:0}
+.ae-body{display:none}
+.ae-body.open{display:block}
+.ae-toolbar{padding:9px 16px;border-bottom:0.5px solid var(--border);display:flex;justify-content:space-between;align-items:center;background:var(--bg)}
+.acct-block{border-bottom:0.5px solid var(--border)}
+.acct-block:last-child{border-bottom:none}
+.acct-header{padding:11px 16px;display:flex;align-items:center;gap:8px;cursor:pointer;background:var(--bg)}
+.acct-header:hover{background:var(--bg2)}
+.acct-name{flex:1;font-size:13px;font-weight:500;color:var(--text)}
+.acct-meta{display:flex;align-items:center;gap:6px;flex-shrink:0}
+.acct-body{display:none;padding:14px 18px 18px 34px;background:var(--bg)}
+.acct-body.open{display:block}
+.sec-label{font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:9px;display:flex;align-items:center;gap:6px}
+.ns-list{display:flex;flex-direction:column;gap:7px;margin-bottom:9px}
+.ns-item{display:flex;align-items:flex-start;gap:10px;padding:10px 13px;border-radius:var(--radius);border:0.5px solid}
+.ns-item.sf{background:#edf4fd;border-color:#b8d4f5}
+.ns-item.globant{background:#edf7f2;border-color:#9fd4b8}
+.ns-item.done{opacity:0.45}
+.ns-check{width:16px;height:16px;border-radius:4px;border:1.5px solid;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;transition:all 0.15s}
+.ns-check.sf{border-color:var(--blue)}
+.ns-check.globant{border-color:var(--green)}
+.ns-check.checked{background:var(--blue);border-color:var(--blue)}
+.ns-check.checked.globant{background:var(--green);border-color:var(--green)}
+.ns-content{flex:1;min-width:0}
+.ns-text{font-size:13px;line-height:1.45;color:var(--text)}
+.ns-text.done{text-decoration:line-through;color:var(--text3)}
+.ns-footer{display:flex;align-items:center;gap:8px;margin-top:5px;flex-wrap:wrap}
+.ns-tag{font-size:11px;font-weight:600;padding:1px 8px;border-radius:20px}
+.ns-tag.sf{background:var(--blue);color:#fff}
+.ns-tag.globant{background:var(--green);color:#fff}
+.ns-date{font-size:11px;color:var(--text3)}
+.ns-date.od{color:var(--red-dark);font-weight:600}
+.ns-rm{background:none;border:none;cursor:pointer;color:var(--text3);font-size:12px;padding:2px 5px;border-radius:4px;margin-left:auto;flex-shrink:0}
+.ns-rm:hover{color:var(--text);background:var(--bg2)}
+.add-ns-btn{font-size:12px;color:var(--blue);background:none;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:4px;margin-top:5px;padding:2px 0}
+.add-ns-btn:hover{text-decoration:underline}
+.fw-tag{display:inline-flex;align-items:center;gap:4px;font-size:11px;padding:2px 9px;border-radius:20px;font-weight:500}
+.fw-tag.ok{background:var(--green-light);color:var(--green-dark)}
+.fw-tag.soon{background:var(--amber-light);color:var(--amber-dark)}
+.fw-tag.overdue{background:var(--red-light);color:var(--red-dark)}
+.fw-tag.none{background:var(--gray-light);color:var(--gray-dark)}
+.notes-txt{font-size:13px;color:var(--text2);line-height:1.55;white-space:pre-wrap}
+/* Config */
+.cfg-section{border:0.5px solid var(--border);border-radius:var(--radius-lg);padding:18px;margin-bottom:16px;background:var(--bg)}
+.cfg-row{display:flex;gap:13px;align-items:flex-start;padding:12px 0;border-bottom:0.5px solid var(--border)}
+.cfg-row:last-child{border-bottom:none}
+.cfg-num{width:26px;height:26px;border-radius:50%;background:var(--blue-light);color:var(--blue);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;flex-shrink:0;margin-top:2px}
+.cfg-body{flex:1}
+.cfg-title{font-size:13px;font-weight:500;margin-bottom:3px;color:var(--text)}
+.cfg-desc{font-size:12px;color:var(--text2);margin-bottom:9px;line-height:1.5}
+/* Modal */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.45);align-items:center;justify-content:center;z-index:100;padding:20px}
+.modal-overlay.open{display:flex}
+.modal{background:var(--bg);border-radius:var(--radius-lg);border:0.5px solid var(--border);padding:22px;width:100%;max-width:450px;max-height:90vh;overflow-y:auto}
+.modal h3{font-size:17px;font-weight:600;margin-bottom:16px;color:var(--text)}
+.field{margin-bottom:13px}
+.field label{display:block;font-size:12px;color:var(--text2);margin-bottom:5px;font-weight:500}
+.field input,.field select,.field textarea{width:100%;font-size:13px;font-family:var(--font);padding:7px 10px;border:0.5px solid var(--border2);border-radius:var(--radius);background:var(--bg);color:var(--text);transition:border-color 0.1s}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--blue)}
+.field textarea{resize:vertical;min-height:60px}
+.two-col-f{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.modal-btns{display:flex;gap:9px;justify-content:flex-end;margin-top:18px}
+.toast{position:fixed;bottom:20px;right:20px;background:var(--blue);color:#fff;padding:9px 16px;border-radius:var(--radius);font-size:13px;opacity:0;transition:opacity 0.3s;pointer-events:none;z-index:200;font-weight:500}
+.toast.show{opacity:1}
+.empty-state{text-align:center;padding:40px 20px;color:var(--text3)}
+.empty-state i{font-size:30px;display:block;margin-bottom:9px;opacity:0.3}
+.empty-state p{font-size:13px}
+.topbar{background:var(--bg);border-bottom:0.5px solid var(--border);padding:0 24px;height:48px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.topbar-title{font-size:14px;font-weight:600;color:var(--text)}
+.topbar-sub{font-size:12px;color:var(--text3)}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div>
+    <span class="topbar-title">SalesTracker</span>
+    <span class="topbar-sub" style="margin-left:10px">Globant · Salesforce Practice</span>
+  </div>
+  <div style="display:flex;align-items:center;gap:8px">
+    <div class="sync-dot" id="sync-dot"></div>
+    <span style="font-size:12px;color:var(--text3)" id="sync-lbl">Loading...</span>
+  </div>
+</div>
+
+<div class="app">
+  <div class="sidebar">
+    <div class="sidebar-logo">
+      <strong>SalesTracker</strong>
+      <span>Globant · Salesforce</span>
+    </div>
+    <div class="nav">
+      <a class="nav-item active" onclick="nav('dashboard',this)"><i class="ti ti-layout-dashboard"></i> Dashboard</a>
+      <a class="nav-item" onclick="nav('clients',this)"><i class="ti ti-building-store"></i> Clients</a>
+      <a class="nav-item" onclick="nav('pipeline',this)"><i class="ti ti-git-fork"></i> Pipeline</a>
+      <a class="nav-item" onclick="nav('activities',this)"><i class="ti ti-calendar-event"></i> Activities</a>
+      <a class="nav-item" onclick="nav('accountplans',this)"><i class="ti ti-map-2"></i> Account Plans</a>
+      <a class="nav-item" onclick="nav('reports',this)"><i class="ti ti-file-analytics"></i> Reports</a>
+      <a class="nav-item" onclick="nav('config',this)"><i class="ti ti-settings"></i> Settings</a>
+    </div>
+    <div class="sync-bar"><div class="sync-dot" id="sync-dot2"></div><span id="sync-lbl2">Loading...</span></div>
+  </div>
+
+  <div class="main">
+
+    <!-- DASHBOARD -->
+    <div class="page active" id="page-dashboard">
+      <h2 id="dash-greeting">Dashboard</h2>
+      <div class="metrics">
+        <div class="metric"><div class="lbl">Closed YTD</div><div class="val" id="m-ytd">—</div><div class="sub" id="m-ytd-s"></div></div>
+        <div class="metric"><div class="lbl">Active pipeline</div><div class="val" id="m-pipe">—</div><div class="sub" id="m-pipe-s"></div></div>
+        <div class="metric"><div class="lbl">Clients</div><div class="val" id="m-cli">—</div><div class="sub" id="m-cli-s"></div></div>
+        <div class="metric"><div class="lbl">Pending actions</div><div class="val" id="m-act">—</div><div class="sub" id="m-act-s"></div></div>
+      </div>
+      <div class="alert-bar" id="alert-dash"><i class="ti ti-bell-ringing" style="color:var(--amber-dark);flex-shrink:0;margin-top:1px"></i><div id="alert-dash-c" style="font-size:13px"></div></div>
+      <div class="two-col">
+        <div class="card"><div class="card-title">Pipeline by service</div><div class="bar-wrap" id="dash-bars"></div></div>
+        <div class="card"><div class="card-title">Upcoming actions</div><div id="dash-next"></div></div>
+      </div>
+    </div>
+
+    <!-- CLIENTS -->
+    <div class="page" id="page-clients">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px">
+        <h2 style="margin:0">Clients</h2>
+        <button class="btn btn-primary" onclick="openModal('client')"><i class="ti ti-plus"></i> New client</button>
+      </div>
+      <div class="card" style="padding:0;overflow:hidden"><div style="overflow-x:auto">
+        <table>
+          <thead><tr><th style="width:130px">Client</th><th style="width:85px">Sector</th><th style="width:105px">Service</th><th style="width:80px">Value</th><th style="width:90px">Status</th><th style="width:125px">Next action</th><th style="width:55px"></th></tr></thead>
+          <tbody id="cli-tbody"></tbody>
+        </table>
+      </div></div>
+    </div>
+
+    <!-- PIPELINE -->
+    <div class="page" id="page-pipeline">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px">
+        <h2 style="margin:0">Pipeline</h2>
+        <button class="btn btn-primary" onclick="openModal('deal')"><i class="ti ti-plus"></i> New deal</button>
+      </div>
+      <div class="pipeline" id="pipe-board"></div>
+    </div>
+
+    <!-- ACTIVITIES -->
+    <div class="page" id="page-activities">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px">
+        <h2 style="margin:0">Activities</h2>
+        <button class="btn btn-primary" onclick="openModal('activity')"><i class="ti ti-plus"></i> Log activity</button>
+      </div>
+      <div class="card" id="act-list"></div>
+    </div>
+
+    <!-- ACCOUNT PLANS -->
+    <div class="page" id="page-accountplans">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+        <h2 style="margin:0">Account Plans</h2>
+        <button class="btn btn-primary" onclick="openModal('ae')"><i class="ti ti-plus"></i> New session</button>
+      </div>
+      <p style="font-size:12px;color:var(--text3);margin-bottom:16px">Sessions with Salesforce AEs · next steps per account</p>
+      <div class="alert-bar" id="alert-ap"><i class="ti ti-bell-ringing" style="color:var(--amber-dark);flex-shrink:0;margin-top:1px"></i><div id="alert-ap-c" style="font-size:13px"></div></div>
+      <div style="display:flex;gap:9px;margin-bottom:16px;flex-wrap:wrap">
+        <input type="text" id="ap-search" placeholder="Search AE or account..." oninput="renderAP()" style="font-size:13px;padding:7px 11px;border:0.5px solid var(--border2);border-radius:var(--radius);background:var(--bg);color:var(--text);width:220px">
+        <select id="ap-filter" onchange="renderAP()" style="font-size:13px;padding:7px 9px;border:0.5px solid var(--border2);border-radius:var(--radius);background:var(--bg);color:var(--text)">
+          <option value="">All</option><option value="overdue">Overdue</option><option value="soon">This week</option><option value="ok">Up to date</option>
+        </select>
+      </div>
+      <div id="ae-list"></div>
+    </div>
+
+    <!-- REPORTS -->
+    <div class="page" id="page-reports">
+      <h2>Reports</h2>
+      <div class="metrics" style="grid-template-columns:repeat(3,1fr);margin-bottom:18px">
+        <div class="metric"><div class="lbl">Closed this year</div><div class="val" id="r-ytd">—</div><div class="sub" id="r-meta"></div></div>
+        <div class="metric"><div class="lbl">Closed Q1</div><div class="val" id="r-q1">—</div><div class="sub" id="r-q1d"></div></div>
+        <div class="metric"><div class="lbl">Closed Q2</div><div class="val" id="r-q2">—</div><div class="sub" id="r-q2d"></div></div>
+      </div>
+      <div class="two-col">
+        <div class="card"><div class="card-title">Revenue by service (YTD)</div><div class="bar-wrap" id="rep-bars"></div></div>
+        <div class="card"><div class="card-title">Closed deals</div><div style="overflow-x:auto"><table>
+          <thead><tr><th style="width:110px">Client</th><th style="width:90px">Service</th><th style="width:75px">Value</th><th style="width:75px">Close date</th></tr></thead>
+          <tbody id="rep-closed"></tbody>
+        </table></div></div>
+      </div>
+      <div style="display:flex;gap:9px;margin-top:10px">
+        <button class="btn" onclick="exportCSV()"><i class="ti ti-download"></i> Export CSV</button>
+        <button class="btn" onclick="forcSync()"><i class="ti ti-refresh"></i> Sync Drive</button>
+      </div>
+    </div>
+
+    <!-- SETTINGS -->
+    <div class="page" id="page-config">
+      <h2>Settings</h2>
+      <div class="cfg-section">
+        <div class="card-title" style="margin-bottom:14px">Google Drive sync</div>
+        <div class="cfg-row">
+          <div class="cfg-num">1</div>
+          <div class="cfg-body">
+            <div class="cfg-title">Sheet name in Drive</div>
+            <div class="cfg-desc">The app will find or create a Google Sheet with this name in your Drive.</div>
+            <div style="display:flex;gap:9px">
+              <input type="text" id="cfg-sheet" placeholder="SalesTracker CRM" style="flex:1;font-size:13px;padding:7px 10px;border:0.5px solid var(--border2);border-radius:var(--radius);background:var(--bg);color:var(--text)">
+              <button class="btn btn-primary" onclick="saveSheetName()">Save</button>
+            </div>
+            <div style="font-size:11px;color:var(--text3);margin-top:7px" id="cfg-sheet-st"></div>
+          </div>
+        </div>
+        <div class="cfg-row">
+          <div class="cfg-num">2</div>
+          <div class="cfg-body">
+            <div class="cfg-title">Sync status</div>
+            <div class="cfg-desc" id="cfg-sync-st">Checking...</div>
+            <div style="display:flex;gap:9px;margin-top:5px">
+              <button class="btn" onclick="forcSync()"><i class="ti ti-refresh"></i> Sync now</button>
+              <button class="btn" onclick="checkDrive()"><i class="ti ti-plug"></i> Test connection</button>
+            </div>
+            <div style="font-size:11px;color:var(--text3);margin-top:9px" id="cfg-drive-link"></div>
+          </div>
+        </div>
+        <div class="cfg-row">
+          <div class="cfg-num">3</div>
+          <div class="cfg-body">
+            <div class="cfg-title">Your name</div>
+            <div style="display:flex;gap:9px;margin-top:7px">
+              <input type="text" id="cfg-name" placeholder="Your name" style="flex:1;font-size:13px;padding:7px 10px;border:0.5px solid var(--border2);border-radius:var(--radius);background:var(--bg);color:var(--text)">
+              <button class="btn btn-primary" onclick="saveName()">Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="cfg-section">
+        <div class="card-title" style="margin-bottom:14px">Data</div>
+        <div style="display:flex;gap:9px">
+          <button class="btn" onclick="exportCSV()"><i class="ti ti-download"></i> Export CSV</button>
+          <button class="btn" style="color:var(--red-dark);border-color:#f09595" onclick="if(confirm('Delete all local data?')){clearAll()}"><i class="ti ti-trash"></i> Clear data</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-overlay"><div class="modal" id="modal-body"></div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+const KEYS={db:'crm_db_v1',sheet:'crm_sheet',uname:'crm_uname'};
+const STAGES=['Lead','Demo','Proposal','Negotiation','Won','Lost'];
+const SERVICES=['Sales Cloud','Service Cloud','Marketing Cloud','Commerce Cloud','Platform','Data Cloud','Other'];
+const STATUSES=['Lead','Active','Proposal','Negotiation','Inactive'];
+const ACT_TYPES=['Call','Email','Meeting','Proposal sent','Demo','Other'];
+const DOT={Call:'dot-call',Email:'dot-email',Meeting:'dot-meet','Proposal sent':'dot-prop',Demo:'dot-meet',Other:'dot-other'};
+const SVC_CLR={'Sales Cloud':'#185fa5','Service Cloud':'#1d9e75','Marketing Cloud':'#ba7517','Commerce Cloud':'#993556','Platform':'#534AB7','Data Cloud':'#0f6e56','Other':'#888780'};
+const BADGE_STAGE={Lead:'b-gray',Demo:'b-blue',Proposal:'b-amber',Negotiation:'b-amber',Won:'b-green',Lost:'b-red'};
+const BADGE_ST={Lead:'b-gray',Active:'b-green',Proposal:'b-amber',Negotiation:'b-amber',Inactive:'b-red'};
+
+let db={clients:[],deals:[],activities:[],aes:[]};
+let isSyncing=false;
+
+function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,6)}
+function today(){return new Date().toISOString().slice(0,10)}
+function fmtEur(v){return'€'+Math.round(v).toLocaleString('en-EU')}
+function fmtDate(d){if(!d)return'';const[y,m,day]=d.split('-');return day+'/'+m+'/'+y.slice(2)}
+function daysFromNow(d){if(!d)return null;return Math.round((new Date(d)-new Date(today()))/86400000)}
+function fwCls(d){if(!d)return'none';const x=daysFromNow(d);if(x<0)return'overdue';if(x<=7)return'soon';return'ok'}
+function fwLabel(d){if(!d)return'No date';const x=daysFromNow(d);if(x<0)return'Overdue '+Math.abs(x)+'d';if(x===0)return'Today';if(x===1)return'Tomorrow';if(x<=7)return'In '+x+'d';return fmtDate(d)}
+
+function load(){
+  try{const r=localStorage.getItem(KEYS.db);if(r){const p=JSON.parse(r);db.clients=p.clients||[];db.deals=p.deals||[];db.activities=p.activities||[];db.aes=p.aes||[]}}catch(e){}
+  try{const s=localStorage.getItem(KEYS.sheet);if(s)document.getElementById('cfg-sheet').value=s}catch(e){}
+  try{const n=localStorage.getItem(KEYS.uname);if(n)document.getElementById('cfg-name').value=n}catch(e){}
+  if(!db.clients.length&&!db.deals.length&&!db.aes.length) seedDemo();
+  renderAll();
+  setSyncState('ok','Local · Drive pending');
+}
+
+function save(){try{localStorage.setItem(KEYS.db,JSON.stringify(db))}catch(e){}}
+function persist(){save();renderAll();}
+
+function seedDemo(){
+  db.clients=[
+    {id:'cl1',name:'Telefónica',sector:'Telco',service:'Sales Cloud',value:42000,status:'Active',nextAction:'QBR Q2'},
+    {id:'cl2',name:'BBVA',sector:'Banking',service:'Service Cloud',value:61000,status:'Active',nextAction:'Renewal Q3'},
+    {id:'cl3',name:'Mapfre',sector:'Insurance',service:'Service Cloud',value:38000,status:'Proposal',nextAction:'Contract signature'},
+    {id:'cl4',name:'Inditex',sector:'Retail',service:'Sales Cloud',value:55000,status:'Negotiation',nextAction:'Follow-up'},
+  ];
+  db.deals=[
+    {id:'d1',client:'Telefónica',service:'Sales Cloud',value:42000,stage:'Won',closeDate:'2026-01-15',notes:''},
+    {id:'d2',client:'BBVA',service:'Service Cloud',value:61000,stage:'Won',closeDate:'2026-03-10',notes:''},
+    {id:'d3',client:'Mapfre',service:'Service Cloud',value:38000,stage:'Proposal',closeDate:'2026-06-30',notes:''},
+    {id:'d4',client:'Inditex',service:'Sales Cloud',value:55000,stage:'Negotiation',closeDate:'2026-07-15',notes:''},
+    {id:'d5',client:'Repsol',service:'Sales Cloud',value:28000,stage:'Demo',closeDate:'2026-08-01',notes:''},
+  ];
+  db.activities=[
+    {id:'a1',client:'Telefónica',type:'Meeting',description:'QBR Q2 kick-off',date:'2026-05-08'},
+    {id:'a2',client:'BBVA',type:'Call',description:'Annual renewal review',date:'2026-05-02'},
+    {id:'a3',client:'Mapfre',type:'Proposal sent',description:'Service Cloud + 15 licences',date:'2026-05-04'},
+    {id:'a4',client:'Repsol',type:'Demo',description:'Sales Cloud demo',date:'2026-05-08'},
+  ];
+  db.aes=[{
+    id:'ae1',name:'Carlos Ruiz',territory:'SF · Madrid',date:'2026-04-10',
+    accounts:[
+      {id:'c1',name:'Telefónica',notes:'Wants to accelerate renewal before Q3.',followup:'2026-05-20',
+       nextSteps:[{id:'n1',owner:'globant',resp:'Juan (Globant)',text:'Send updated renewal proposal',date:'2026-05-22',done:false},{id:'n2',owner:'sf',resp:'Carlos Ruiz (SF)',text:'Share Q3 roadmap with client',date:'2026-05-15',done:true}]},
+      {id:'c2',name:'BBVA',notes:'Clear interest in Service Cloud Enterprise upsell.',followup:'2026-05-08',
+       nextSteps:[{id:'n3',owner:'sf',resp:'Carlos Ruiz (SF)',text:'Set up technical workshop with BBVA architecture team',date:'2026-05-25',done:false},{id:'n4',owner:'globant',resp:'Juan (Globant)',text:'Prepare banking business case for Service Cloud',date:'2026-05-18',done:false}]},
+    ]
+  }];
+  save();
+}
+
+function renderAll(){renderDashboard();renderClients();renderPipeline();renderActivities();renderAP();renderReports();renderAlerts()}
+
+function renderDashboard(){
+  const name=document.getElementById('cfg-name').value.trim();
+  const h=new Date().getHours();
+  document.getElementById('dash-greeting').textContent=(h<12?'Good morning':h<18?'Good afternoon':'Good evening')+(name?', '+name:'')+' 👋';
+  const won=db.deals.filter(d=>d.stage==='Won');
+  const ytd=won.reduce((s,d)=>s+(+d.value||0),0);
+  document.getElementById('m-ytd').textContent=fmtEur(ytd);
+  const active=db.deals.filter(d=>!['Won','Lost'].includes(d.stage));
+  document.getElementById('m-pipe').textContent=fmtEur(active.reduce((s,d)=>s+(+d.value||0),0));
+  document.getElementById('m-pipe-s').textContent=active.length+' opportunities';
+  document.getElementById('m-cli').textContent=db.clients.length;
+  document.getElementById('m-cli-s').textContent=db.clients.filter(c=>c.status==='Active').length+' active';
+  const pend=db.activities.filter(a=>a.date>=today());
+  document.getElementById('m-act').textContent=pend.length;
+  document.getElementById('m-act-s').textContent='upcoming';
+  const svcMap={};
+  active.forEach(d=>{const s=d.service||'Other';svcMap[s]=(svcMap[s]||0)+(+d.value||0)});
+  const entries=Object.entries(svcMap).sort((a,b)=>b[1]-a[1]);
+  const maxV=entries[0]?entries[0][1]:1;
+  const barsEl=document.getElementById('dash-bars');
+  barsEl.innerHTML=entries.length?entries.slice(0,5).map(([s,v])=>`<div class="bar-row"><span class="bar-lbl">${s.replace(' Cloud','')}</span><div class="bar-bg"><div class="bar-fill" style="width:${Math.round(v/maxV*100)}%;background:${SVC_CLR[s]||'#888780'}"></div></div><span class="bar-val">${fmtEur(v)}</span></div>`).join(''):'<p style="font-size:12px;color:var(--text3)">No active deals</p>';
+  const nextActs=[...db.activities].filter(a=>a.date>=today()).sort((a,b)=>a.date.localeCompare(b.date)).slice(0,5);
+  const naEl=document.getElementById('dash-next');
+  naEl.innerHTML=nextActs.length?nextActs.map(a=>`<div class="act-item"><div class="act-dot ${DOT[a.type]||'dot-other'}"></div><div class="act-text"><strong>${a.type}</strong> with ${a.client||'—'} — ${a.description||''}</div><div class="act-date">${fmtDate(a.date)}</div></div>`).join(''):'<p style="font-size:12px;color:var(--text3)">No upcoming actions</p>';
+}
+
+function renderAlerts(){
+  const allFw=db.aes.flatMap(ae=>ae.accounts.map(c=>({ae:ae.name,account:c.name,fw:c.followup})));
+  const ov=allFw.filter(x=>x.fw&&x.fw<today());
+  const so=allFw.filter(x=>x.fw&&x.fw>=today()&&daysFromNow(x.fw)<=7);
+  const msgs=[];
+  if(ov.length)msgs.push('<strong>'+ov.length+' account'+(ov.length>1?'s':'')+' with overdue follow-up:</strong> '+ov.map(x=>x.account+' ('+x.ae+')').join(' · '));
+  if(so.length)msgs.push('<strong>'+so.length+' account'+(so.length>1?'s':'')+' due this week:</strong> '+so.map(x=>x.account+' — '+fwLabel(x.fw)).join(' · '));
+  ['alert-dash','alert-ap'].forEach(id=>{
+    const el=document.getElementById(id);
+    const content=document.getElementById(id+'-c');
+    if(msgs.length){content.innerHTML=msgs.join('<br>');el.classList.add('visible')}
+    else el.classList.remove('visible');
+  });
+}
+
+function renderClients(){
+  const tbody=document.getElementById('cli-tbody');
+  if(!db.clients.length){tbody.innerHTML='<tr><td colspan="7" style="text-align:center;color:var(--text3);padding:24px">No clients yet. Add your first one.</td></tr>';return}
+  tbody.innerHTML=db.clients.map(c=>`<tr>
+    <td title="${c.name}"><strong>${c.name}</strong></td><td>${c.sector||'—'}</td>
+    <td><span class="badge b-blue" style="font-size:10px">${c.service||'—'}</span></td>
+    <td>${c.value?fmtEur(c.value):'—'}</td>
+    <td><span class="badge ${BADGE_ST[c.status]||'b-gray'}">${c.status||'—'}</span></td>
+    <td title="${c.nextAction||''}">${c.nextAction||'—'}</td>
+    <td><div class="row-actions"><button class="row-btn" onclick="openModal('edit-client','${c.id}')" title="Edit"><i class="ti ti-edit"></i></button><button class="row-btn" onclick="delItem('clients','${c.id}')" title="Delete"><i class="ti ti-trash"></i></button></div></td>
+  </tr>`).join('');
+}
+
+function renderPipeline(){
+  const board=document.getElementById('pipe-board');
+  board.innerHTML=STAGES.map(stage=>{
+    const cards=db.deals.filter(d=>d.stage===stage);
+    return`<div class="pcol">
+      <div class="pcol-hdr"><span>${stage}</span><span style="background:var(--bg);border:0.5px solid var(--border);border-radius:20px;font-size:10px;padding:1px 7px">${cards.length}</span></div>
+      ${cards.map(d=>`<div class="pcard">
+        <div class="pclient" title="${d.client||''}">${d.client||'—'}</div>
+        <div class="pservice">${d.service||'—'}</div>
+        <div class="pamount">${d.value?fmtEur(d.value):'—'}</div>
+        <div class="pcard-actions">
+          <button class="row-btn" onclick="openModal('edit-deal','${d.id}')" title="Edit"><i class="ti ti-edit" style="font-size:12px"></i></button>
+          <button class="row-btn" onclick="delItem('deals','${d.id}')" title="Delete"><i class="ti ti-trash" style="font-size:12px"></i></button>
+        </div>
+      </div>`).join('')}
+      ${!cards.length?`<div style="font-size:11px;color:var(--text3);padding:8px 0;text-align:center">—</div>`:''}
+    </div>`;
+  }).join('');
+}
+
+function renderActivities(){
+  const el=document.getElementById('act-list');
+  const sorted=[...db.activities].sort((a,b)=>b.date.localeCompare(a.date));
+  if(!sorted.length){el.innerHTML='<p style="font-size:12px;color:var(--text3)">No activities logged yet.</p>';return}
+  el.innerHTML=sorted.slice(0,40).map(a=>`<div class="act-item">
+    <div class="act-dot ${DOT[a.type]||'dot-other'}"></div>
+    <div class="act-text"><strong>${a.type||'Other'}</strong> with <strong>${a.client||'—'}</strong>${a.description?' — '+a.description:''}</div>
+    <div style="display:flex;align-items:center;gap:7px"><div class="act-date">${fmtDate(a.date)}</div><button class="row-btn" onclick="delItem('activities','${a.id}')" title="Delete"><i class="ti ti-trash"></i></button></div>
+  </div>`).join('');
+}
+
+function renderAP(){
+  const q=(document.getElementById('ap-search').value||'').toLowerCase();
+  const fs=document.getElementById('ap-filter').value;
+  let filtered=db.aes.map(ae=>{
+    let accounts=ae.accounts;
+    if(q)accounts=accounts.filter(c=>c.name.toLowerCase().includes(q)||ae.name.toLowerCase().includes(q));
+    if(fs==='overdue')accounts=accounts.filter(c=>c.followup&&c.followup<today());
+    else if(fs==='soon')accounts=accounts.filter(c=>c.followup&&c.followup>=today()&&daysFromNow(c.followup)<=7);
+    else if(fs==='ok')accounts=accounts.filter(c=>!c.followup||daysFromNow(c.followup)>7);
+    return{...ae,accounts};
+  }).filter(ae=>ae.accounts.length>0||(q===''&&fs===''));
+  const el=document.getElementById('ae-list');
+  if(!filtered.length){el.innerHTML='<div class="empty-state"><i class="ti ti-map-2"></i><p>No account plans yet. Create your first session.</p></div>';return}
+  el.innerHTML=filtered.map(ae=>{
+    const totalC=ae.accounts.length;
+    const allNS=ae.accounts.flatMap(c=>c.nextSteps);
+    const doneNS=allNS.filter(n=>n.done).length;
+    const worst=ae.accounts.some(c=>c.followup&&c.followup<today())?'overdue':ae.accounts.some(c=>c.followup&&daysFromNow(c.followup)<=7)?'soon':'ok';
+    return`<div class="ae-card">
+      <div class="ae-header" onclick="toggleAE('${ae.id}')">
+        <i class="ti ti-chevron-right ae-chevron" id="aechev-${ae.id}"></i>
+        <div class="ae-info"><strong>${ae.name}</strong><span>${ae.territory||''} · Session ${fmtDate(ae.date)}</span></div>
+        <div class="ae-meta">
+          <span class="badge b-gray">${totalC} account${totalC!==1?'s':''}</span>
+          ${allNS.length?`<span class="badge b-blue">${doneNS}/${allNS.length} NS</span>`:''}
+          ${worst!=='ok'?`<span class="fw-tag ${worst}"><i class="ti ti-bell" style="font-size:10px"></i> ${worst==='overdue'?'Overdue':'This week'}</span>`:''}
+          <button class="btn btn-sm" onclick="event.stopPropagation();openModal('edit-ae','${ae.id}')" title="Edit"><i class="ti ti-edit" style="font-size:11px"></i></button>
+          <button class="btn btn-sm" onclick="event.stopPropagation();delAE('${ae.id}')" title="Delete"><i class="ti ti-trash" style="font-size:11px"></i></button>
+        </div>
+      </div>
+      <div class="ae-body" id="aebody-${ae.id}">
+        <div class="ae-toolbar">
+          <span style="font-size:12px;color:var(--text2)">${totalC} account${totalC!==1?'s':''} reviewed</span>
+          <button class="btn btn-sm btn-primary" onclick="openModal('account','${ae.id}')"><i class="ti ti-plus" style="font-size:11px"></i> Add account</button>
+        </div>
+        ${ae.accounts.map(c=>renderAccount(ae.id,c)).join('')}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function renderAccount(aeId,c){
+  const fwC=fwCls(c.followup);
+  const nsSF=c.nextSteps.filter(n=>n.owner==='sf');
+  const nsGlo=c.nextSteps.filter(n=>n.owner==='globant');
+  const total=c.nextSteps.length;
+  const done=c.nextSteps.filter(n=>n.done).length;
+  const nsHtml=(arr)=>arr.map(n=>{
+    const od=n.date&&n.date<today()&&!n.done;
+    return`<div class="ns-item ${n.owner}${n.done?' done':''}">
+      <div class="ns-check ${n.owner}${n.done?' checked':''}" onclick="toggleNS('${aeId}','${c.id}','${n.id}')">
+        ${n.done?'<i class="ti ti-check" style="font-size:10px;color:#fff"></i>':''}
+      </div>
+      <div class="ns-content">
+        <div class="ns-text${n.done?' done':''}">${n.text}</div>
+        <div class="ns-footer">
+          <span class="ns-tag ${n.owner}">${n.owner==='sf'?'SF':'Globant'}</span>
+          <span style="font-size:11px;color:var(--text2)">${n.resp||''}</span>
+          ${n.date?`<span class="ns-date${od?' od':''}"><i class="ti ti-calendar" style="font-size:10px"></i> ${fmtDate(n.date)}${od?' · overdue':''}</span>`:''}
+        </div>
+      </div>
+      <button class="ns-rm" onclick="removeNS('${aeId}','${c.id}','${n.id}')" title="Remove"><i class="ti ti-x"></i></button>
+    </div>`;
+  }).join('');
+  return`<div class="acct-block">
+    <div class="acct-header" onclick="toggleAccount('${c.id}')">
+      <i class="ti ti-building" style="font-size:14px;color:var(--text3);flex-shrink:0"></i>
+      <span class="acct-name">${c.name}</span>
+      <div class="acct-meta">
+        ${total?`<span class="badge b-gray" style="font-size:10px">${done}/${total} NS</span>`:''}
+        <span class="fw-tag ${fwC}"><i class="ti ti-bell" style="font-size:10px"></i> ${fwLabel(c.followup)}</span>
+        <button class="btn btn-sm" onclick="event.stopPropagation();openModal('edit-account','${aeId}:${c.id}')" title="Edit"><i class="ti ti-edit" style="font-size:11px"></i></button>
+        <button class="btn btn-sm" onclick="event.stopPropagation();delAccount('${aeId}','${c.id}')" title="Delete"><i class="ti ti-trash" style="font-size:11px"></i></button>
+        <i class="ti ti-chevron-right" id="cchev-${c.id}" style="font-size:12px;color:var(--text3);transition:transform 0.2s"></i>
+      </div>
+    </div>
+    <div class="acct-body" id="cbody-${c.id}">
+      <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px">
+        <div>
+          ${c.notes?`<div style="margin-bottom:13px"><div class="sec-label"><i class="ti ti-notes" style="font-size:12px"></i> Notes</div><div class="notes-txt">${c.notes}</div></div>`:''}
+          <div><div class="sec-label"><i class="ti ti-bell" style="font-size:12px"></i> Next follow-up</div>
+          <span class="fw-tag ${fwC}"><i class="ti ti-calendar" style="font-size:11px"></i> ${c.followup?fmtDate(c.followup):'No date set'}</span></div>
+        </div>
+        <div>
+          ${nsSF.length?`<div class="sec-label"><span class="ns-tag sf">SF</span> Salesforce next steps</div><div class="ns-list">${nsHtml(nsSF)}</div>`:''}
+          ${nsGlo.length?`<div class="sec-label" style="margin-top:${nsSF.length?'11px':'0'}"><span class="ns-tag globant">Globant</span> Globant next steps</div><div class="ns-list">${nsHtml(nsGlo)}</div>`:''}
+          ${!total?`<p style="font-size:12px;color:var(--text3)">No next steps yet.</p>`:''}
+          <button class="add-ns-btn" onclick="openModal('ns','${aeId}:${c.id}')"><i class="ti ti-plus" style="font-size:11px"></i> Add next step</button>
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+
+function renderReports(){
+  const won=db.deals.filter(d=>d.stage==='Won');
+  const ytd=won.reduce((s,d)=>s+(+d.value||0),0);
+  document.getElementById('r-ytd').textContent=fmtEur(ytd);
+  const yr=new Date().getFullYear();
+  const q1=won.filter(d=>d.closeDate>=(yr+'-01-01')&&d.closeDate<=(yr+'-03-31'));
+  const q2=won.filter(d=>d.closeDate>=(yr+'-04-01')&&d.closeDate<=(yr+'-06-30'));
+  document.getElementById('r-q1').textContent=fmtEur(q1.reduce((s,d)=>s+(+d.value||0),0));
+  document.getElementById('r-q1d').textContent=q1.length+' deals';
+  document.getElementById('r-q2').textContent=fmtEur(q2.reduce((s,d)=>s+(+d.value||0),0));
+  document.getElementById('r-q2d').textContent=q2.length+' deals';
+  const svcMap={};won.forEach(d=>{const s=d.service||'Other';svcMap[s]=(svcMap[s]||0)+(+d.value||0)});
+  const entries=Object.entries(svcMap).sort((a,b)=>b[1]-a[1]);
+  const maxV=entries[0]?entries[0][1]:1;
+  const rbars=document.getElementById('rep-bars');
+  rbars.innerHTML=entries.length?entries.map(([s,v])=>`<div class="bar-row"><span class="bar-lbl">${s.replace(' Cloud','')}</span><div class="bar-bg"><div class="bar-fill" style="width:${Math.round(v/maxV*100)}%;background:${SVC_CLR[s]||'#888780'}"></div></div><span class="bar-val">${fmtEur(v)}</span></div>`).join(''):'<p style="font-size:12px;color:var(--text3)">No closed deals yet</p>';
+  const rc=document.getElementById('rep-closed');
+  rc.innerHTML=won.length?[...won].sort((a,b)=>(b.closeDate||'').localeCompare(a.closeDate||'')).slice(0,10).map(d=>`<tr><td title="${d.client||''}">${d.client||'—'}</td><td><span class="badge b-blue" style="font-size:10px">${(d.service||'').replace(' Cloud','')}</span></td><td>${d.value?fmtEur(d.value):'—'}</td><td>${fmtDate(d.closeDate)}</td></tr>`).join(''):'<tr><td colspan="4" style="text-align:center;color:var(--text3);padding:18px">No closed deals</td></tr>';
+}
+
+function toggleAE(id){
+  const b=document.getElementById('aebody-'+id);const c=document.getElementById('aechev-'+id);
+  const o=b.classList.contains('open');b.classList.toggle('open',!o);c.style.transform=o?'':'rotate(90deg)';
+}
+function toggleAccount(id){
+  const b=document.getElementById('cbody-'+id);const c=document.getElementById('cchev-'+id);
+  const o=b.classList.contains('open');b.classList.toggle('open',!o);c.style.transform=o?'':'rotate(90deg)';
+}
+function toggleNS(aeId,cId,nId){
+  const ae=db.aes.find(a=>a.id===aeId);if(!ae)return;
+  const c=ae.accounts.find(x=>x.id===cId);if(!c)return;
+  const n=c.nextSteps.find(x=>x.id===nId);if(n){n.done=!n.done;persist();}
+}
+function removeNS(aeId,cId,nId){
+  const ae=db.aes.find(a=>a.id===aeId);if(!ae)return;
+  const c=ae.accounts.find(x=>x.id===cId);if(!c)return;
+  c.nextSteps=c.nextSteps.filter(x=>x.id!==nId);persist();
+}
+function delAE(id){if(!confirm('Delete this session?'))return;db.aes=db.aes.filter(a=>a.id!==id);persist();showToast('Session deleted')}
+function delAccount(aeId,cId){if(!confirm('Remove this account from the plan?'))return;const ae=db.aes.find(a=>a.id===aeId);if(ae)ae.accounts=ae.accounts.filter(c=>c.id!==cId);persist();showToast('Account removed')}
+function delItem(col,id){if(!confirm('Delete this record?'))return;db[col]=db[col].filter(x=>x.id!==id);persist();showToast('Deleted')}
+
+function openModal(type,extra){
+  const mb=document.getElementById('modal-body');
+  const cliOpts=db.clients.map(c=>`<option value="${c.name}">${c.name}</option>`).join('');
+  const sel=(id,val)=>{setTimeout(()=>{const el=document.getElementById(id);if(el&&val)el.value=val},0)};
+
+  if(type==='client'||type==='edit-client'){
+    const ex=type==='edit-client'?db.clients.find(c=>c.id===extra):{};
+    mb.innerHTML=`<h3>${type==='edit-client'?'Edit client':'New client'}</h3>
+    <div class="field"><label>Name</label><input type="text" id="f-name" value="${ex.name||''}"></div>
+    <div class="two-col-f"><div class="field"><label>Sector</label><input type="text" id="f-sector" value="${ex.sector||''}" placeholder="Banking, Retail..."></div>
+    <div class="field"><label>Service</label><select id="f-srv">${SERVICES.map(s=>`<option${ex.service===s?' selected':''}>${s}</option>`).join('')}</select></div></div>
+    <div class="two-col-f"><div class="field"><label>Contract value (€)</label><input type="number" id="f-value" value="${ex.value||''}"></div>
+    <div class="field"><label>Status</label><select id="f-st">${STATUSES.map(s=>`<option${ex.status===s?' selected':''}>${s}</option>`).join('')}</select></div></div>
+    <div class="field"><label>Next action</label><input type="text" id="f-nxt" value="${ex.nextAction||''}"></div>
+    <div class="modal-btns"><button class="btn" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="saveClient('${type==='edit-client'?extra:''}')">Save</button></div>`;
+  } else if(type==='deal'||type==='edit-deal'){
+    const ex=type==='edit-deal'?db.deals.find(d=>d.id===extra):{};
+    mb.innerHTML=`<h3>${type==='edit-deal'?'Edit deal':'New deal'}</h3>
+    <div class="field"><label>Client</label><select id="f-cli"><option value="">— select —</option>${cliOpts}</select></div>
+    <div class="two-col-f"><div class="field"><label>Service</label><select id="f-srv">${SERVICES.map(s=>`<option${ex.service===s?' selected':''}>${s}</option>`).join('')}</select></div>
+    <div class="field"><label>Value (€)</label><input type="number" id="f-value" value="${ex.value||''}"></div></div>
+    <div class="two-col-f"><div class="field"><label>Stage</label><select id="f-stage">${STAGES.map(s=>`<option${ex.stage===s?' selected':''}>${s}</option>`).join('')}</select></div>
+    <div class="field"><label>Est. close date</label><input type="date" id="f-date" value="${ex.closeDate||today()}"></div></div>
+    <div class="field"><label>Notes</label><textarea id="f-notes">${ex.notes||''}</textarea></div>
+    <div class="modal-btns"><button class="btn" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="saveDeal('${type==='edit-deal'?extra:''}')">Save</button></div>`;
+    sel('f-cli',ex.client);
+  } else if(type==='activity'){
+    mb.innerHTML=`<h3>Log activity</h3>
+    <div class="field"><label>Client</label><select id="f-cli"><option value="">— select —</option>${cliOpts}</select></div>
+    <div class="two-col-f"><div class="field"><label>Type</label><select id="f-type">${ACT_TYPES.map(s=>`<option>${s}</option>`).join('')}</select></div>
+    <div class="field"><label>Date</label><input type="date" id="f-date" value="${today()}"></div></div>
+    <div class="field"><label>Description</label><textarea id="f-desc" placeholder="What happened or needs to happen..."></textarea></div>
+    <div class="modal-btns"><button class="btn" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="saveActivity()">Save</button></div>`;
+  } else if(type==='ae'){
+    mb.innerHTML=`<h3>New AE session</h3>
+    <div class="two-col-f"><div class="field"><label>AE name</label><input type="text" id="f-ae-n" placeholder="e.g. Carlos Ruiz"></div>
+    <div class="field"><label>Territory</label><input type="text" id="f-ae-t" placeholder="SF · Madrid"></div></div>
+    <div class="field"><label>Session date</label><input type="date" id="f-ae-d" value="${today()}"></div>
+    <div class="field"><label>Accounts reviewed <span style="color:var(--text3);font-weight:400">(one per line)</span></label><textarea id="f-ae-c" rows="3" placeholder="Telefónica&#10;BBVA&#10;Inditex"></textarea></div>
+    <div class="modal-btns"><button class="btn" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="saveAE()">Create session</button></div>`;
+  } else if(type==='edit-ae'){
+    const ae=db.aes.find(a=>a.id===extra);if(!ae)return;
+    mb.innerHTML=`<h3>Edit session</h3>
+    <div class="two-col-f"><div class="field"><label>AE name</label><input type="text" id="f-ae-n" value="${ae.name}"></div>
+    <div class="field"><label>Territory</label><input type="text" id="f-ae-t" value="${ae.territory||''}"></div></div>
+    <div class="field"><label>Session date</label><input type="date" id="f-ae-d" value="${ae.date}"></div>
+    <div class="modal-btns"><button class="btn" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="saveEditAE('${extra}')">Save</button></div>`;
+  } else if(type==='account'){
+    mb.innerHTML=`<h3>Add account</h3>
+    <div class="field"><label>Account name</label><input type="text" id="f-c-n" placeholder="e.g. Repsol"></div>
+    <div class="field"><label>Initial notes</label><textarea id="f-c-no" rows="2" placeholder="Context, situation..."></textarea></div>
+    <div class="field"><label>Next follow-up</label><input type="date" id="f-c-fw"></div>
+    <div class="modal-btns"><button class="btn" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="saveAccount('${extra}')">Add</button></div>`;
+  } else if(type==='edit-account'){
+    const [aeId,cId]=extra.split(':');
+    const ae=db.aes.find(a=>a.id===aeId);const c=ae?ae.accounts.find(x=>x.id===cId):null;if(!c)return;
+    mb.innerHTML=`<h3>Edit account · ${c.name}</h3>
+    <div class="field"><label>Name</label><input type="text" id="f-c-n" value="${c.name}"></div>
+    <div class="field"><label>Notes</label><textarea id="f-c-no" rows="3">${c.notes||''}</textarea></div>
+    <div class="field"><label>Next follow-up</label><input type="date" id="f-c-fw" value="${c.followup||''}"></div>
+    <div class="modal-btns"><button class="btn" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="saveEditAccount('${aeId}','${cId}')">Save</button></div>`;
+  } else if(type==='ns'){
+    const [aeId,cId]=extra.split(':');
+    const ae=db.aes.find(a=>a.id===aeId);const c=ae?ae.accounts.find(x=>x.id===cId):null;if(!c)return;
+    mb.innerHTML=`<h3>Add next step · <span style="font-weight:400">${c.name}</span></h3>
+    <div class="field"><label>Owner side</label><select id="f-ns-o" style="width:100%;font-size:13px;padding:7px 10px;border:0.5px solid var(--border2);border-radius:var(--radius);background:var(--bg);color:var(--text)"><option value="globant">Globant</option><option value="sf">Salesforce</option></select></div>
+    <div class="field"><label>Owner name</label><input type="text" id="f-ns-r" placeholder="e.g. Juan / Carlos Ruiz (SF)"></div>
+    <div class="field"><label>Description</label><input type="text" id="f-ns-t" placeholder="What needs to happen?"></div>
+    <div class="field"><label>Due date</label><input type="date" id="f-ns-d" value="${today()}"></div>
+    <div class="modal-btns"><button class="btn" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="saveNS('${aeId}','${cId}')">Add</button></div>`;
+  }
+  document.getElementById('modal-overlay').classList.add('open');
+}
+
+function saveClient(eid){
+  const n=document.getElementById('f-name').value.trim();if(!n){alert('Name is required');return}
+  const o={id:eid||uid(),name:n,sector:document.getElementById('f-sector').value.trim(),service:document.getElementById('f-srv').value,value:+document.getElementById('f-value').value||0,status:document.getElementById('f-st').value,nextAction:document.getElementById('f-nxt').value.trim()};
+  if(eid){const i=db.clients.findIndex(c=>c.id===eid);if(i>=0)db.clients[i]=o}else db.clients.push(o);
+  closeModal();persist();showToast('Client saved');
+}
+function saveDeal(eid){
+  const cli=document.getElementById('f-cli').value;if(!cli){alert('Please select a client');return}
+  const o={id:eid||uid(),client:cli,service:document.getElementById('f-srv').value,value:+document.getElementById('f-value').value||0,stage:document.getElementById('f-stage').value,closeDate:document.getElementById('f-date').value,notes:document.getElementById('f-notes').value.trim()};
+  if(eid){const i=db.deals.findIndex(d=>d.id===eid);if(i>=0)db.deals[i]=o}else db.deals.push(o);
+  closeModal();persist();showToast('Deal saved');
+}
+function saveActivity(){
+  const cli=document.getElementById('f-cli').value;
+  db.activities.push({id:uid(),client:cli,type:document.getElementById('f-type').value,description:document.getElementById('f-desc').value.trim(),date:document.getElementById('f-date').value});
+  closeModal();persist();showToast('Activity logged');
+}
+function saveAE(){
+  const n=document.getElementById('f-ae-n').value.trim();if(!n){alert('AE name is required');return}
+  const accounts=document.getElementById('f-ae-c').value.split('\n').map(s=>s.trim()).filter(Boolean);
+  db.aes.unshift({id:uid(),name:n,territory:document.getElementById('f-ae-t').value.trim(),date:document.getElementById('f-ae-d').value,accounts:accounts.map(name=>({id:uid(),name,notes:'',followup:'',nextSteps:[]}))});
+  closeModal();persist();showToast('Session created');
+}
+function saveEditAE(eid){
+  const ae=db.aes.find(a=>a.id===eid);if(!ae)return;
+  ae.name=document.getElementById('f-ae-n').value.trim()||ae.name;
+  ae.territory=document.getElementById('f-ae-t').value.trim();
+  ae.date=document.getElementById('f-ae-d').value;
+  closeModal();persist();showToast('Session updated');
+}
+function saveAccount(aeId){
+  const n=document.getElementById('f-c-n').value.trim();if(!n){alert('Name is required');return}
+  const ae=db.aes.find(a=>a.id===aeId);if(!ae)return;
+  ae.accounts.push({id:uid(),name:n,notes:document.getElementById('f-c-no').value.trim(),followup:document.getElementById('f-c-fw').value,nextSteps:[]});
+  closeModal();persist();showToast('Account added');
+}
+function saveEditAccount(aeId,cId){
+  const ae=db.aes.find(a=>a.id===aeId);if(!ae)return;
+  const c=ae.accounts.find(x=>x.id===cId);if(!c)return;
+  c.name=document.getElementById('f-c-n').value.trim()||c.name;
+  c.notes=document.getElementById('f-c-no').value.trim();
+  c.followup=document.getElementById('f-c-fw').value;
+  closeModal();persist();showToast('Account updated');
+}
+function saveNS(aeId,cId){
+  const t=document.getElementById('f-ns-t').value.trim();if(!t){alert('Please describe the next step');return}
+  const ae=db.aes.find(a=>a.id===aeId);if(!ae)return;
+  const c=ae.accounts.find(x=>x.id===cId);if(!c)return;
+  c.nextSteps.push({id:uid(),owner:document.getElementById('f-ns-o').value,resp:document.getElementById('f-ns-r').value.trim(),text:t,date:document.getElementById('f-ns-d').value,done:false});
+  closeModal();persist();showToast('Next step added');
+}
+
+function closeModal(){document.getElementById('modal-overlay').classList.remove('open')}
+
+function saveSheetName(){
+  const v=document.getElementById('cfg-sheet').value.trim()||'SalesTracker CRM';
+  localStorage.setItem(KEYS.sheet,v);
+  document.getElementById('cfg-sheet-st').textContent='Saved: "'+v+'"';
+  showToast('Sheet name saved');
+}
+function saveName(){
+  const v=document.getElementById('cfg-name').value.trim();
+  if(v){localStorage.setItem(KEYS.uname,v);showToast('Name saved');renderDashboard();}
+}
+
+function setSyncState(state,lbl){
+  ['sync-dot','sync-dot2'].forEach(id=>{
+    const dot=document.getElementById(id);
+    dot.className='sync-dot'+(state==='syncing'?' syncing':state==='error'?' error':'');
+  });
+  document.getElementById('sync-lbl').textContent=lbl;
+  document.getElementById('sync-lbl2').textContent=lbl;
+}
+
+function checkDrive(){
+  setSyncState('syncing','Checking Drive...');
+  document.getElementById('cfg-sync-st').textContent='Google Drive connection requires Claude integration. Open this app through Claude for Drive sync.';
+  setSyncState('ok','Local storage active');
+}
+
+function forcSync(){
+  showToast('Drive sync available when running inside Claude');
+  setSyncState('ok','Local storage active');
+  document.getElementById('cfg-sync-st').textContent='Running standalone. Data is saved locally in your browser. Open through Claude to enable Drive sync.';
+}
+
+function exportCSV(){
+  function toCSV(cols,rows){return[cols.join(','),...rows.map(r=>cols.map(k=>'"'+(String(r[k]||'').replace(/"/g,'""'))+'"').join(','))].join('\n')}
+  const content='CLIENTS\n'+toCSV(['name','sector','service','value','status','nextAction'],db.clients)+'\n\nDEALS\n'+toCSV(['client','service','value','stage','closeDate','notes'],db.deals)+'\n\nACTIVITIES\n'+toCSV(['client','type','description','date'],db.activities);
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([content],{type:'text/csv'}));a.download='salestracker_export.csv';a.click();
+  showToast('CSV exported');
+}
+
+function clearAll(){db={clients:[],deals:[],activities:[],aes:[]};save();renderAll();showToast('Data cleared')}
+
+function nav(id,el){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  el.classList.add('active');
+  if(id==='reports')renderReports();
+}
+
+function showToast(msg){
+  const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2500);
+}
+document.getElementById('modal-overlay').addEventListener('click',function(e){if(e.target===this)closeModal()});
+load();
+</script>
+</body>
+</html>
