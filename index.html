@@ -60,38 +60,44 @@ h2{font-size:19px;font-weight:600;margin-bottom:16px}
 .card{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--rl);padding:16px;margin-bottom:14px}
 .card-title{font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px}
 .two-col{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px}
-table{width:100%;border-collapse:collapse;font-size:13px;table-layout:fixed}
-th{text-align:left;font-weight:500;color:var(--text3);padding:6px 9px;border-bottom:0.5px solid var(--border);font-size:11px;text-transform:uppercase;letter-spacing:.4px}
-td{padding:8px 9px;border-bottom:0.5px solid var(--border);vertical-align:middle;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-tr:last-child td{border-bottom:none}
-tr:hover td{background:var(--bg2)}
-.badge{display:inline-flex;align-items:center;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:500;white-space:nowrap}
-.b-blue{background:var(--blue-bg);color:var(--blue)}.b-green{background:var(--green-bg);color:var(--green-dark)}.b-amber{background:var(--amber-bg);color:var(--amber-dark)}.b-red{background:var(--red-bg);color:var(--red-dark)}.b-gray{background:var(--gray-bg);color:var(--gray-dark)}
-.pipeline{display:flex;gap:10px;overflow-x:auto;padding-bottom:8px}
-.pcol{min-width:150px;flex-shrink:0}
-.pcol-hdr{font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;padding:5px 9px;background:var(--bg2);border-radius:var(--r);margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;border:0.5px solid var(--border)}
-.pcard{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--r);padding:10px;margin-bottom:7px}
-.pcard .pc{font-size:12px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.pcard .ps{font-size:11px;color:var(--text3);margin:2px 0}
-.pcard .pa{font-size:12px;color:var(--blue);font-weight:600}
-.pcard-btns{display:flex;justify-content:flex-end;gap:3px;margin-top:5px}
-.act-item{display:flex;gap:9px;align-items:flex-start;padding:10px 0;border-bottom:0.5px solid var(--border)}
-.act-item:last-child{border-bottom:none}
-.act-dot{width:7px;height:7px;border-radius:50%;margin-top:5px;flex-shrink:0}
-.d-call{background:var(--blue)}.d-email{background:var(--green)}.d-meet{background:var(--amber)}.d-prop{background:#993556}.d-other{background:var(--text3)}
-.act-body{flex:1;min-width:0}
-.act-notes{font-size:12px;color:var(--text2);margin-top:5px;line-height:1.5;padding:6px 9px;background:var(--bg2);border-radius:var(--r)}
-.act-ns-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:8px}
-.act-ns-table th{text-align:left;font-size:10px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.4px;padding:4px 8px;border-bottom:0.5px solid var(--border);background:var(--bg2)}
-.act-ns-table td{padding:5px 8px;border-bottom:0.5px solid var(--border);vertical-align:top;white-space:normal}
-.act-ns-table tr:last-child td{border-bottom:none}
-.act-ns-bullet::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--blue);flex-shrink:0;display:inline-block;margin-right:5px;vertical-align:middle}
-.bar-wrap{display:flex;flex-direction:column;gap:10px}
-.bar-row{display:flex;align-items:center;gap:8px}
-.bar-lbl{width:88px;font-size:12px;color:var(--text2);text-align:right;flex-shrink:0}
-.bar-bg{flex:1;height:8px;background:var(--bg2);border-radius:20px;overflow:hidden}
-.bar-fill{height:100%;border-radius:20px}
-.bar-val{width:44px;font-size:12px;font-weight:500;flex-shrink:0}
+/* ── ACTIVITIES TABLE ── */
+.act-toolbar{display:flex;align-items:center;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+.act-toolbar-title{font-size:19px;font-weight:600;flex:1}
+.period-nav{display:flex;align-items:center;gap:6px}
+.period-label{font-size:13px;font-weight:500;min-width:160px;text-align:center}
+.view-tabs{display:flex;border:0.5px solid var(--border2);border-radius:var(--r);overflow:hidden}
+.view-tab{padding:5px 12px;font-size:12px;cursor:pointer;color:var(--text2);background:var(--bg);border:none;font-family:var(--font);transition:background .1s}
+.view-tab.active{background:var(--blue);color:#fff}
+.act-table-wrap{overflow-x:auto}
+.act-table{width:100%;border-collapse:collapse;font-size:13px}
+.act-table th{text-align:left;font-weight:500;color:var(--text3);padding:8px 10px;border-bottom:0.5px solid var(--border);font-size:11px;text-transform:uppercase;letter-spacing:.4px;background:var(--bg2);white-space:nowrap}
+.act-table td{padding:10px 10px;border-bottom:0.5px solid var(--border);vertical-align:top}
+.act-table tr:last-child td{border-bottom:none}
+.act-table tr:hover td{background:var(--bg2)}
+.act-table .client-link{color:var(--blue);cursor:pointer;font-weight:500;text-decoration:none}
+.act-table .client-link:hover{text-decoration:underline}
+.act-day-header td{background:var(--bg2);font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;padding:6px 10px;border-bottom:0.5px solid var(--border)}
+.ns-pill{display:inline-flex;align-items:center;gap:4px;font-size:11px;padding:2px 7px;border-radius:20px;margin:2px 2px 2px 0;white-space:nowrap}
+.ns-pill.pending{background:var(--blue-bg);color:var(--blue)}
+.ns-pill.overdue{background:var(--red-bg);color:var(--red-dark)}
+.ns-pill.done{background:var(--gray-bg);color:var(--gray-dark);text-decoration:line-through}
+/* ── ALERTS ── */
+.alert-section{margin-bottom:20px}
+.alert-section-title{font-size:13px;font-weight:600;margin-bottom:10px;display:flex;align-items:center;justify-content:space-between}
+.alert-card{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--r);padding:12px 14px;margin-bottom:8px;display:flex;align-items:flex-start;gap:12px;transition:opacity .2s}
+.alert-card.dismissed{display:none}
+.alert-card.overdue{border-left:3px solid var(--red)}
+.alert-card.warn{border-left:3px solid var(--amber)}
+.alert-icon{width:30px;height:30px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:15px}
+.alert-icon.overdue{background:var(--red-bg);color:var(--red-dark)}
+.alert-icon.warn{background:var(--amber-bg);color:var(--amber-dark)}
+.alert-body{flex:1;min-width:0}
+.alert-title{font-size:13px;font-weight:500;margin-bottom:2px}
+.alert-sub{font-size:12px;color:var(--text3)}
+.alert-right{display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex-shrink:0}
+.alert-dismiss{background:none;border:0.5px solid var(--border2);border-radius:var(--r);cursor:pointer;color:var(--text3);font-size:11px;padding:3px 8px;font-family:var(--font);display:flex;align-items:center;gap:4px;transition:all .1s}
+.alert-dismiss:hover{background:var(--green-bg);color:var(--green-dark);border-color:var(--green)}
+/* DASH ALERTS */
 .dash-alerts{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--rl);padding:16px;margin-bottom:14px}
 .dash-alert-item{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:0.5px solid var(--border)}
 .dash-alert-item:last-child{border-bottom:none}
@@ -101,20 +107,13 @@ tr:hover td{background:var(--bg2)}
 .dash-alert-body{flex:1;min-width:0}
 .dash-alert-title{font-size:13px;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .dash-alert-sub{font-size:11px;color:var(--text3);margin-top:2px}
-.dash-alert-right{font-size:11px;font-weight:600;white-space:nowrap;flex-shrink:0}
-.dash-alert-right.overdue{color:var(--red-dark)}
-.dash-alert-right.warn{color:var(--amber-dark)}
-
-/* ═══ MEETINGS PAGE ═══ */
-.meetings-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
-.meetings-date{font-size:12px;color:var(--text3);margin-bottom:18px}
-
-/* Pinned sections */
+.dash-alert-right{display:flex;align-items:center;gap:6px;flex-shrink:0}
+/* MEETINGS */
 .pinned-sections{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px;margin-bottom:18px}
-
-/* TO COMMENT */
-.tc-item{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:var(--r);border:0.5px solid var(--border);background:var(--bg);margin-bottom:7px;transition:opacity .2s}
-.tc-item.done{opacity:.45;border-color:var(--border)}
+.section-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.section-title{font-size:13px;font-weight:600;display:flex;align-items:center;gap:7px}
+.tc-item{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:var(--r);border:0.5px solid var(--border);background:var(--bg);margin-bottom:7px}
+.tc-item.done{opacity:.45}
 .tc-check{width:18px;height:18px;border-radius:50%;border:1.5px solid var(--border2);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;transition:all .15s}
 .tc-check.done{background:var(--blue);border-color:var(--blue)}
 .tc-body{flex:1;min-width:0}
@@ -127,30 +126,21 @@ tr:hover td{background:var(--bg2)}
 .tc-ns-check input{width:12px;height:12px;cursor:pointer;accent-color:var(--blue)}
 .tc-rm{background:none;border:none;cursor:pointer;color:var(--text3);font-size:11px;padding:1px 4px;border-radius:3px;margin-left:auto}
 .tc-rm:hover{color:var(--red-dark)}
-.tc-add-row{display:flex;gap:7px;margin-top:6px}
-
-/* ACTIONS FOR TODAY */
-.af-item{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:var(--r);border:0.5px solid var(--border);background:var(--bg);margin-bottom:7px;transition:opacity .2s}
+.af-item{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:var(--r);border:0.5px solid var(--border);background:var(--bg);margin-bottom:7px}
 .af-item.done{opacity:.45}
-.af-check{width:16px;height:16px;border-radius:4px;border:1.5px solid var(--border2);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;transition:all .15s;flex-shrink:0}
+.af-check{width:16px;height:16px;border-radius:4px;border:1.5px solid var(--border2);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;transition:all .15s}
 .af-check.done{background:var(--green);border-color:var(--green)}
 .af-body{flex:1;min-width:0}
 .af-title{font-size:13px;font-weight:500}
 .af-title.done{text-decoration:line-through;color:var(--text3)}
 .af-meta{display:flex;align-items:center;gap:8px;margin-top:4px;flex-wrap:wrap}
 .prio-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-.prio-dot.high{background:var(--red)}
-.prio-dot.medium{background:var(--amber)}
-.prio-dot.low{background:var(--green)}
+.prio-dot.high{background:var(--red)}.prio-dot.medium{background:var(--amber)}.prio-dot.low{background:var(--green)}
 .prio-label.high{font-size:11px;color:var(--red-dark);font-weight:500}
 .prio-label.medium{font-size:11px;color:var(--amber-dark);font-weight:500}
 .prio-label.low{font-size:11px;color:var(--green-dark);font-weight:500}
-.af-time{font-size:11px;color:var(--text3);display:flex;align-items:center;gap:3px}
-.af-client-link{font-size:11px;color:var(--blue);display:flex;align-items:center;gap:3px}
 .af-rm{background:none;border:none;cursor:pointer;color:var(--text3);font-size:11px;padding:1px 4px;border-radius:3px;margin-left:auto;flex-shrink:0}
 .af-rm:hover{color:var(--red-dark)}
-
-/* MEETING CARDS */
 .mtg-card{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--rl);margin-bottom:12px;overflow:hidden}
 .mtg-card-hdr{padding:13px 16px;display:flex;align-items:flex-start;gap:12px;cursor:pointer}
 .mtg-card-hdr:hover{background:var(--bg2)}
@@ -168,10 +158,6 @@ tr:hover td{background:var(--bg2)}
 .mtg-agenda-item:last-child{border-bottom:none}
 .mtg-agenda-cb{width:14px;height:14px;border-radius:3px;border:1.5px solid var(--border2);cursor:pointer;flex-shrink:0;margin-top:1px;accent-color:var(--blue)}
 .mtg-link{font-size:12px;color:var(--blue);display:flex;align-items:center;gap:4px;margin-top:4px;word-break:break-all}
-.mtg-link i{flex-shrink:0}
-.section-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
-.section-title{font-size:13px;font-weight:600;display:flex;align-items:center;gap:7px}
-
 /* ACCOUNT PLANS */
 .ae-card{border:0.5px solid var(--border);border-radius:var(--rl);margin-bottom:12px;overflow:hidden}
 .ae-hdr{padding:12px 16px;display:flex;align-items:center;gap:10px;cursor:pointer;background:var(--bg2);user-select:none}
@@ -227,18 +213,7 @@ tr:hover td{background:var(--bg2)}
 .ns-rm:hover{color:var(--text)}
 .add-btn{font-size:12px;color:var(--blue);background:none;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:3px;padding:2px 0;margin-top:6px}
 .add-btn:hover{text-decoration:underline}
-.alert-section{margin-bottom:20px}
-.alert-section-title{font-size:13px;font-weight:600;margin-bottom:10px;display:flex;align-items:center;gap:8px}
-.alert-card{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--r);padding:12px 14px;margin-bottom:8px;display:flex;align-items:flex-start;gap:12px}
-.alert-card.overdue{border-left:3px solid var(--red)}
-.alert-card.warn{border-left:3px solid var(--amber)}
-.alert-icon{width:30px;height:30px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:15px}
-.alert-icon.overdue{background:var(--red-bg);color:var(--red-dark)}
-.alert-icon.warn{background:var(--amber-bg);color:var(--amber-dark)}
-.alert-body{flex:1;min-width:0}
-.alert-title{font-size:13px;font-weight:500;margin-bottom:2px}
-.alert-sub{font-size:12px;color:var(--text3)}
-.alert-right{display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex-shrink:0}
+/* CFG */
 .cfg-section{border:0.5px solid var(--border);border-radius:var(--rl);padding:16px;margin-bottom:14px}
 .cfg-row{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:0.5px solid var(--border)}
 .cfg-row:last-child{border-bottom:none}
@@ -246,6 +221,7 @@ tr:hover td{background:var(--bg2)}
 .cfg-body{flex:1}
 .cfg-title{font-size:13px;font-weight:500;margin-bottom:2px}
 .cfg-desc{font-size:12px;color:var(--text2);margin-bottom:8px;line-height:1.5}
+/* MODAL */
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);align-items:flex-start;justify-content:center;z-index:100;padding:24px;overflow-y:auto}
 .modal-overlay.open{display:flex}
 .modal{background:var(--bg);border-radius:var(--rl);border:0.5px solid var(--border);padding:20px;width:100%;max-width:500px;margin:auto}
@@ -262,6 +238,16 @@ tr:hover td{background:var(--bg2)}
 .detail-row{padding:10px 12px;border-radius:var(--r);border:0.5px solid var(--border);background:var(--bg2);font-size:13px}
 .detail-row strong{display:block;margin-bottom:2px}
 .detail-row span{font-size:12px;color:var(--text2)}
+.badge{display:inline-flex;align-items:center;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:500;white-space:nowrap}
+.b-blue{background:var(--blue-bg);color:var(--blue)}.b-green{background:var(--green-bg);color:var(--green-dark)}.b-amber{background:var(--amber-bg);color:var(--amber-dark)}.b-red{background:var(--red-bg);color:var(--red-dark)}.b-gray{background:var(--gray-bg);color:var(--gray-dark)}
+.pipeline{display:flex;gap:10px;overflow-x:auto;padding-bottom:8px}
+.pcol{min-width:150px;flex-shrink:0}
+.pcol-hdr{font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;padding:5px 9px;background:var(--bg2);border-radius:var(--r);margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;border:0.5px solid var(--border)}
+.pcard{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--r);padding:10px;margin-bottom:7px}
+.pcard .pc{font-size:12px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pcard .ps{font-size:11px;color:var(--text3);margin:2px 0}
+.pcard .pa{font-size:12px;color:var(--blue);font-weight:600}
+.pcard-btns{display:flex;justify-content:flex-end;gap:3px;margin-top:5px}
 .toast{position:fixed;bottom:18px;right:18px;background:var(--blue);color:#fff;padding:8px 15px;border-radius:var(--r);font-size:13px;opacity:0;transition:opacity .3s;pointer-events:none;z-index:200}
 .toast.show{opacity:1}
 .empty{text-align:center;padding:24px 20px;color:var(--text3);font-size:13px}
@@ -313,23 +299,19 @@ tr:hover .row-actions{opacity:1}
       </div>
       <div id="dash-alerts-wrap"></div>
       <div class="two-col">
-        <div class="card"><div class="card-title">Pipeline by service</div><div class="bar-wrap" id="dash-bars"></div></div>
+        <div class="card"><div class="card-title">Pipeline by service</div><div class="bar-wrap" id="dash-bars" style="display:flex;flex-direction:column;gap:10px"></div></div>
         <div class="card"><div class="card-title">Upcoming activities</div><div id="dash-next"></div></div>
       </div>
     </div>
 
     <!-- MEETINGS -->
     <div class="page" id="page-meetings">
-      <div class="meetings-header">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
         <h2 style="margin:0">Meetings</h2>
         <button class="btn btn-primary" onclick="openModal('newmeeting')"><i class="ti ti-plus"></i> New Meeting</button>
       </div>
-      <div class="meetings-date" id="mtg-date-str"></div>
-
-      <!-- PINNED: To Comment + Actions for Today -->
+      <div style="font-size:12px;color:var(--text3);margin-bottom:18px" id="mtg-date-str"></div>
       <div class="pinned-sections">
-
-        <!-- TO COMMENT -->
         <div class="card" style="margin-bottom:0">
           <div class="section-hdr">
             <div class="section-title"><i class="ti ti-message-circle" style="color:var(--blue)"></i> To Comment</div>
@@ -340,15 +322,10 @@ tr:hover .row-actions{opacity:1}
             <div style="display:flex;flex-direction:column;gap:6px">
               <input id="tc-input-point" type="text" placeholder="Key point or question..." style="font-size:13px;padding:7px 9px;border:0.5px solid var(--border2);border-radius:var(--r);background:var(--bg);color:var(--text);font-family:var(--font);width:100%">
               <input id="tc-input-ref" type="text" placeholder="Reference / response (optional)" style="font-size:12px;padding:5px 9px;border:0.5px solid var(--border2);border-radius:var(--r);background:var(--bg);color:var(--text);font-family:var(--font);width:100%">
-              <div style="display:flex;gap:6px">
-                <button class="btn btn-primary btn-sm" onclick="saveTC()">Add</button>
-                <button class="btn btn-sm" onclick="closeAddTC()">Cancel</button>
-              </div>
+              <div style="display:flex;gap:6px"><button class="btn btn-primary btn-sm" onclick="saveTC()">Add</button><button class="btn btn-sm" onclick="closeAddTC()">Cancel</button></div>
             </div>
           </div>
         </div>
-
-        <!-- ACTIONS FOR TODAY -->
         <div class="card" style="margin-bottom:0">
           <div class="section-hdr">
             <div class="section-title"><i class="ti ti-bolt" style="color:var(--amber-dark)"></i> Actions for Today</div>
@@ -356,10 +333,7 @@ tr:hover .row-actions{opacity:1}
           </div>
           <div id="af-list"></div>
         </div>
-
       </div>
-
-      <!-- SCHEDULED MEETINGS -->
       <div style="margin-top:4px">
         <div class="section-hdr" style="margin-bottom:10px">
           <div class="section-title"><i class="ti ti-calendar-event" style="color:var(--text3)"></i> Scheduled Meetings</div>
@@ -375,8 +349,16 @@ tr:hover .row-actions{opacity:1}
         <button class="btn btn-primary" onclick="openModal('client')"><i class="ti ti-plus"></i> New client</button>
       </div>
       <div class="card" style="padding:0;overflow:hidden"><div style="overflow-x:auto">
-        <table>
-          <thead><tr><th style="width:130px">Client</th><th style="width:80px">Sector</th><th style="width:105px">Service</th><th style="width:75px">Value</th><th style="width:85px">Status</th><th style="width:120px">Next action</th><th style="width:55px"></th></tr></thead>
+        <table style="width:100%;border-collapse:collapse;font-size:13px;table-layout:fixed">
+          <thead><tr>
+            <th style="text-align:left;font-weight:500;color:var(--text3);padding:6px 9px;border-bottom:0.5px solid var(--border);font-size:11px;text-transform:uppercase;letter-spacing:.4px;width:130px">Client</th>
+            <th style="text-align:left;font-weight:500;color:var(--text3);padding:6px 9px;border-bottom:0.5px solid var(--border);font-size:11px;text-transform:uppercase;letter-spacing:.4px;width:80px">Sector</th>
+            <th style="text-align:left;font-weight:500;color:var(--text3);padding:6px 9px;border-bottom:0.5px solid var(--border);font-size:11px;text-transform:uppercase;letter-spacing:.4px;width:105px">Service</th>
+            <th style="text-align:left;font-weight:500;color:var(--text3);padding:6px 9px;border-bottom:0.5px solid var(--border);font-size:11px;text-transform:uppercase;letter-spacing:.4px;width:75px">Value</th>
+            <th style="text-align:left;font-weight:500;color:var(--text3);padding:6px 9px;border-bottom:0.5px solid var(--border);font-size:11px;text-transform:uppercase;letter-spacing:.4px;width:85px">Status</th>
+            <th style="text-align:left;font-weight:500;color:var(--text3);padding:6px 9px;border-bottom:0.5px solid var(--border);font-size:11px;text-transform:uppercase;letter-spacing:.4px;width:120px">Next action</th>
+            <th style="text-align:left;font-weight:500;color:var(--text3);padding:6px 9px;border-bottom:0.5px solid var(--border);font-size:11px;text-transform:uppercase;letter-spacing:.4px;width:55px"></th>
+          </tr></thead>
           <tbody id="cli-tbody"></tbody>
         </table>
       </div></div>
@@ -393,11 +375,38 @@ tr:hover .row-actions{opacity:1}
 
     <!-- ACTIVITIES -->
     <div class="page" id="page-activities">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
-        <h2 style="margin:0">Activities</h2>
-        <button class="btn btn-primary" onclick="openModal('activity')"><i class="ti ti-plus"></i> Log activity</button>
+      <div class="act-toolbar">
+        <div class="act-toolbar-title">Activities</div>
+        <div class="view-tabs">
+          <button class="view-tab active" id="vt-week" onclick="setView('week')">Week</button>
+          <button class="view-tab" id="vt-day" onclick="setView('day')">Day</button>
+          <button class="view-tab" id="vt-all" onclick="setView('all')">All</button>
+        </div>
+        <div class="period-nav">
+          <button class="btn btn-sm" onclick="shiftPeriod(-1)"><i class="ti ti-chevron-left"></i></button>
+          <span class="period-label" id="period-label">—</span>
+          <button class="btn btn-sm" onclick="shiftPeriod(1)"><i class="ti ti-chevron-right"></i></button>
+          <button class="btn btn-sm" onclick="goToday()">Today</button>
+        </div>
+        <button class="btn btn-primary" onclick="openModal('activity')"><i class="ti ti-plus"></i> Log</button>
       </div>
-      <div class="card" id="act-list"></div>
+      <div class="act-table-wrap">
+        <table class="act-table">
+          <thead>
+            <tr>
+              <th style="width:80px">Date</th>
+              <th style="width:70px">Type</th>
+              <th style="width:120px">Client</th>
+              <th style="width:130px">Description</th>
+              <th style="width:120px">Attendees</th>
+              <th>Notes</th>
+              <th style="width:180px">Next steps</th>
+              <th style="width:40px"></th>
+            </tr>
+          </thead>
+          <tbody id="act-tbody"></tbody>
+        </table>
+      </div>
     </div>
 
     <!-- ACCOUNT PLANS -->
@@ -413,8 +422,11 @@ tr:hover .row-actions{opacity:1}
 
     <!-- ALERTS -->
     <div class="page" id="page-alerts">
-      <h2>Alerts</h2>
-      <p style="font-size:13px;color:var(--text2);margin-bottom:18px">Next steps overdue or due within 2 days.</p>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+        <h2 style="margin:0">Alerts</h2>
+        <button class="btn btn-sm" onclick="dismissAll()" id="dismiss-all-btn" style="display:none"><i class="ti ti-checks"></i> Mark all done</button>
+      </div>
+      <p style="font-size:13px;color:var(--text2);margin-bottom:18px">Next steps overdue or due within 2 days. Mark as done to clear them.</p>
       <div id="alerts-content"></div>
     </div>
 
@@ -427,9 +439,14 @@ tr:hover .row-actions{opacity:1}
         <div class="metric" style="cursor:default"><div class="lbl">Closed Q2</div><div class="val" id="r-q2">—</div><div class="sub" id="r-q2d"></div></div>
       </div>
       <div class="two-col">
-        <div class="card"><div class="card-title">Revenue by service (YTD)</div><div class="bar-wrap" id="rep-bars"></div></div>
-        <div class="card"><div class="card-title">Closed deals</div><div style="overflow-x:auto"><table>
-          <thead><tr><th style="width:110px">Client</th><th style="width:90px">Service</th><th style="width:75px">Value</th><th style="width:75px">Close date</th></tr></thead>
+        <div class="card"><div class="card-title">Revenue by service (YTD)</div><div id="rep-bars" style="display:flex;flex-direction:column;gap:10px"></div></div>
+        <div class="card"><div class="card-title">Closed deals</div><div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:13px;table-layout:fixed">
+          <thead><tr>
+            <th style="text-align:left;font-weight:500;color:var(--text3);padding:6px 9px;border-bottom:0.5px solid var(--border);font-size:11px;text-transform:uppercase;width:110px">Client</th>
+            <th style="text-align:left;font-weight:500;color:var(--text3);padding:6px 9px;border-bottom:0.5px solid var(--border);font-size:11px;text-transform:uppercase;width:90px">Service</th>
+            <th style="text-align:left;font-weight:500;color:var(--text3);padding:6px 9px;border-bottom:0.5px solid var(--border);font-size:11px;text-transform:uppercase;width:75px">Value</th>
+            <th style="text-align:left;font-weight:500;color:var(--text3);padding:6px 9px;border-bottom:0.5px solid var(--border);font-size:11px;text-transform:uppercase;width:75px">Close date</th>
+          </tr></thead>
           <tbody id="rep-closed"></tbody>
         </table></div></div>
       </div>
@@ -450,11 +467,21 @@ tr:hover .row-actions{opacity:1}
               <input style="flex:1;font-size:13px;padding:7px 9px;border:0.5px solid var(--border2);border-radius:var(--r);background:var(--bg);color:var(--text)" type="text" id="cfg-gas" placeholder="https://script.google.com/macros/s/...">
               <button class="btn btn-primary" onclick="saveGAS()">Save & Sync</button>
             </div>
-            <div id="cfg-gas-st" style="font-size:11px;color:var(--text3);margin-top:6px"></div>
           </div>
         </div>
         <div class="cfg-row">
           <div class="cfg-num">2</div>
+          <div class="cfg-body">
+            <div class="cfg-title">Security token</div>
+            <div class="cfg-desc">Must match MI_TOKEN in your Apps Script.</div>
+            <div style="display:flex;gap:8px">
+              <input style="flex:1;font-size:13px;padding:7px 9px;border:0.5px solid var(--border2);border-radius:var(--r);background:var(--bg);color:var(--text)" type="text" id="cfg-token" placeholder="Sergio77">
+              <button class="btn btn-primary" onclick="saveToken()">Save</button>
+            </div>
+          </div>
+        </div>
+        <div class="cfg-row">
+          <div class="cfg-num">3</div>
           <div class="cfg-body">
             <div class="cfg-title">Sync status</div>
             <div id="cfg-sync-desc" style="font-size:12px;color:var(--text2);margin-bottom:8px">Not configured.</div>
@@ -465,7 +492,7 @@ tr:hover .row-actions{opacity:1}
           </div>
         </div>
         <div class="cfg-row">
-          <div class="cfg-num">3</div>
+          <div class="cfg-num">4</div>
           <div class="cfg-body">
             <div class="cfg-title">Your name</div>
             <div style="display:flex;gap:8px;margin-top:6px">
@@ -486,12 +513,11 @@ tr:hover .row-actions{opacity:1}
 
   </div>
 </div>
-
 <div class="modal-overlay" id="modal-overlay"><div class="modal" id="modal-body"></div></div>
 <div class="toast" id="toast"></div>
 
 <script>
-const DB_KEY='st_db_v6', GAS_KEY='st_gas', NAME_KEY='st_name';
+const DB_KEY='st_db_v7',GAS_KEY='st_gas',TOKEN_KEY='st_token',NAME_KEY='st_name';
 const ALERT_DAYS=2;
 const STAGES=['Lead','Demo','Proposal','Negotiation','Won','Lost'];
 const SERVICES=['Sales Cloud','Service Cloud','Marketing Cloud','Commerce Cloud','Platform','Data Cloud','Other'];
@@ -499,28 +525,34 @@ const STATUSES=['Lead','Active','Proposal','Negotiation','Inactive'];
 const ACT_TYPES=['Call','Email','Meeting','Proposal sent','Demo','Other'];
 const PRIOS=['High','Medium','Low'];
 const TIME_OPTS=['15 min','30 min','45 min','1h','1.5h','2h','3h+'];
-const DOT_CLS={Call:'d-call',Email:'d-email',Meeting:'d-meet','Proposal sent':'d-prop',Demo:'d-meet',Other:'d-other'};
 const SVC_CLR={'Sales Cloud':'#185fa5','Service Cloud':'#1d9e75','Marketing Cloud':'#ba7517','Commerce Cloud':'#993556','Platform':'#534AB7','Data Cloud':'#0f6e56','Other':'#888780'};
 const BADGE_ST={Lead:'b-gray',Active:'b-green',Proposal:'b-amber',Negotiation:'b-amber',Inactive:'b-red'};
-const PRIO_CLS={High:'high',Medium:'medium',Low:'low'};
+const DOT_CLS={Call:'d-call',Email:'d-email',Meeting:'d-meet','Proposal sent':'d-prop',Demo:'d-meet',Other:'d-other'};
 
-let db={clients:[],deals:[],activities:[],aps:[],toComments:[],actionsToday:[],scheduledMeetings:[]};
-let gasUrl='', isSyncing=false;
+let db={clients:[],deals:[],activities:[],aps:[],toComments:[],actionsToday:[],scheduledMeetings:[],dismissedAlerts:[]};
+let gasUrl='',secToken='',isSyncing=false;
+// Activities view state
+let actView='week'; // week | day | all
+let actOffset=0; // weeks or days offset from today
 
 const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,6);
 const today=()=>new Date().toISOString().slice(0,10);
 const now=()=>new Date().toISOString();
 const fmtEur=v=>'€'+Math.round(v).toLocaleString('en');
-const fmtDate=d=>{if(!d)return'';const[y,m,day]=d.split('T')[0].split('-');return day+'/'+m+'/'+y.slice(2)};
+const fmtDate=d=>{if(!d)return'';const s=d.split('T')[0];const[y,m,day]=s.split('-');return day+'/'+m+'/'+y.slice(2)};
 const fmtDateTime=d=>{if(!d)return'';const dt=new Date(d);return dt.toLocaleDateString('en-GB',{day:'2-digit',month:'2-digit',year:'2-digit'})+' '+dt.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'})};
-const daysFrom=d=>{if(!d)return null;return Math.round((new Date(d.split('T')[0])-new Date(today()))/86400000)};
+const daysFrom=d=>{if(!d)return null;const s=d.split('T')[0];return Math.round((new Date(s)-new Date(today()))/86400000)};
 const dLabel=d=>{const x=daysFrom(d);if(x===null)return'';if(x<0)return Math.abs(x)+'d overdue';if(x===0)return'Today';if(x===1)return'Tomorrow';return'In '+x+'d'};
+const addDays=(dateStr,n)=>{const d=new Date(dateStr);d.setDate(d.getDate()+n);return d.toISOString().slice(0,10)};
+const startOfWeek=dateStr=>{const d=new Date(dateStr);const day=d.getDay();const diff=d.getDate()-(day===0?6:day-1);d.setDate(diff);return d.toISOString().slice(0,10)};
 
 function load(){
-  try{const r=localStorage.getItem(DB_KEY);if(r){const p=JSON.parse(r);Object.keys(db).forEach(k=>{if(p[k])db[k]=p[k];});}}catch(e){}
+  try{const r=localStorage.getItem(DB_KEY);if(r){const p=JSON.parse(r);Object.keys(db).forEach(k=>{if(p[k]!==undefined)db[k]=p[k];});}}catch(e){}
   gasUrl=localStorage.getItem(GAS_KEY)||'';
+  secToken=localStorage.getItem(TOKEN_KEY)||'';
   try{const n=localStorage.getItem(NAME_KEY);if(n)document.getElementById('cfg-name').value=n;}catch(e){}
   if(gasUrl)document.getElementById('cfg-gas').value=gasUrl;
+  if(secToken)document.getElementById('cfg-token').value=secToken;
   if(!db.clients.length&&!db.aps.length)seedDemo();
   renderAll();
   setSyncState(gasUrl?'pending':'ok',gasUrl?'Syncing...':'Local only');
@@ -530,12 +562,13 @@ const saveLocal=()=>{try{localStorage.setItem(DB_KEY,JSON.stringify(db))}catch(e
 const persist=()=>{saveLocal();renderAll();if(gasUrl)syncToDrive();};
 
 /* ── DRIVE ── */
+function driveUrl(base){return secToken?base+'?token='+encodeURIComponent(secToken):base;}
 async function syncToDrive(){
   if(!gasUrl||isSyncing)return;
   isSyncing=true;setSyncState('syncing','Syncing...');
   try{
-    const payload={clients:db.clients,deals:db.deals,activities:db.activities,aps:db.aps,toComments:db.toComments,actionsToday:db.actionsToday,scheduledMeetings:db.scheduledMeetings};
-    const res=await fetch(gasUrl,{method:'POST',body:JSON.stringify(payload)});
+    const payload={clients:db.clients,deals:db.deals,activities:db.activities,aps:db.aps,toComments:db.toComments,actionsToday:db.actionsToday,scheduledMeetings:db.scheduledMeetings,dismissedAlerts:db.dismissedAlerts};
+    const res=await fetch(driveUrl(gasUrl),{method:'POST',body:JSON.stringify(payload)});
     const data=await res.json();
     if(data.ok){setSyncState('ok','Drive: synced '+new Date().toLocaleTimeString('en',{hour:'2-digit',minute:'2-digit'}));document.getElementById('cfg-sync-desc').textContent='Last sync: '+new Date().toLocaleString('en');}
     else throw new Error(data.error||'Unknown');
@@ -546,46 +579,31 @@ async function loadFromDrive(){
   if(!gasUrl){alert('Configure Apps Script URL in Settings first.');return;}
   setSyncState('syncing','Loading...');
   try{
-    const res=await fetch(gasUrl);const data=await res.json();
-    Object.keys(db).forEach(k=>{if(data[k])db[k]=data[k];});
+    const res=await fetch(driveUrl(gasUrl));const data=await res.json();
+    if(data.error)throw new Error(data.error);
+    Object.keys(db).forEach(k=>{if(data[k]!==undefined)db[k]=data[k];});
     saveLocal();renderAll();setSyncState('ok','Loaded from Drive');showToast('Data loaded from Drive');
-  }catch(e){setSyncState('error','Load failed');showToast('Could not load from Drive');}
+  }catch(e){setSyncState('error','Load failed: '+e.message);showToast('Could not load from Drive');}
 }
-function saveGAS(){const v=document.getElementById('cfg-gas').value.trim();if(!v)return;gasUrl=v;localStorage.setItem(GAS_KEY,v);document.getElementById('cfg-gas-st').textContent='Saved. Testing...';syncToDrive();showToast('Saved — syncing...');}
+function saveGAS(){const v=document.getElementById('cfg-gas').value.trim();if(!v)return;gasUrl=v;localStorage.setItem(GAS_KEY,v);syncToDrive();showToast('Saved — syncing...');}
+function saveToken(){const v=document.getElementById('cfg-token').value.trim();if(!v)return;secToken=v;localStorage.setItem(TOKEN_KEY,v);showToast('Token saved');}
 function manualSync(){if(!gasUrl){showToast('Set up Drive URL in Settings');return;}isSyncing=false;syncToDrive();showToast('Syncing...');}
 function setSyncState(s,l){['sdot','sdot2'].forEach(id=>{const d=document.getElementById(id);d.className='dot'+(s==='syncing'?' syncing':s==='error'?' error':s==='pending'?' pending':'');});document.getElementById('slbl').textContent=l;document.getElementById('slbl2').textContent=l;}
 
 /* ── SEED ── */
 function seedDemo(){
-  db.clients=[
-    {id:'cl1',name:'Telefónica',sector:'Telco',service:'Sales Cloud',value:42000,status:'Active',nextAction:'QBR Q2'},
-    {id:'cl2',name:'BBVA',sector:'Banking',service:'Service Cloud',value:61000,status:'Active',nextAction:'Renewal Q3'},
-    {id:'cl3',name:'Mapfre',sector:'Insurance',service:'Service Cloud',value:38000,status:'Proposal',nextAction:'Contract signature'},
-    {id:'cl4',name:'Repsol',sector:'Energy',service:'Sales Cloud',value:28000,status:'Negotiation',nextAction:'Final proposal'},
-  ];
-  db.deals=[
-    {id:'d1',client:'Telefónica',service:'Sales Cloud',value:42000,stage:'Won',closeDate:'2026-01-15',notes:''},
-    {id:'d2',client:'BBVA',service:'Service Cloud',value:61000,stage:'Won',closeDate:'2026-03-10',notes:''},
-    {id:'d3',client:'Mapfre',service:'Service Cloud',value:38000,stage:'Proposal',closeDate:'2026-06-30',notes:''},
-    {id:'d4',client:'Repsol',service:'Sales Cloud',value:28000,stage:'Negotiation',closeDate:'2026-07-15',notes:''},
-  ];
-  const t1=new Date();t1.setDate(t1.getDate()+1);
-  const y1=new Date();y1.setDate(y1.getDate()-1);
+  db.clients=[{id:'cl1',name:'Telefónica',sector:'Telco',service:'Sales Cloud',value:42000,status:'Active',nextAction:'QBR Q2'},{id:'cl2',name:'BBVA',sector:'Banking',service:'Service Cloud',value:61000,status:'Active',nextAction:'Renewal Q3'},{id:'cl3',name:'Mapfre',sector:'Insurance',service:'Service Cloud',value:38000,status:'Proposal',nextAction:'Contract signature'},{id:'cl4',name:'Repsol',sector:'Energy',service:'Sales Cloud',value:28000,status:'Negotiation',nextAction:'Final proposal'},];
+  db.deals=[{id:'d1',client:'Telefónica',service:'Sales Cloud',value:42000,stage:'Won',closeDate:'2026-01-15',notes:''},{id:'d2',client:'BBVA',service:'Service Cloud',value:61000,stage:'Won',closeDate:'2026-03-10',notes:''},{id:'d3',client:'Mapfre',service:'Service Cloud',value:38000,stage:'Proposal',closeDate:'2026-06-30',notes:''},{id:'d4',client:'Repsol',service:'Sales Cloud',value:28000,stage:'Negotiation',closeDate:'2026-07-15',notes:''},];
+  const t1=addDays(today(),1),y1=addDays(today(),-1);
   db.activities=[
-    {id:'a1',client:'Telefónica',type:'Meeting',description:'QBR Q2 kick-off',date:today(),attendees:'Carlos (SF), Maria (Telefónica)',notes:'Client happy with progress.',nextSteps:[{person:'Juan',description:'Send updated timeline'},{person:'Carlos (SF)',description:'Share Q3 roadmap'}]},
+    {id:'a1',client:'Telefónica',type:'Meeting',description:'QBR Q2 kick-off',date:today(),attendees:'Carlos (SF), Maria (Telefónica)',notes:'Client happy with progress.',nextSteps:[{person:'Juan',description:'Send updated timeline',dueDate:t1},{person:'Carlos (SF)',description:'Share Q3 roadmap',dueDate:addDays(today(),5)}]},
+    {id:'a2',client:'BBVA',type:'Call',description:'Annual renewal review',date:addDays(today(),-3),attendees:'Juan, Pedro (BBVA)',notes:'Positive. Budget confirmed.',nextSteps:[{person:'Juan',description:'Prepare contract draft',dueDate:addDays(today(),2)}]},
+    {id:'a3',client:'Mapfre',type:'Email',description:'Proposal follow-up',date:addDays(today(),-1),attendees:'',notes:'Sent updated pricing.',nextSteps:[]},
   ];
-  db.toComments=[
-    {id:'tc1',point:'Ask about Q3 budget approval status',ref:'',nsCreated:false,done:false,createdAt:now()},
-    {id:'tc2',point:'Clarify implementation timeline with BBVA',ref:'They mentioned delays on their side',nsCreated:false,done:false,createdAt:now()},
-  ];
-  db.actionsToday=[
-    {id:'af1',title:'Send renewal proposal to Telefónica',priority:'High',client:'Telefónica',timeBlock:'30 min',done:false,createdAt:now()},
-    {id:'af2',title:'Prepare BBVA business case deck',priority:'Medium',client:'BBVA',timeBlock:'2h',done:false,createdAt:now()},
-    {id:'af3',title:'Review Mapfre contract draft',priority:'Low',client:'Mapfre',timeBlock:'45 min',done:true,createdAt:now()},
-  ];
-  db.scheduledMeetings=[
-    {id:'sm1',title:'Q2 Review — Telefónica',datetime:today()+'T10:00',participants:'Telefónica',objective:'Close renewal contract for Q3',agenda:['Review Q1 results','Present Q3 roadmap','Confirm renewal terms'],materials:'https://drive.google.com/...',notes:'',createdAt:now()},
-  ];
+  db.toComments=[{id:'tc1',point:'Ask about Q3 budget approval',ref:'',nsCreated:false,done:false,createdAt:now()},{id:'tc2',point:'Clarify BBVA implementation timeline',ref:'They mentioned possible delays',nsCreated:false,done:false,createdAt:now()},];
+  db.actionsToday=[{id:'af1',title:'Send renewal proposal to Telefónica',priority:'High',client:'Telefónica',timeBlock:'30 min',done:false,createdAt:now()},{id:'af2',title:'Prepare BBVA business case deck',priority:'Medium',client:'BBVA',timeBlock:'2h',done:false,createdAt:now()},];
+  db.scheduledMeetings=[{id:'sm1',title:'Q2 Review — Telefónica',datetime:today()+'T10:00',participants:'Telefónica',objective:'Close renewal contract',agenda:['Review Q1 results','Present Q3 roadmap','Confirm renewal terms'],agendaDone:[false,false,false],materials:'https://drive.google.com/...',notes:'',createdAt:now()},];
+  db.dismissedAlerts=[];
   saveLocal();
 }
 
@@ -607,17 +625,17 @@ function renderDashboard(){
   document.getElementById('m-cli').textContent=db.clients.length;
   document.getElementById('m-cli-s').textContent=db.clients.filter(c=>c.status==='Active').length+' active';
   const openNS=allNS().filter(n=>!n.done);
-  const urgentNS=openNS.filter(n=>n.dueDate&&daysFrom(n.dueDate)<=ALERT_DAYS);
+  const urgentNS=openNS.filter(n=>n.dueDate&&daysFrom(n.dueDate)<=ALERT_DAYS&&!db.dismissedAlerts.includes(n.id));
   document.getElementById('m-ns').textContent=openNS.length;
   document.getElementById('m-ns-s').textContent=urgentNS.length?urgentNS.length+' need attention':'';
   const svcMap={};active.forEach(d=>{const s=d.service||'Other';svcMap[s]=(svcMap[s]||0)+(+d.value||0)});
   const entries=Object.entries(svcMap).sort((a,b)=>b[1]-a[1]);const maxV=entries[0]?entries[0][1]:1;
-  document.getElementById('dash-bars').innerHTML=entries.length?entries.slice(0,5).map(([s,v])=>`<div class="bar-row"><span class="bar-lbl">${s.replace(' Cloud','')}</span><div class="bar-bg"><div class="bar-fill" style="width:${Math.round(v/maxV*100)}%;background:${SVC_CLR[s]||'#888780'}"></div></div><span class="bar-val">${fmtEur(v)}</span></div>`).join(''):'<p style="font-size:12px;color:var(--text3)">No active deals</p>';
+  document.getElementById('dash-bars').innerHTML=entries.length?entries.slice(0,5).map(([s,v])=>`<div style="display:flex;align-items:center;gap:8px"><span style="width:88px;font-size:12px;color:var(--text2);text-align:right;flex-shrink:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${s.replace(' Cloud','')}</span><div style="flex:1;height:8px;background:var(--bg2);border-radius:20px;overflow:hidden"><div style="height:100%;border-radius:20px;width:${Math.round(v/maxV*100)}%;background:${SVC_CLR[s]||'#888780'}"></div></div><span style="width:44px;font-size:12px;font-weight:500;flex-shrink:0">${fmtEur(v)}</span></div>`).join(''):'<p style="font-size:12px;color:var(--text3)">No active deals</p>';
   const acts=[...db.activities].filter(a=>a.date>=today()).sort((a,b)=>a.date.localeCompare(b.date)).slice(0,4);
-  document.getElementById('dash-next').innerHTML=acts.length?acts.map(a=>`<div class="act-item" style="padding:7px 0"><div class="act-dot ${DOT_CLS[a.type]||'d-other'}" style="margin-top:5px"></div><div style="flex:1;font-size:13px"><strong>${a.type}</strong> with ${a.client||'—'}${a.description?' — '+a.description:''}</div><div style="font-size:11px;color:var(--text3);white-space:nowrap">${fmtDate(a.date)}</div></div>`).join(''):'<p style="font-size:12px;color:var(--text3)">No upcoming activities</p>';
+  document.getElementById('dash-next').innerHTML=acts.length?acts.map(a=>`<div style="display:flex;gap:9px;align-items:flex-start;padding:7px 0;border-bottom:0.5px solid var(--border)"><div style="width:7px;height:7px;border-radius:50%;margin-top:5px;flex-shrink:0;background:var(--blue)"></div><div style="flex:1;font-size:13px"><strong>${a.type}</strong> with ${a.client||'—'}${a.description?' — '+a.description:''}</div><div style="font-size:11px;color:var(--text3);white-space:nowrap">${fmtDate(a.date)}</div></div>`).join(''):'<p style="font-size:12px;color:var(--text3)">No upcoming activities</p>';
   const ns=allNS();
-  const overdue=ns.filter(n=>!n.done&&n.dueDate&&daysFrom(n.dueDate)<0).sort((a,b)=>a.dueDate.localeCompare(b.dueDate));
-  const warn=ns.filter(n=>!n.done&&n.dueDate&&daysFrom(n.dueDate)>=0&&daysFrom(n.dueDate)<=ALERT_DAYS).sort((a,b)=>a.dueDate.localeCompare(b.dueDate));
+  const overdue=ns.filter(n=>!n.done&&n.dueDate&&daysFrom(n.dueDate)<0&&!db.dismissedAlerts.includes(n.id));
+  const warn=ns.filter(n=>!n.done&&n.dueDate&&daysFrom(n.dueDate)>=0&&daysFrom(n.dueDate)<=ALERT_DAYS&&!db.dismissedAlerts.includes(n.id));
   const wrap=document.getElementById('dash-alerts-wrap');
   const all=[...overdue.map(n=>({...n,_t:'overdue'})),...warn.map(n=>({...n,_t:'warn'}))];
   if(!all.length){wrap.innerHTML='';return;}
@@ -626,7 +644,14 @@ function renderDashboard(){
       <span><i class="ti ti-bell" style="margin-right:5px;color:var(--amber-dark)"></i>Active alerts (${all.length})</span>
       <button class="btn btn-sm" onclick="nav('alerts',document.getElementById('nav-alerts'))">View all</button>
     </div>
-    ${all.slice(0,5).map(n=>`<div class="dash-alert-item"><div class="dash-alert-dot ${n._t}"></div><div class="dash-alert-body"><div class="dash-alert-title">${n.title}</div><div class="dash-alert-sub">${n._aeName} → ${n._acName} → ${n._mTitle}</div></div><div class="dash-alert-right ${n._t}">${dLabel(n.dueDate)}</div></div>`).join('')}
+    ${all.slice(0,5).map(n=>`<div class="dash-alert-item">
+      <div class="dash-alert-dot ${n._t}"></div>
+      <div class="dash-alert-body"><div class="dash-alert-title">${n.title}</div><div class="dash-alert-sub">${n._aeName} → ${n._acName} → ${n._mTitle}</div></div>
+      <div class="dash-alert-right">
+        <span style="font-size:11px;font-weight:600;color:var(--${n._t==='overdue'?'red-dark':'amber-dark'})">${dLabel(n.dueDate)}</span>
+        <button class="alert-dismiss" onclick="dismissAlert('${n.id}')"><i class="ti ti-check" style="font-size:10px"></i> Done</button>
+      </div>
+    </div>`).join('')}
   </div>`;
 }
 
@@ -635,99 +660,193 @@ function showDetail(type){
   const mb=document.getElementById('modal-body');mb.className='modal wide';
   if(type==='ytd'){const won=db.deals.filter(d=>d.stage==='Won').sort((a,b)=>(b.closeDate||'').localeCompare(a.closeDate||''));mb.innerHTML=`<h3>Closed deals YTD — ${fmtEur(won.reduce((s,d)=>s+(+d.value||0),0))}</h3><div class="detail-list">${won.length?won.map(d=>`<div class="detail-row"><strong>${d.client}</strong><span>${(d.service||'').replace(' Cloud','')} · ${fmtEur(d.value)} · Closed ${fmtDate(d.closeDate)}</span></div>`).join(''):'<p style="color:var(--text3)">No closed deals yet.</p>'}</div><div class="modal-btns"><button class="btn btn-primary" onclick="closeModal()">Close</button></div>`;}
   else if(type==='pipeline'){const active=db.deals.filter(d=>!['Won','Lost'].includes(d.stage)).sort((a,b)=>(+b.value||0)-(+a.value||0));mb.innerHTML=`<h3>Active pipeline — ${fmtEur(active.reduce((s,d)=>s+(+d.value||0),0))}</h3><div class="detail-list">${active.length?active.map(d=>`<div class="detail-row"><strong>${d.client} <span class="badge ${d.stage==='Negotiation'||d.stage==='Proposal'?'b-amber':d.stage==='Demo'?'b-blue':'b-gray'}" style="font-size:10px;vertical-align:middle">${d.stage}</span></strong><span>${(d.service||'').replace(' Cloud','')} · ${fmtEur(d.value)} · Est. close ${fmtDate(d.closeDate)}</span></div>`).join(''):'<p style="color:var(--text3)">No active deals.</p>'}</div><div class="modal-btns"><button class="btn btn-primary" onclick="closeModal()">Close</button></div>`;}
-  else if(type==='clients'){const sorted=[...db.clients].sort((a,b)=>a.name.localeCompare(b.name));mb.innerHTML=`<h3>All clients (${sorted.length})</h3><div class="detail-list">${sorted.length?sorted.map(c=>`<div class="detail-row"><strong>${c.name} <span class="badge ${BADGE_ST[c.status]||'b-gray'}" style="font-size:10px;vertical-align:middle">${c.status}</span></strong><span>${c.sector||''} · ${c.service||''} · ${c.value?fmtEur(c.value):'—'} · Next: ${c.nextAction||'—'}</span></div>`).join(''):'<p style="color:var(--text3)">No clients.</p>'}</div><div class="modal-btns"><button class="btn btn-primary" onclick="closeModal()">Close</button></div>`;}
-  else if(type==='nextsteps'){const open=allNS().filter(n=>!n.done).sort((a,b)=>(a.dueDate||'9').localeCompare(b.dueDate||'9'));mb.innerHTML=`<h3>Open next steps (${open.length})</h3><div class="detail-list">${open.length?open.map(n=>{const d=daysFrom(n.dueDate);const cls=d===null?'':d<0?'var(--red-dark)':d<=ALERT_DAYS?'var(--amber-dark)':'var(--text2)';return`<div class="detail-row" style="border-left:3px solid ${n.company==='sf'?'var(--blue)':'var(--green)'}"><strong>${n.title}</strong><span>${n._aeName} → ${n._acName} · ${n.person||''}${n.dueDate?` · <span style="font-weight:600;color:${cls}">${dLabel(n.dueDate)}</span>`:''}</span></div>`}).join(''):'<p style="color:var(--text3)">All done!</p>'}</div><div class="modal-btns"><button class="btn btn-primary" onclick="closeModal()">Close</button></div>`;}
+  else if(type==='clients'){const sorted=[...db.clients].sort((a,b)=>a.name.localeCompare(b.name));mb.innerHTML=`<h3>All clients (${sorted.length})</h3><div class="detail-list">${sorted.map(c=>`<div class="detail-row"><strong>${c.name} <span class="badge ${BADGE_ST[c.status]||'b-gray'}" style="font-size:10px;vertical-align:middle">${c.status}</span></strong><span>${c.sector||''} · ${c.service||''} · ${c.value?fmtEur(c.value):'—'} · Next: ${c.nextAction||'—'}</span></div>`).join('')}</div><div class="modal-btns"><button class="btn btn-primary" onclick="closeModal()">Close</button></div>`;}
+  else if(type==='nextsteps'){const open=allNS().filter(n=>!n.done).sort((a,b)=>(a.dueDate||'9').localeCompare(b.dueDate||'9'));mb.innerHTML=`<h3>Open next steps (${open.length})</h3><div class="detail-list">${open.length?open.map(n=>{const d=daysFrom(n.dueDate);const clr=d===null?'var(--text2)':d<0?'var(--red-dark)':d<=ALERT_DAYS?'var(--amber-dark)':'var(--text2)';return`<div class="detail-row" style="border-left:3px solid ${n.company==='sf'?'var(--blue)':'var(--green)'}"><strong>${n.title}</strong><span>${n._aeName} → ${n._acName} · ${n.person||''}${n.dueDate?` · <span style="font-weight:600;color:${clr}">${dLabel(n.dueDate)}</span>`:''}</span></div>`}).join(''):'<p style="color:var(--text3)">All done!</p>'}</div><div class="modal-btns"><button class="btn btn-primary" onclick="closeModal()">Close</button></div>`;}
   document.getElementById('modal-overlay').classList.add('open');
 }
 
-/* ── MEETINGS PAGE ── */
+/* ── ALERTS ── */
+function dismissAlert(nsId){
+  if(!db.dismissedAlerts.includes(nsId))db.dismissedAlerts.push(nsId);
+  persist();showToast('Marked as done');
+}
+function dismissAll(){
+  const ns=allNS();
+  const active=ns.filter(n=>!n.done&&n.dueDate&&daysFrom(n.dueDate)<=ALERT_DAYS&&!db.dismissedAlerts.includes(n.id));
+  active.forEach(n=>{if(!db.dismissedAlerts.includes(n.id))db.dismissedAlerts.push(n.id);});
+  persist();showToast('All alerts cleared');
+}
+function renderAlerts(){
+  const ns=allNS();
+  const overdue=ns.filter(n=>!n.done&&n.dueDate&&daysFrom(n.dueDate)<0&&!db.dismissedAlerts.includes(n.id)).sort((a,b)=>a.dueDate.localeCompare(b.dueDate));
+  const warn=ns.filter(n=>!n.done&&n.dueDate&&daysFrom(n.dueDate)>=0&&daysFrom(n.dueDate)<=ALERT_DAYS&&!db.dismissedAlerts.includes(n.id)).sort((a,b)=>a.dueDate.localeCompare(b.dueDate));
+  const el=document.getElementById('alerts-content');
+  const dismissAllBtn=document.getElementById('dismiss-all-btn');
+  const total=overdue.length+warn.length;
+  if(dismissAllBtn)dismissAllBtn.style.display=total>0?'':'none';
+  if(!total){el.innerHTML='<div class="empty"><i class="ti ti-circle-check"></i><p>No alerts — all on track.</p></div>';return;}
+  const card=(n,t)=>`<div class="alert-card ${t}" id="alcard-${n.id}">
+    <div class="alert-icon ${t}"><i class="ti ti-${t==='overdue'?'clock-x':'clock'}"></i></div>
+    <div class="alert-body">
+      <div class="alert-title">${n.title}</div>
+      <div class="alert-sub">${n._aeName} → ${n._acName} → ${n._mTitle}</div>
+    </div>
+    <div class="alert-right">
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">
+        <span class="ns-tag ${n.company}" style="font-size:11px;font-weight:600;padding:1px 8px;border-radius:20px;background:${n.company==='sf'?'var(--blue)':'var(--green)'};color:#fff">${n.company==='sf'?'SF':'Globant'}</span>
+        <span style="font-size:11px;font-weight:600;color:var(--${t==='overdue'?'red-dark':'amber-dark'})">${dLabel(n.dueDate)}</span>
+        ${n.person?`<span style="font-size:11px;color:var(--text3)">${n.person}</span>`:''}
+      </div>
+      <button class="alert-dismiss" onclick="dismissAlert('${n.id}')"><i class="ti ti-check" style="font-size:10px"></i> Mark done</button>
+    </div>
+  </div>`;
+  let html='';
+  if(overdue.length)html+=`<div class="alert-section"><div class="alert-section-title"><span style="display:flex;align-items:center;gap:8px"><i class="ti ti-alert-circle" style="color:var(--red-dark)"></i> Overdue (${overdue.length})</span></div>${overdue.map(n=>card(n,'overdue')).join('')}</div>`;
+  if(warn.length)html+=`<div class="alert-section"><div class="alert-section-title"><span style="display:flex;align-items:center;gap:8px"><i class="ti ti-bell" style="color:var(--amber-dark)"></i> Due within ${ALERT_DAYS} days (${warn.length})</span></div>${warn.map(n=>card(n,'warn')).join('')}</div>`;
+  el.innerHTML=html;
+}
+function updateBadge(){
+  const c=allNS().filter(n=>!n.done&&n.dueDate&&daysFrom(n.dueDate)<=ALERT_DAYS&&!db.dismissedAlerts.includes(n.id)).length;
+  const b=document.getElementById('alerts-badge');
+  if(c){b.textContent=c;b.style.display='';}else b.style.display='none';
+}
+
+/* ── ACTIVITIES TABLE ── */
+function setView(v){actView=v;actOffset=0;['week','day','all'].forEach(x=>document.getElementById('vt-'+x).classList.toggle('active',x===v));renderActivities();}
+function shiftPeriod(d){actOffset+=d;renderActivities();}
+function goToday(){actOffset=0;renderActivities();}
+
+function getDateRange(){
+  const base=today();
+  if(actView==='all')return{start:'0000-01-01',end:'9999-12-31',label:'All time'};
+  if(actView==='day'){
+    const d=addDays(base,actOffset);
+    const label=new Date(d).toLocaleDateString('en-GB',{weekday:'long',day:'2-digit',month:'long',year:'numeric'});
+    return{start:d,end:d,label};
+  }
+  // week
+  const weekStart=startOfWeek(addDays(base,actOffset*7));
+  const weekEnd=addDays(weekStart,6);
+  const fmt=s=>new Date(s).toLocaleDateString('en-GB',{day:'2-digit',month:'short'});
+  return{start:weekStart,end:weekEnd,label:`Week of ${fmt(weekStart)} — ${fmt(weekEnd)}`};
+}
+
+function renderActivities(){
+  const{start,end,label}=getDateRange();
+  document.getElementById('period-label').textContent=label;
+  const filtered=[...db.activities].filter(a=>a.date>=start&&a.date<=end).sort((a,b)=>b.date.localeCompare(a.date));
+  const tbody=document.getElementById('act-tbody');
+  if(!filtered.length){tbody.innerHTML=`<tr><td colspan="8" style="text-align:center;color:var(--text3);padding:30px;font-size:13px">No activities for this period</td></tr>`;return;}
+
+  // Group by date for day headers in week view
+  const byDate={};
+  filtered.forEach(a=>{if(!byDate[a.date])byDate[a.date]=[];byDate[a.date].push(a);});
+
+  let html='';
+  const dates=Object.keys(byDate).sort((a,b)=>b.localeCompare(a));
+  dates.forEach(date=>{
+    if(actView==='week'){
+      const dayLabel=new Date(date).toLocaleDateString('en-GB',{weekday:'long',day:'2-digit',month:'short'});
+      html+=`<tr class="act-day-header"><td colspan="8">${dayLabel}</td></tr>`;
+    }
+    byDate[date].forEach(a=>{
+      const nsPills=(a.nextSteps||[]).map(ns=>{
+        const d=ns.dueDate?daysFrom(ns.dueDate):null;
+        const cls=d===null?'pending':d<0?'overdue':'pending';
+        return`<span class="ns-pill ${cls}"><i class="ti ti-${cls==='overdue'?'alert-circle':'circle-dot'}" style="font-size:9px"></i> ${ns.person?ns.person+': ':''}${ns.description}${ns.dueDate?` · ${fmtDate(ns.dueDate)}`:''}</span>`;
+      }).join('');
+      const client=db.clients.find(c=>c.name===a.client);
+      html+=`<tr>
+        <td style="white-space:nowrap;color:var(--text3);font-size:12px">${fmtDate(a.date)}</td>
+        <td><span style="font-size:11px;font-weight:500;padding:2px 7px;border-radius:20px;background:var(--blue-bg);color:var(--blue)">${a.type}</span></td>
+        <td>${client?`<a class="client-link" onclick="openClientDetail('${a.client}')">${a.client}</a>`:a.client||'—'}</td>
+        <td style="font-size:13px;color:var(--text)">${a.description||'—'}</td>
+        <td style="font-size:12px;color:var(--text2)">${a.attendees||'—'}</td>
+        <td style="font-size:12px;color:var(--text2);white-space:normal;max-width:180px">${a.notes||'—'}</td>
+        <td style="white-space:normal">${nsPills||'—'}</td>
+        <td><div class="row-actions"><button class="rb" onclick="delItem('activities','${a.id}')" title="Delete"><i class="ti ti-trash" style="font-size:12px"></i></button></div></td>
+      </tr>`;
+    });
+  });
+  tbody.innerHTML=html;
+}
+
+function openClientDetail(clientName){
+  const c=db.clients.find(x=>x.name===clientName);
+  if(!c)return;
+  const clientActs=db.activities.filter(a=>a.client===clientName).sort((b,a)=>a.date.localeCompare(b.date));
+  const mb=document.getElementById('modal-body');mb.className='modal wide';
+  mb.innerHTML=`<h3>${c.name} <span class="badge ${BADGE_ST[c.status]||'b-gray'}" style="font-size:11px;vertical-align:middle">${c.status}</span></h3>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px;font-size:13px">
+    <div><span style="color:var(--text3);font-size:11px">SECTOR</span><br>${c.sector||'—'}</div>
+    <div><span style="color:var(--text3);font-size:11px">SERVICE</span><br>${c.service||'—'}</div>
+    <div><span style="color:var(--text3);font-size:11px">VALUE</span><br>${c.value?fmtEur(c.value):'—'}</div>
+    <div><span style="color:var(--text3);font-size:11px">NEXT ACTION</span><br>${c.nextAction||'—'}</div>
+  </div>
+  <div style="font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px">Activities (${clientActs.length})</div>
+  <div class="detail-list">${clientActs.length?clientActs.map(a=>`<div class="detail-row">
+    <strong>${a.type} — ${a.description||'(no description)'} <span style="font-size:11px;color:var(--text3);font-weight:400">${fmtDate(a.date)}</span></strong>
+    ${a.attendees?`<span>Attendees: ${a.attendees}</span>`:''}
+    ${a.notes?`<span style="margin-top:2px;display:block">${a.notes}</span>`:''}
+    ${(a.nextSteps||[]).length?`<span style="margin-top:4px;display:block">${a.nextSteps.map(ns=>`<span class="ns-pill pending" style="display:inline-flex;margin:2px">${ns.person?ns.person+': ':''}${ns.description}${ns.dueDate?' · '+fmtDate(ns.dueDate):''}</span>`).join('')}</span>`:''}
+  </div>`).join(''):'<p style="color:var(--text3)">No activities logged for this client.</p>'}</div>
+  <div class="modal-btns"><button class="btn btn-primary" onclick="closeModal()">Close</button></div>`;
+  document.getElementById('modal-overlay').classList.add('open');
+}
+
+/* ── MEETINGS ── */
 function renderMeetings(){
   document.getElementById('mtg-date-str').textContent=new Date().toLocaleDateString('en-GB',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
-  renderToComment();
-  renderActionsToday();
-  renderScheduledMeetings();
+  renderToComment();renderActionsToday();renderScheduledMeetings();
 }
-
-/* TO COMMENT */
 function renderToComment(){
   const el=document.getElementById('tc-list');
-  // sort: undone first (in creation order), done after
   const items=[...db.toComments.filter(t=>!t.done),...db.toComments.filter(t=>t.done)];
   if(!items.length){el.innerHTML='<div class="empty" style="padding:16px"><i class="ti ti-message-circle"></i>Nothing to comment yet</div>';return;}
-  el.innerHTML=items.map(t=>`
-    <div class="tc-item${t.done?' done':''}">
-      <div class="tc-check${t.done?' done':''}" onclick="toggleTC('${t.id}')" title="${t.done?'Mark pending':'Mark done'}">
-        ${t.done?'<i class="ti ti-check" style="font-size:10px;color:#fff"></i>':''}
-      </div>
-      <div class="tc-body">
-        <div class="tc-point${t.done?' done':''}">${t.point}</div>
-        ${t.ref?`<div class="tc-ref">${t.ref}</div>`:''}
-        <div class="tc-footer">
-          ${!t.done?`<label class="tc-ns-check" title="Create an action for today from this item">
-            <input type="checkbox" ${t.nsCreated?'checked':''} onchange="tcToAction('${t.id}',this.checked)"> → Action for today
-          </label>`:''}
-          ${t.nsCreated&&!t.done?`<span class="badge b-blue" style="font-size:10px">Action created</span>`:''}
-        </div>
-      </div>
-      <button class="tc-rm" onclick="deleteTC('${t.id}')" title="Remove"><i class="ti ti-x"></i></button>
-    </div>`).join('');
+  el.innerHTML=items.map(t=>`<div class="tc-item${t.done?' done':''}">
+    <div class="tc-check${t.done?' done':''}" onclick="toggleTC('${t.id}')">${t.done?'<i class="ti ti-check" style="font-size:10px;color:#fff"></i>':''}</div>
+    <div class="tc-body">
+      <div class="tc-point${t.done?' done':''}">${t.point}</div>
+      ${t.ref?`<div class="tc-ref">${t.ref}</div>`:''}
+      <div class="tc-footer">${!t.done?`<label class="tc-ns-check"><input type="checkbox" ${t.nsCreated?'checked':''} onchange="tcToAction('${t.id}',this.checked)"> → Action for today</label>`:''}${t.nsCreated&&!t.done?`<span class="badge b-blue" style="font-size:10px">Action created</span>`:''}</div>
+    </div>
+    <button class="tc-rm" onclick="deleteTC('${t.id}')"><i class="ti ti-x"></i></button>
+  </div>`).join('');
 }
-
 function openAddTC(){document.getElementById('tc-add-form').style.display='block';document.getElementById('tc-input-point').focus();}
 function closeAddTC(){document.getElementById('tc-add-form').style.display='none';document.getElementById('tc-input-point').value='';document.getElementById('tc-input-ref').value='';}
-function saveTC(){
-  const point=document.getElementById('tc-input-point').value.trim();if(!point)return;
-  db.toComments.unshift({id:uid(),point,ref:document.getElementById('tc-input-ref').value.trim(),nsCreated:false,done:false,createdAt:now()});
-  closeAddTC();persist();
-}
-function toggleTC(id){
-  const t=db.toComments.find(x=>x.id===id);if(!t)return;
-  t.done=!t.done;persist();
-}
+function saveTC(){const point=document.getElementById('tc-input-point').value.trim();if(!point)return;db.toComments.unshift({id:uid(),point,ref:document.getElementById('tc-input-ref').value.trim(),nsCreated:false,done:false,createdAt:now()});closeAddTC();persist();}
+function toggleTC(id){const t=db.toComments.find(x=>x.id===id);if(!t)return;t.done=!t.done;persist();}
 function deleteTC(id){db.toComments=db.toComments.filter(x=>x.id!==id);persist();}
-function tcToAction(id,checked){
-  const t=db.toComments.find(x=>x.id===id);if(!t)return;
-  if(checked&&!t.nsCreated){
-    db.actionsToday.unshift({id:uid(),title:t.point,priority:'Medium',client:'',timeBlock:'30 min',done:false,createdAt:now()});
-    t.nsCreated=true;
-  } else if(!checked){
-    t.nsCreated=false;
-  }
-  persist();
-}
+function tcToAction(id,checked){const t=db.toComments.find(x=>x.id===id);if(!t)return;if(checked&&!t.nsCreated){db.actionsToday.unshift({id:uid(),title:t.point,priority:'Medium',client:'',timeBlock:'30 min',done:false,createdAt:now()});t.nsCreated=true;}else if(!checked){t.nsCreated=false;}persist();}
 
-/* ACTIONS FOR TODAY */
 function renderActionsToday(){
   const el=document.getElementById('af-list');
   const items=[...db.actionsToday.filter(a=>!a.done),...db.actionsToday.filter(a=>a.done)];
   if(!items.length){el.innerHTML='<div class="empty" style="padding:16px"><i class="ti ti-bolt"></i>No actions yet</div>';return;}
   el.innerHTML=items.map(a=>{
-    const pc=PRIO_CLS[a.priority]||'low';
-    const client=a.client?db.clients.find(c=>c.name===a.client):null;
+    const pc=(a.priority||'').toLowerCase();
     return`<div class="af-item${a.done?' done':''}">
-      <div class="af-check${a.done?' done':''}" onclick="toggleAF('${a.id}')" title="${a.done?'Mark pending':'Mark done'}">
-        ${a.done?'<i class="ti ti-check" style="font-size:10px;color:#fff"></i>':''}
-      </div>
+      <div class="af-check${a.done?' done':''}" onclick="toggleAF('${a.id}')">${a.done?'<i class="ti ti-check" style="font-size:10px;color:#fff"></i>':''}</div>
       <div class="af-body">
         <div class="af-title${a.done?' done':''}">${a.title}</div>
         <div class="af-meta">
           <div class="prio-dot ${pc}"></div><span class="prio-label ${pc}">${a.priority}</span>
-          ${a.timeBlock?`<span class="af-time"><i class="ti ti-clock" style="font-size:10px"></i> ${a.timeBlock}</span>`:''}
-          ${client?`<span class="af-client-link"><i class="ti ti-building-store" style="font-size:10px"></i> ${a.client}</span>`:''}
+          ${a.timeBlock?`<span style="font-size:11px;color:var(--text3);display:flex;align-items:center;gap:3px"><i class="ti ti-clock" style="font-size:10px"></i> ${a.timeBlock}</span>`:''}
+          ${a.client?`<span style="font-size:11px;color:var(--blue);display:flex;align-items:center;gap:3px"><i class="ti ti-building-store" style="font-size:10px"></i> ${a.client}</span>`:''}
         </div>
       </div>
-      <button class="af-rm" onclick="deleteAF('${a.id}')" title="Remove"><i class="ti ti-x"></i></button>
+      <button class="af-rm" onclick="deleteAF('${a.id}')"><i class="ti ti-x"></i></button>
     </div>`;
   }).join('');
 }
 function toggleAF(id){const a=db.actionsToday.find(x=>x.id===id);if(!a)return;a.done=!a.done;persist();}
 function deleteAF(id){db.actionsToday=db.actionsToday.filter(x=>x.id!==id);persist();}
 
-/* SCHEDULED MEETINGS */
 function renderScheduledMeetings(){
   const el=document.getElementById('mtg-list');
   const sorted=[...db.scheduledMeetings].sort((a,b)=>a.datetime.localeCompare(b.datetime));
-  if(!sorted.length){el.innerHTML='<div class="empty"><i class="ti ti-calendar-event"></i>No meetings scheduled. Create one with the button above.</div>';return;}
+  if(!sorted.length){el.innerHTML='<div class="empty"><i class="ti ti-calendar-event"></i>No meetings scheduled.</div>';return;}
   el.innerHTML=sorted.map(m=>{
     const isPast=m.datetime<now();
     return`<div class="mtg-card">
@@ -738,7 +857,7 @@ function renderScheduledMeetings(){
           <div class="mtg-sub">
             <span><i class="ti ti-clock" style="font-size:10px"></i> ${fmtDateTime(m.datetime)}</span>
             ${m.participants?`<span><i class="ti ti-user" style="font-size:10px"></i> ${m.participants}</span>`:''}
-            ${isPast?`<span class="badge b-gray" style="font-size:10px">Past</span>`:'<span class="badge b-blue" style="font-size:10px">Upcoming</span>'}
+            ${isPast?`<span class="badge b-gray" style="font-size:10px">Past</span>`:`<span class="badge b-blue" style="font-size:10px">Upcoming</span>`}
           </div>
         </div>
         <div class="mtg-meta">
@@ -749,28 +868,29 @@ function renderScheduledMeetings(){
       </div>
       <div class="mtg-body" id="mtgbody-${m.id}">
         ${m.objective?`<div class="mtg-section"><div class="mtg-section-lbl">Objective</div><div class="mtg-text" style="font-weight:500;color:var(--text)">${m.objective}</div></div>`:''}
-        ${m.agenda&&m.agenda.length?`<div class="mtg-section"><div class="mtg-section-lbl">Agenda</div>${m.agenda.filter(a=>a).map((a,i)=>`<div class="mtg-agenda-item"><input type="checkbox" class="mtg-agenda-cb" onchange="toggleAgenda('${m.id}',${i},this.checked)"><span style="${m.agendaDone&&m.agendaDone[i]?'text-decoration:line-through;color:var(--text3)':''}">${a}</span></div>`).join('')}</div>`:''}
+        ${m.agenda&&m.agenda.length?`<div class="mtg-section"><div class="mtg-section-lbl">Agenda</div>${m.agenda.filter(a=>a).map((a,i)=>`<div class="mtg-agenda-item"><input type="checkbox" class="mtg-agenda-cb" ${m.agendaDone&&m.agendaDone[i]?'checked':''} onchange="toggleAgenda('${m.id}',${i},this.checked)"><span style="${m.agendaDone&&m.agendaDone[i]?'text-decoration:line-through;color:var(--text3)':''}">${a}</span></div>`).join('')}</div>`:''}
         ${m.materials?`<div class="mtg-section"><div class="mtg-section-lbl">Materials</div><a href="${m.materials}" target="_blank" class="mtg-link"><i class="ti ti-link"></i> ${m.materials}</a></div>`:''}
         ${m.notes?`<div class="mtg-section"><div class="mtg-section-lbl">Notes</div><div class="mtg-text">${m.notes}</div></div>`:''}
       </div>
     </div>`;
   }).join('');
-  // restore agenda checkbox states
-  sorted.forEach(m=>{if(m.agendaDone)m.agendaDone.forEach((done,i)=>{const cb=document.querySelector(`[onchange="toggleAgenda('${m.id}',${i},this.checked)"]`);if(cb)cb.checked=done;});});
 }
-
-function toggleAgenda(mId,idx,checked){
-  const m=db.scheduledMeetings.find(x=>x.id===mId);if(!m)return;
-  if(!m.agendaDone)m.agendaDone=m.agenda.map(()=>false);
-  m.agendaDone[idx]=checked;persist();
-}
+function toggleAgenda(mId,idx,checked){const m=db.scheduledMeetings.find(x=>x.id===mId);if(!m)return;if(!m.agendaDone)m.agendaDone=m.agenda.map(()=>false);m.agendaDone[idx]=checked;persist();}
 function deleteMtg(id){if(!confirm('Delete this meeting?'))return;db.scheduledMeetings=db.scheduledMeetings.filter(x=>x.id!==id);persist();showToast('Meeting deleted');}
 
 /* ── CLIENTS ── */
 function renderClients(){
   const tbody=document.getElementById('cli-tbody');
   if(!db.clients.length){tbody.innerHTML='<tr><td colspan="7" style="text-align:center;color:var(--text3);padding:22px">No clients yet.</td></tr>';return}
-  tbody.innerHTML=db.clients.map(c=>`<tr><td title="${c.name}"><strong>${c.name}</strong></td><td>${c.sector||'—'}</td><td><span class="badge b-blue" style="font-size:10px">${c.service||'—'}</span></td><td>${c.value?fmtEur(c.value):'—'}</td><td><span class="badge ${BADGE_ST[c.status]||'b-gray'}">${c.status||'—'}</span></td><td title="${c.nextAction||''}">${c.nextAction||'—'}</td><td><div class="row-actions"><button class="rb" onclick="openModal('edit-client','${c.id}')"><i class="ti ti-edit"></i></button><button class="rb" onclick="delItem('clients','${c.id}')"><i class="ti ti-trash"></i></button></div></td></tr>`).join('');
+  tbody.innerHTML=db.clients.map(c=>`<tr>
+    <td><a class="client-link" onclick="openClientDetail('${c.name}')" style="color:var(--blue);cursor:pointer;font-weight:500">${c.name}</a></td>
+    <td style="padding:8px 9px;border-bottom:0.5px solid var(--border);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${c.sector||'—'}</td>
+    <td style="padding:8px 9px;border-bottom:0.5px solid var(--border)"><span class="badge b-blue" style="font-size:10px">${c.service||'—'}</span></td>
+    <td style="padding:8px 9px;border-bottom:0.5px solid var(--border)">${c.value?fmtEur(c.value):'—'}</td>
+    <td style="padding:8px 9px;border-bottom:0.5px solid var(--border)"><span class="badge ${BADGE_ST[c.status]||'b-gray'}">${c.status||'—'}</span></td>
+    <td style="padding:8px 9px;border-bottom:0.5px solid var(--border);overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${c.nextAction||''}">${c.nextAction||'—'}</td>
+    <td style="padding:8px 9px;border-bottom:0.5px solid var(--border)"><div class="row-actions"><button class="rb" onclick="openModal('edit-client','${c.id}')"><i class="ti ti-edit"></i></button><button class="rb" onclick="delItem('clients','${c.id}')"><i class="ti ti-trash"></i></button></div></td>
+  </tr>`).join('');
 }
 
 /* ── PIPELINE ── */
@@ -779,31 +899,6 @@ function renderPipeline(){
     const cards=db.deals.filter(d=>d.stage===stage);
     return`<div class="pcol"><div class="pcol-hdr"><span>${stage}</span><span style="background:var(--bg);border:0.5px solid var(--border);border-radius:20px;font-size:10px;padding:1px 6px">${cards.length}</span></div>${cards.map(d=>`<div class="pcard"><div class="pc">${d.client||'—'}</div><div class="ps">${d.service||'—'}</div><div class="pa">${d.value?fmtEur(d.value):'—'}</div><div class="pcard-btns"><button class="rb" onclick="openModal('edit-deal','${d.id}')"><i class="ti ti-edit" style="font-size:12px"></i></button><button class="rb" onclick="delItem('deals','${d.id}')"><i class="ti ti-trash" style="font-size:12px"></i></button></div></div>`).join('')}${!cards.length?`<div style="font-size:11px;color:var(--text3);padding:8px 0;text-align:center">—</div>`:''}</div>`;
   }).join('');
-}
-
-/* ── ACTIVITIES ── */
-function renderActivities(){
-  const el=document.getElementById('act-list');
-  const sorted=[...db.activities].sort((a,b)=>b.date.localeCompare(a.date));
-  if(!sorted.length){el.innerHTML='<p style="font-size:12px;color:var(--text3)">No activities logged yet.</p>';return}
-  el.innerHTML=sorted.slice(0,40).map(a=>`
-    <div class="act-item">
-      <div class="act-dot ${DOT_CLS[a.type]||'d-other'}" style="margin-top:6px"></div>
-      <div class="act-body">
-        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
-          <strong style="font-size:13px">${a.type}</strong>
-          <span style="font-size:13px">with <strong>${a.client||'—'}</strong></span>
-          ${a.description?`<span style="font-size:13px;color:var(--text2)">— ${a.description}</span>`:''}
-        </div>
-        <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:3px">
-          <span style="font-size:11px;color:var(--text3)">${fmtDate(a.date)}</span>
-          ${a.attendees?`<span style="font-size:11px;color:var(--text2)"><i class="ti ti-users" style="font-size:10px"></i> ${a.attendees}</span>`:''}
-        </div>
-        ${a.notes?`<div class="act-notes">${a.notes}</div>`:''}
-        ${a.nextSteps&&a.nextSteps.length?`<table class="act-ns-table"><thead><tr><th style="width:110px">Person</th><th>Next step</th></tr></thead><tbody>${a.nextSteps.map(ns=>`<tr><td style="color:var(--text2);font-weight:500">${ns.person||'—'}</td><td><span class="act-ns-bullet">${ns.description||ns}</span></td></tr>`).join('')}</tbody></table>`:''}
-      </div>
-      <button class="rb" onclick="delItem('activities','${a.id}')" style="flex-shrink:0;margin-top:2px"><i class="ti ti-trash"></i></button>
-    </div>`).join('');
 }
 
 /* ── ACCOUNT PLANS ── */
@@ -819,37 +914,16 @@ function renderAP(){
     return`<div class="ae-card"><div class="ae-hdr" onclick="tog('aebody-${ap.id}','aechev-${ap.id}')"><i class="ti ti-chevron-right chev" id="aechev-${ap.id}"></i><div class="ae-info"><strong>${ap.aeName}</strong><span>${ap.aeTerritory||''} · ${ap.accounts.length} account${ap.accounts.length!==1?'s':''}</span></div><div class="ae-meta">${allNSap.length?`<span class="badge b-blue">${doneNS}/${allNSap.length} NS</span>`:''} ${openNS?`<span class="badge b-amber">${openNS} open</span>`:''}<button class="btn btn-sm" onclick="event.stopPropagation();openModal('edit-ae','${ap.id}')"><i class="ti ti-edit" style="font-size:11px"></i></button><button class="btn btn-sm" onclick="event.stopPropagation();delAP('${ap.id}')"><i class="ti ti-trash" style="font-size:11px"></i></button></div></div><div class="ae-body" id="aebody-${ap.id}"><div class="ae-toolbar"><span style="font-size:12px;color:var(--text2)">${ap.accounts.length} accounts</span><button class="btn btn-sm btn-primary" onclick="openModal('account','${ap.id}')"><i class="ti ti-plus" style="font-size:11px"></i> Add account</button></div>${ap.accounts.map(ac=>renderAccount(ap.id,ac)).join('')}</div></div>`;
   }).join('');
 }
-
 function renderAccount(apId,ac){
   const openNS=ac.meetings.flatMap(m=>m.nextSteps.filter(n=>!n.done));
-  return`<div class="acct-block"><div class="acct-hdr" onclick="tog('acbody-${ac.id}','acchev-${ac.id}')"><i class="ti ti-building" style="font-size:14px;color:var(--text3);flex-shrink:0"></i><span class="acct-name">${ac.name}</span><div class="acct-meta"><span class="badge b-gray" style="font-size:10px">${ac.meetings.length} meetings</span>${openNS.length?`<span class="badge b-amber" style="font-size:10px">${openNS.length} open NS</span>`:''}<button class="btn btn-sm" onclick="event.stopPropagation();openModal('edit-account','${apId}:${ac.id}')"><i class="ti ti-edit" style="font-size:11px"></i></button><button class="btn btn-sm" onclick="event.stopPropagation();delAccount('${apId}','${ac.id}')"><i class="ti ti-trash" style="font-size:11px"></i></button><i class="ti ti-chevron-right chev" id="acchev-${ac.id}" style="font-size:12px"></i></div></div><div class="acct-body" id="acbody-${ac.id}">${openNS.length?`<div class="global-ns-bar"><span style="font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.4px">All open NS · ${ac.name}</span><span class="badge b-amber" style="font-size:10px">${openNS.length} open</span></div><div class="global-ns-list">${openNS.map(ns=>{const d=daysFrom(ns.dueDate);const dCls=d===null?'':d<0?'overdue':d<=ALERT_DAYS?'warn':'';return`<div class="ns-item ${ns.company}"><div class="ns-check ${ns.company}${ns.done?' checked':''}" onclick="toggleNS('${apId}','${ac.id}','_','${ns.id}')">${ns.done?'<i class="ti ti-check" style="font-size:10px;color:#fff"></i>':''}</div><div class="ns-body"><div class="ns-title">${ns.title}</div><div class="ns-footer"><span class="ns-tag ${ns.company}">${ns.company==='sf'?'SF':'Globant'}</span><span class="ns-person">${ns.person||''}</span>${ns.dueDate?`<span class="ns-due ${dCls}"><i class="ti ti-calendar" style="font-size:10px"></i> ${fmtDate(ns.dueDate)}${d!==null&&d<0?' · overdue':d!==null&&d<=ALERT_DAYS?' · due soon':''}</span>`:''}</div></div></div>`;}).join('')}</div>`:''}
-      <div style="${openNS.length?'border-top:0.5px solid var(--border)':''}">
-        <div style="padding:8px 16px 8px 36px;display:flex;justify-content:space-between;align-items:center;background:var(--bg2)"><span style="font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.4px">Meetings</span><button class="btn btn-sm btn-primary" onclick="openModal('ap-meeting','${apId}:${ac.id}')"><i class="ti ti-plus" style="font-size:11px"></i> Add</button></div>
-        ${ac.meetings.length?ac.meetings.sort((a,b)=>b.date.localeCompare(a.date)).map(m=>renderAPMeeting(apId,ac.id,m)).join(''):`<div style="padding:16px 36px;font-size:12px;color:var(--text3)">No meetings yet.</div>`}
-      </div>
-    </div>
-  </div>`;
+  return`<div class="acct-block"><div class="acct-hdr" onclick="tog('acbody-${ac.id}','acchev-${ac.id}')"><i class="ti ti-building" style="font-size:14px;color:var(--text3);flex-shrink:0"></i><span class="acct-name">${ac.name}</span><div class="acct-meta"><span class="badge b-gray" style="font-size:10px">${ac.meetings.length} meetings</span>${openNS.length?`<span class="badge b-amber" style="font-size:10px">${openNS.length} open NS</span>`:''}<button class="btn btn-sm" onclick="event.stopPropagation();openModal('edit-account','${apId}:${ac.id}')"><i class="ti ti-edit" style="font-size:11px"></i></button><button class="btn btn-sm" onclick="event.stopPropagation();delAccount('${apId}','${ac.id}')"><i class="ti ti-trash" style="font-size:11px"></i></button><i class="ti ti-chevron-right chev" id="acchev-${ac.id}" style="font-size:12px"></i></div></div><div class="acct-body" id="acbody-${ac.id}">${openNS.length?`<div class="global-ns-bar"><span style="font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.4px">All open NS · ${ac.name}</span><span class="badge b-amber" style="font-size:10px">${openNS.length} open</span></div><div class="global-ns-list">${openNS.map(ns=>{const d=daysFrom(ns.dueDate);const dCls=d===null?'':d<0?'overdue':d<=ALERT_DAYS?'warn':'';return`<div class="ns-item ${ns.company}"><div class="ns-check ${ns.company}${ns.done?' checked':''}" onclick="toggleNS('${apId}','${ac.id}','_','${ns.id}')">${ns.done?'<i class="ti ti-check" style="font-size:10px;color:#fff"></i>':''}</div><div class="ns-body"><div class="ns-title">${ns.title}</div><div class="ns-footer"><span class="ns-tag ${ns.company}" style="font-size:11px;font-weight:600;padding:1px 8px;border-radius:20px;background:${ns.company==='sf'?'var(--blue)':'var(--green)'};color:#fff">${ns.company==='sf'?'SF':'Globant'}</span><span class="ns-person">${ns.person||''}</span>${ns.dueDate?`<span class="ns-due ${dCls}"><i class="ti ti-calendar" style="font-size:10px"></i> ${fmtDate(ns.dueDate)}${d!==null&&d<0?' · overdue':d!==null&&d<=ALERT_DAYS?' · due soon':''}</span>`:''}</div></div></div>`;}).join('')}</div>`:''}
+    <div style="${openNS.length?'border-top:0.5px solid var(--border)':''}"><div style="padding:8px 16px 8px 36px;display:flex;justify-content:space-between;align-items:center;background:var(--bg2)"><span style="font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.4px">Meetings</span><button class="btn btn-sm btn-primary" onclick="openModal('ap-meeting','${apId}:${ac.id}')"><i class="ti ti-plus" style="font-size:11px"></i> Add</button></div>${ac.meetings.length?ac.meetings.sort((a,b)=>b.date.localeCompare(a.date)).map(m=>renderAPMeeting(apId,ac.id,m)).join(''):`<div style="padding:16px 36px;font-size:12px;color:var(--text3)">No meetings yet.</div>`}</div>
+  </div></div>`;
 }
-
 function renderAPMeeting(apId,acId,m){
   const openNS=m.nextSteps.filter(n=>!n.done).length;const doneNS=m.nextSteps.filter(n=>n.done).length;
-  return`<div class="meeting-block"><div class="meeting-hdr" onclick="tog('mbody-${m.id}','mchev-${m.id}')"><div class="meeting-icon2"><i class="ti ti-users"></i></div><div class="meeting-info"><strong>${m.title}</strong><span>${fmtDate(m.date)}${m.nextSteps.length?' · '+doneNS+'/'+m.nextSteps.length+' NS':''}</span></div><div class="meeting-meta">${openNS?`<span class="badge b-amber" style="font-size:10px">${openNS} open</span>`:''}${m.nextSteps.length&&!openNS?`<span class="badge b-green" style="font-size:10px">All done ✓</span>`:''}<button class="btn btn-sm" onclick="event.stopPropagation();openModal('edit-ap-meeting','${apId}:${acId}:${m.id}')"><i class="ti ti-edit" style="font-size:11px"></i></button><button class="btn btn-sm" onclick="event.stopPropagation();delAPMeeting('${apId}','${acId}','${m.id}')"><i class="ti ti-trash" style="font-size:11px"></i></button><i class="ti ti-chevron-right chev" id="mchev-${m.id}" style="font-size:12px"></i></div></div><div class="meeting-body" id="mbody-${m.id}">${m.notes?`<div class="meeting-notes-box">${m.notes}</div>`:''}<div style="font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px">Next steps</div>${m.nextSteps.length?`<div class="ns-list">${m.nextSteps.map(ns=>{const d=daysFrom(ns.dueDate);const dCls=d===null?'':d<0?'overdue':d<=ALERT_DAYS?'warn':'';return`<div class="ns-item ${ns.company}${ns.done?' done':''}"><div class="ns-check ${ns.company}${ns.done?' checked':''}" onclick="toggleNS('${apId}','${acId}','${m.id}','${ns.id}')">${ns.done?'<i class="ti ti-check" style="font-size:10px;color:#fff"></i>':''}</div><div class="ns-body"><div class="ns-title${ns.done?' done':''}">${ns.title}</div><div class="ns-footer"><span class="ns-tag ${ns.company}">${ns.company==='sf'?'SF':'Globant'}</span><span class="ns-person">${ns.person||''}</span>${ns.dueDate?`<span class="ns-due ${dCls}"><i class="ti ti-calendar" style="font-size:10px"></i> ${fmtDate(ns.dueDate)}${d!==null&&d<0?' · overdue':d!==null&&d<=ALERT_DAYS?' · due soon':''}</span>`:''}</div></div><button class="ns-rm" onclick="removeNS('${apId}','${acId}','${m.id}','${ns.id}')"><i class="ti ti-x"></i></button></div>`;}).join('')}</div>`:`<p style="font-size:12px;color:var(--text3)">No next steps yet.</p>`}<button class="add-btn" onclick="openModal('ap-ns','${apId}:${acId}:${m.id}')"><i class="ti ti-plus" style="font-size:11px"></i> Add next step</button></div></div>`;
+  return`<div class="meeting-block"><div class="meeting-hdr" onclick="tog('mbody-${m.id}','mchev-${m.id}')"><div class="meeting-icon2"><i class="ti ti-users"></i></div><div class="meeting-info"><strong>${m.title}</strong><span>${fmtDate(m.date)}${m.nextSteps.length?' · '+doneNS+'/'+m.nextSteps.length+' NS':''}</span></div><div class="meeting-meta">${openNS?`<span class="badge b-amber" style="font-size:10px">${openNS} open</span>`:''}${m.nextSteps.length&&!openNS?`<span class="badge b-green" style="font-size:10px">All done ✓</span>`:''}<button class="btn btn-sm" onclick="event.stopPropagation();openModal('edit-ap-meeting','${apId}:${acId}:${m.id}')"><i class="ti ti-edit" style="font-size:11px"></i></button><button class="btn btn-sm" onclick="event.stopPropagation();delAPMeeting('${apId}','${acId}','${m.id}')"><i class="ti ti-trash" style="font-size:11px"></i></button><i class="ti ti-chevron-right chev" id="mchev-${m.id}" style="font-size:12px"></i></div></div><div class="meeting-body" id="mbody-${m.id}">${m.notes?`<div class="meeting-notes-box">${m.notes}</div>`:''}<div style="font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px">Next steps</div>${m.nextSteps.length?`<div class="ns-list">${m.nextSteps.map(ns=>{const d=daysFrom(ns.dueDate);const dCls=d===null?'':d<0?'overdue':d<=ALERT_DAYS?'warn':'';return`<div class="ns-item ${ns.company}${ns.done?' done':''}"><div class="ns-check ${ns.company}${ns.done?' checked':''}" onclick="toggleNS('${apId}','${acId}','${m.id}','${ns.id}')">${ns.done?'<i class="ti ti-check" style="font-size:10px;color:#fff"></i>':''}</div><div class="ns-body"><div class="ns-title${ns.done?' done':''}">${ns.title}</div><div class="ns-footer"><span class="ns-tag ${ns.company}" style="font-size:11px;font-weight:600;padding:1px 8px;border-radius:20px;background:${ns.company==='sf'?'var(--blue)':'var(--green)'};color:#fff">${ns.company==='sf'?'SF':'Globant'}</span><span class="ns-person">${ns.person||''}</span>${ns.dueDate?`<span class="ns-due ${dCls}"><i class="ti ti-calendar" style="font-size:10px"></i> ${fmtDate(ns.dueDate)}${d!==null&&d<0?' · overdue':d!==null&&d<=ALERT_DAYS?' · due soon':''}</span>`:''}</div></div><button class="ns-rm" onclick="removeNS('${apId}','${acId}','${m.id}','${ns.id}')"><i class="ti ti-x"></i></button></div>`;}).join('')}</div>`:`<p style="font-size:12px;color:var(--text3)">No next steps yet.</p>`}<button class="add-btn" onclick="openModal('ap-ns','${apId}:${acId}:${m.id}')"><i class="ti ti-plus" style="font-size:11px"></i> Add next step</button></div></div>`;
 }
-
-/* ── ALERTS ── */
-function renderAlerts(){
-  const ns=allNS();
-  const overdue=ns.filter(n=>!n.done&&n.dueDate&&daysFrom(n.dueDate)<0).sort((a,b)=>a.dueDate.localeCompare(b.dueDate));
-  const warn=ns.filter(n=>!n.done&&n.dueDate&&daysFrom(n.dueDate)>=0&&daysFrom(n.dueDate)<=ALERT_DAYS).sort((a,b)=>a.dueDate.localeCompare(b.dueDate));
-  const el=document.getElementById('alerts-content');
-  if(!overdue.length&&!warn.length){el.innerHTML='<div class="empty"><i class="ti ti-circle-check"></i><p>No alerts — all on track.</p></div>';return}
-  const card=(n,t)=>`<div class="alert-card ${t}"><div class="alert-icon ${t}"><i class="ti ti-${t==='overdue'?'clock-x':'clock'}"></i></div><div class="alert-body"><div class="alert-title">${n.title}</div><div class="alert-sub">${n._aeName} → ${n._acName} → ${n._mTitle}</div></div><div class="alert-right"><span class="ns-tag ${n.company}">${n.company==='sf'?'SF':'Globant'}</span><span style="font-size:11px;font-weight:600;color:var(--${t==='overdue'?'red-dark':'amber-dark'})">${dLabel(n.dueDate)}</span>${n.person?`<span style="font-size:11px;color:var(--text3)">${n.person}</span>`:''}</div></div>`;
-  let html='';
-  if(overdue.length)html+=`<div class="alert-section"><div class="alert-section-title"><i class="ti ti-alert-circle" style="color:var(--red-dark)"></i> Overdue (${overdue.length})</div>${overdue.map(n=>card(n,'overdue')).join('')}</div>`;
-  if(warn.length)html+=`<div class="alert-section"><div class="alert-section-title"><i class="ti ti-bell" style="color:var(--amber-dark)"></i> Due within ${ALERT_DAYS} days (${warn.length})</div>${warn.map(n=>card(n,'warn')).join('')}</div>`;
-  el.innerHTML=html;
-}
-function updateBadge(){const c=allNS().filter(n=>!n.done&&n.dueDate&&daysFrom(n.dueDate)<=ALERT_DAYS).length;const b=document.getElementById('alerts-badge');if(c){b.textContent=c;b.style.display='';}else b.style.display='none';}
 
 /* ── REPORTS ── */
 function renderReports(){
@@ -862,14 +936,12 @@ function renderReports(){
   document.getElementById('r-q2').textContent=fmtEur(q2.reduce((s,d)=>s+(+d.value||0),0));document.getElementById('r-q2d').textContent=q2.length+' deals';
   const svcMap={};won.forEach(d=>{const s=d.service||'Other';svcMap[s]=(svcMap[s]||0)+(+d.value||0)});
   const entries=Object.entries(svcMap).sort((a,b)=>b[1]-a[1]);const maxV=entries[0]?entries[0][1]:1;
-  document.getElementById('rep-bars').innerHTML=entries.length?entries.map(([s,v])=>`<div class="bar-row"><span class="bar-lbl">${s.replace(' Cloud','')}</span><div class="bar-bg"><div class="bar-fill" style="width:${Math.round(v/maxV*100)}%;background:${SVC_CLR[s]||'#888780'}"></div></div><span class="bar-val">${fmtEur(v)}</span></div>`).join(''):'<p style="font-size:12px;color:var(--text3)">No closed deals</p>';
-  document.getElementById('rep-closed').innerHTML=won.length?[...won].sort((a,b)=>(b.closeDate||'').localeCompare(a.closeDate||'')).slice(0,10).map(d=>`<tr><td>${d.client||'—'}</td><td><span class="badge b-blue" style="font-size:10px">${(d.service||'').replace(' Cloud','')}</span></td><td>${d.value?fmtEur(d.value):'—'}</td><td>${fmtDate(d.closeDate)}</td></tr>`).join(''):'<tr><td colspan="4" style="text-align:center;color:var(--text3);padding:16px">No closed deals</td></tr>';
+  document.getElementById('rep-bars').innerHTML=entries.length?entries.map(([s,v])=>`<div style="display:flex;align-items:center;gap:8px"><span style="width:88px;font-size:12px;color:var(--text2);text-align:right;flex-shrink:0">${s.replace(' Cloud','')}</span><div style="flex:1;height:8px;background:var(--bg2);border-radius:20px;overflow:hidden"><div style="height:100%;border-radius:20px;width:${Math.round(v/maxV*100)}%;background:${SVC_CLR[s]||'#888780'}"></div></div><span style="width:44px;font-size:12px;font-weight:500;flex-shrink:0">${fmtEur(v)}</span></div>`).join(''):'<p style="font-size:12px;color:var(--text3)">No closed deals</p>';
+  document.getElementById('rep-closed').innerHTML=won.length?[...won].sort((a,b)=>(b.closeDate||'').localeCompare(a.closeDate||'')).slice(0,10).map(d=>`<tr><td style="padding:8px 9px;border-bottom:0.5px solid var(--border)">${d.client||'—'}</td><td style="padding:8px 9px;border-bottom:0.5px solid var(--border)"><span class="badge b-blue" style="font-size:10px">${(d.service||'').replace(' Cloud','')}</span></td><td style="padding:8px 9px;border-bottom:0.5px solid var(--border)">${d.value?fmtEur(d.value):'—'}</td><td style="padding:8px 9px;border-bottom:0.5px solid var(--border)">${fmtDate(d.closeDate)}</td></tr>`).join(''):'<tr><td colspan="4" style="text-align:center;color:var(--text3);padding:16px">No closed deals</td></tr>';
 }
 
-/* ── TOGGLE ── */
+/* ── TOGGLE & NS OPS ── */
 const tog=(b,c)=>{const el=document.getElementById(b);const cv=document.getElementById(c);if(!el)return;const o=el.classList.contains('open');el.classList.toggle('open',!o);if(cv)cv.style.transform=o?'':'rotate(90deg)';};
-
-/* ── NS OPS (Account Plans) ── */
 function findNS(apId,acId,mId,nsId){const ap=db.aps.find(a=>a.id===apId);if(!ap)return null;const ac=ap.accounts.find(a=>a.id===acId);if(!ac)return null;if(mId==='_'){for(const m of ac.meetings){const n=m.nextSteps.find(x=>x.id===nsId);if(n)return{m,ns:n}}return null;}const m=ac.meetings.find(x=>x.id===mId);if(!m)return null;const ns=m.nextSteps.find(x=>x.id===nsId);return ns?{m,ns}:null;}
 const toggleNS=(apId,acId,mId,nsId)=>{const r=findNS(apId,acId,mId,nsId);if(!r)return;r.ns.done=!r.ns.done;persist();};
 const removeNS=(apId,acId,mId,nsId)=>{const ap=db.aps.find(a=>a.id===apId);if(!ap)return;const ac=ap.accounts.find(a=>a.id===acId);if(!ac)return;const m=ac.meetings.find(x=>x.id===mId);if(!m)return;m.nextSteps=m.nextSteps.filter(x=>x.id!==nsId);persist();};
@@ -891,15 +963,13 @@ function openModal(type,extra){
   if(type==='newmeeting'||type==='editmeeting'){
     const ex=type==='editmeeting'?db.scheduledMeetings.find(m=>m.id===extra):{};
     mb.className='modal wide';
-    const agendaVal=(ex.agenda||[]).join('\n');
     mb.innerHTML=`<h3>${type==='editmeeting'?'Edit':'New'} Meeting</h3>
     ${fld('Meeting title',inp('f-mtg-title','text',ex.title,'e.g. Q3 Review — Telefónica'))}
-    <div class="two-col-f">${fld('Date & time',`<input id="f-mtg-dt" type="datetime-local" value="${ex.datetime||''}" style="width:100%;font-size:13px;padding:7px 9px;border:0.5px solid var(--border2);border-radius:var(--r);background:var(--bg);color:var(--text)">`)
-    }${fld('Participants / CRM link',`<select id="f-mtg-part" style="width:100%;font-size:13px;padding:7px 9px;border:0.5px solid var(--border2);border-radius:var(--r);background:var(--bg);color:var(--text)">${cliOpts.replace('— none —','— select or leave blank —')}</select>`)}</div>
-    ${fld('Objective <span style="color:var(--text3);font-weight:400">— why does this meeting exist?</span>',inp('f-mtg-obj','text',ex.objective,'e.g. Close Q3 budget, Align on implementation plan...'))}
-    ${fld('Agenda / points to cover <span style="color:var(--text3);font-weight:400">(one per line)</span>',ta('f-mtg-agenda',agendaVal,'Results review\nRoadmap Q3\nNext steps',4))}
-    ${fld('Materials <span style="color:var(--text3);font-weight:400">(link to Drive, PDF, deck...)</span>',inp('f-mtg-mat','url',ex.materials,'https://drive.google.com/...'))}
-    ${fld('Notes',ta('f-mtg-notes',ex.notes,'Pre-meeting notes or context...',2))}
+    <div class="two-col-f">${fld('Date & time',`<input id="f-mtg-dt" type="datetime-local" value="${ex.datetime||''}" style="width:100%;font-size:13px;padding:7px 9px;border:0.5px solid var(--border2);border-radius:var(--r);background:var(--bg);color:var(--text)">`)}<div class="field"><label>Participants / CRM link</label><select id="f-mtg-part" style="width:100%;font-size:13px;padding:7px 9px;border:0.5px solid var(--border2);border-radius:var(--r);background:var(--bg);color:var(--text)"><option value="">— select or leave blank —</option>${db.clients.map(c=>`<option value="${c.name}">${c.name}</option>`).join('')}</select></div></div>
+    ${fld('Objective — why does this meeting exist?',inp('f-mtg-obj','text',ex.objective,'e.g. Close Q3 budget...'))}
+    ${fld('Agenda / points to cover (one per line)',ta('f-mtg-agenda',(ex.agenda||[]).join('\n'),'Results review\nRoadmap Q3\nNext steps',4))}
+    ${fld('Materials (link to Drive, PDF, deck...)',inp('f-mtg-mat','url',ex.materials,'https://drive.google.com/...'))}
+    ${fld('Notes',ta('f-mtg-notes',ex.notes,'Pre-meeting notes...',2))}
     ${btns(`saveMtg('${type==='editmeeting'?extra:''}')`,'Save meeting')}`;
     if(ex.participants)setTimeout(()=>{const e=document.getElementById('f-mtg-part');if(e)e.value=ex.participants;},10);
   } else if(type==='newaction'){
@@ -908,6 +978,20 @@ function openModal(type,extra){
     <div class="two-col-f">${fld('Priority',sel('f-af-prio',PRIOS,'Medium'))}${fld('Time block',sel('f-af-time',TIME_OPTS,'30 min'))}</div>
     ${fld('Linked client (optional)',`<select id="f-af-cli" style="width:100%;font-size:13px;padding:7px 9px;border:0.5px solid var(--border2);border-radius:var(--r);background:var(--bg);color:var(--text)">${cliOpts}</select>`)}
     ${btns('saveAction()')}`;
+  } else if(type==='activity'){
+    mb.innerHTML=`<h3>Log activity</h3>
+    ${fld('Client',`<select id="f-cli" style="width:100%;font-size:13px;padding:7px 9px;border:0.5px solid var(--border2);border-radius:var(--r);background:var(--bg);color:var(--text)"><option value="">— select —</option>${db.clients.map(c=>`<option value="${c.name}">${c.name}</option>`).join('')}</select>`)}
+    <div class="two-col-f">${fld('Type',sel('f-type',ACT_TYPES,''))}${fld('Date',inp('f-date','date',today()))}</div>
+    ${fld('Description',inp('f-desc','text','','Brief title'))}
+    ${fld('Attendees',inp('f-att','text','','e.g. Carlos (SF), Maria (Client)'))}
+    ${fld('Notes',ta('f-notes','','Key points, decisions...',3))}
+    <div class="field"><label>Next steps</label>
+      <div style="font-size:11px;color:var(--text3);margin-bottom:6px">Person · Description · Due date</div>
+      <div id="ns-rows" style="display:flex;flex-direction:column;gap:6px;margin-bottom:6px"></div>
+      <button class="add-btn" onclick="addActNSRow()"><i class="ti ti-plus" style="font-size:11px"></i> Add next step</button>
+    </div>
+    <div class="modal-btns"><button class="btn" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="saveActivity()">Save</button></div>`;
+    addActNSRow();
   } else if(type==='client'||type==='edit-client'){
     const ex=type==='edit-client'?db.clients.find(c=>c.id===extra):{};
     mb.innerHTML=`<h3>${type==='edit-client'?'Edit':'New'} client</h3>
@@ -925,20 +1009,10 @@ function openModal(type,extra){
     ${fld('Notes',ta('f-notes',ex.notes))}
     ${btns(`saveDeal('${type==='edit-deal'?extra:''}')`)}`;
     setTimeout(()=>{const e=document.getElementById('f-cli');if(e&&ex.client)e.value=ex.client;},10);
-  } else if(type==='activity'){
-    mb.innerHTML=`<h3>Log activity</h3>
-    ${fld('Client',`<select id="f-cli" style="width:100%;font-size:13px;padding:7px 9px;border:0.5px solid var(--border2);border-radius:var(--r);background:var(--bg);color:var(--text)"><option value="">— select —</option>${db.clients.map(c=>`<option value="${c.name}">${c.name}</option>`).join('')}</select>`)}
-    <div class="two-col-f">${fld('Type',sel('f-type',ACT_TYPES,''))}${fld('Date',inp('f-date','date',today()))}</div>
-    ${fld('Description',inp('f-desc','text','','Brief title'))}
-    ${fld('Attendees',inp('f-att','text','','e.g. Carlos (SF), Maria (Client)'))}
-    ${fld('Notes',ta('f-notes','','Key points, decisions...',3))}
-    <div class="field"><label>Next steps</label><div id="ns-rows" style="display:flex;flex-direction:column;gap:6px;margin-bottom:6px"></div><button class="add-btn" onclick="addActNSRow()"><i class="ti ti-plus" style="font-size:11px"></i> Add next step</button></div>
-    <div class="modal-btns"><button class="btn" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="saveActivity()">Save</button></div>`;
-    addActNSRow();
   } else if(type==='ae'){
     mb.innerHTML=`<h3>New Account Plan</h3>
     <div class="two-col-f">${fld('AE name',inp('f-ae-n','text','','e.g. Carlos Ruiz'))}${fld('Territory',inp('f-ae-t','text','','SF · Madrid'))}</div>
-    ${fld('Accounts to track <span style="color:var(--text3);font-weight:400">(one per line)</span>',ta('f-ae-c','','Telefónica\nBBVA',3))}
+    ${fld('Accounts (one per line)',ta('f-ae-c','','Telefónica\nBBVA',3))}
     ${btns('saveAP()')}`;
   } else if(type==='edit-ae'){
     const ap=db.aps.find(a=>a.id===extra);if(!ap)return;
@@ -963,7 +1037,7 @@ function openModal(type,extra){
     const[apId,acId,mId]=extra.split(':');
     const ap=db.aps.find(a=>a.id===apId);const ac=ap?ap.accounts.find(a=>a.id===acId):null;const m=ac?ac.meetings.find(x=>x.id===mId):null;if(!m)return;
     mb.innerHTML=`<h3>Add next step · <span style="font-weight:400">${m.title}</span></h3>
-    ${fld('What needs to happen?',inp('f-ns-t','text','','e.g. Send proposal, Book workshop...'))}
+    ${fld('What needs to happen?',inp('f-ns-t','text','','e.g. Send proposal...'))}
     <div class="two-col-f">${fld('Company',sel('f-ns-co',['globant','sf'],'globant'))}${fld('Person',inp('f-ns-p','text','','e.g. Juan / Carlos'))}</div>
     ${fld('Due date',inp('f-ns-d','date',today()))}
     ${btns(`saveAPNS('${apId}','${acId}','${mId}')`)}`;
@@ -973,8 +1047,12 @@ function openModal(type,extra){
 
 function addActNSRow(){
   const row=document.createElement('div');
-  row.style.cssText='display:grid;grid-template-columns:130px 1fr auto;gap:6px;align-items:center';
-  row.innerHTML=`<input placeholder="Person" style="font-size:12px;padding:5px 7px;border:0.5px solid var(--border2);border-radius:var(--r);background:var(--bg);color:var(--text);font-family:var(--font)" data-ns-person><input placeholder="Description..." style="font-size:12px;padding:5px 7px;border:0.5px solid var(--border2);border-radius:var(--r);background:var(--bg);color:var(--text);font-family:var(--font)" data-ns-desc><button onclick="this.closest('div').remove()" style="background:none;border:none;cursor:pointer;color:var(--text3);font-size:16px;padding:2px 4px">×</button>`;
+  row.style.cssText='display:grid;grid-template-columns:110px 1fr 110px auto;gap:6px;align-items:center';
+  row.innerHTML=`
+    <input placeholder="Person" style="font-size:12px;padding:5px 7px;border:0.5px solid var(--border2);border-radius:var(--r);background:var(--bg);color:var(--text);font-family:var(--font)" data-ns-person>
+    <input placeholder="Description..." style="font-size:12px;padding:5px 7px;border:0.5px solid var(--border2);border-radius:var(--r);background:var(--bg);color:var(--text);font-family:var(--font)" data-ns-desc>
+    <input type="date" style="font-size:12px;padding:5px 7px;border:0.5px solid var(--border2);border-radius:var(--r);background:var(--bg);color:var(--text);font-family:var(--font)" data-ns-due>
+    <button onclick="this.closest('div').remove()" style="background:none;border:none;cursor:pointer;color:var(--text3);font-size:16px;padding:2px 4px">×</button>`;
   document.getElementById('ns-rows').appendChild(row);
 }
 
@@ -982,19 +1060,21 @@ function addActNSRow(){
 function saveMtg(eid){
   const title=document.getElementById('f-mtg-title').value.trim();if(!title){alert('Title required');return}
   const agenda=document.getElementById('f-mtg-agenda').value.split('\n').map(s=>s.trim()).filter(Boolean);
-  const o={id:eid||uid(),title,datetime:document.getElementById('f-mtg-dt').value,participants:document.getElementById('f-mtg-part').value,objective:document.getElementById('f-mtg-obj').value.trim(),agenda,agendaDone:agenda.map(()=>false),materials:document.getElementById('f-mtg-mat').value.trim(),notes:document.getElementById('f-mtg-notes').value.trim(),createdAt:eid?undefined:now()};
-  if(eid){const existing=db.scheduledMeetings.find(m=>m.id===eid);if(existing){o.agendaDone=existing.agendaDone||agenda.map(()=>false);o.createdAt=existing.createdAt;}const i=db.scheduledMeetings.findIndex(m=>m.id===eid);if(i>=0)db.scheduledMeetings[i]=o;}
+  const existing=eid?db.scheduledMeetings.find(m=>m.id===eid):null;
+  const o={id:eid||uid(),title,datetime:document.getElementById('f-mtg-dt').value,participants:document.getElementById('f-mtg-part').value,objective:document.getElementById('f-mtg-obj').value.trim(),agenda,agendaDone:existing?existing.agendaDone||agenda.map(()=>false):agenda.map(()=>false),materials:document.getElementById('f-mtg-mat').value.trim(),notes:document.getElementById('f-mtg-notes').value.trim(),createdAt:existing?existing.createdAt:now()};
+  if(eid){const i=db.scheduledMeetings.findIndex(m=>m.id===eid);if(i>=0)db.scheduledMeetings[i]=o;}
   else db.scheduledMeetings.push(o);
   closeModal();persist();showToast('Meeting saved');
 }
-function saveAction(){
-  const title=document.getElementById('f-af-title').value.trim();if(!title){alert('Task required');return}
-  db.actionsToday.unshift({id:uid(),title,priority:document.getElementById('f-af-prio').value,client:document.getElementById('f-af-cli').value,timeBlock:document.getElementById('f-af-time').value,done:false,createdAt:now()});
-  closeModal();persist();showToast('Action added');
-}
+function saveAction(){const title=document.getElementById('f-af-title').value.trim();if(!title){alert('Task required');return}db.actionsToday.unshift({id:uid(),title,priority:document.getElementById('f-af-prio').value,client:document.getElementById('f-af-cli').value,timeBlock:document.getElementById('f-af-time').value,done:false,createdAt:now()});closeModal();persist();showToast('Action added');}
 function saveClient(eid){const n=document.getElementById('f-name').value.trim();if(!n){alert('Name required');return}const o={id:eid||uid(),name:n,sector:document.getElementById('f-sector').value.trim(),service:document.getElementById('f-srv').value,value:+document.getElementById('f-value').value||0,status:document.getElementById('f-st').value,nextAction:document.getElementById('f-nxt').value.trim()};if(eid){const i=db.clients.findIndex(c=>c.id===eid);if(i>=0)db.clients[i]=o}else db.clients.push(o);closeModal();persist();showToast('Client saved');}
 function saveDeal(eid){const cli=document.getElementById('f-cli').value;if(!cli){alert('Please select a client');return}const o={id:eid||uid(),client:cli,service:document.getElementById('f-srv').value,value:+document.getElementById('f-value').value||0,stage:document.getElementById('f-stage').value,closeDate:document.getElementById('f-date').value,notes:document.getElementById('f-notes').value.trim()};if(eid){const i=db.deals.findIndex(d=>d.id===eid);if(i>=0)db.deals[i]=o}else db.deals.push(o);closeModal();persist();showToast('Deal saved');}
-function saveActivity(){const rows=document.querySelectorAll('#ns-rows > div');const nextSteps=[...rows].map(r=>({person:(r.querySelector('[data-ns-person]')||{}).value?.trim()||'',description:(r.querySelector('[data-ns-desc]')||{}).value?.trim()||''})).filter(ns=>ns.description);db.activities.push({id:uid(),client:document.getElementById('f-cli').value,type:document.getElementById('f-type').value,description:document.getElementById('f-desc').value.trim(),date:document.getElementById('f-date').value,attendees:document.getElementById('f-att').value.trim(),notes:document.getElementById('f-notes').value.trim(),nextSteps});closeModal();persist();showToast('Activity logged');}
+function saveActivity(){
+  const rows=document.querySelectorAll('#ns-rows > div');
+  const nextSteps=[...rows].map(r=>({person:(r.querySelector('[data-ns-person]')||{}).value?.trim()||'',description:(r.querySelector('[data-ns-desc]')||{}).value?.trim()||'',dueDate:(r.querySelector('[data-ns-due]')||{}).value||''})).filter(ns=>ns.description);
+  db.activities.push({id:uid(),client:document.getElementById('f-cli').value,type:document.getElementById('f-type').value,description:document.getElementById('f-desc').value.trim(),date:document.getElementById('f-date').value,attendees:document.getElementById('f-att').value.trim(),notes:document.getElementById('f-notes').value.trim(),nextSteps});
+  closeModal();persist();showToast('Activity logged');
+}
 function saveAP(){const n=document.getElementById('f-ae-n').value.trim();if(!n){alert('AE name required');return}const accounts=document.getElementById('f-ae-c').value.split('\n').map(s=>s.trim()).filter(Boolean);db.aps.unshift({id:uid(),aeName:n,aeTerritory:document.getElementById('f-ae-t').value.trim(),accounts:accounts.map(name=>({id:uid(),name,meetings:[]}))});closeModal();persist();showToast('Account plan created');}
 function saveEditAP(id){const ap=db.aps.find(a=>a.id===id);if(!ap)return;ap.aeName=document.getElementById('f-ae-n').value.trim()||ap.aeName;ap.aeTerritory=document.getElementById('f-ae-t').value.trim();closeModal();persist();showToast('Updated');}
 function saveAccount(apId){const n=document.getElementById('f-ac-n').value.trim();if(!n){alert('Name required');return}const ap=db.aps.find(a=>a.id===apId);if(!ap)return;ap.accounts.push({id:uid(),name:n,meetings:[]});closeModal();persist();showToast('Account added');}
@@ -1005,7 +1085,7 @@ function saveAPNS(apId,acId,mId){const t=document.getElementById('f-ns-t').value
 const closeModal=()=>{document.getElementById('modal-overlay').classList.remove('open');document.getElementById('modal-body').className='modal';};
 const saveName=()=>{const v=document.getElementById('cfg-name').value.trim();if(v){localStorage.setItem(NAME_KEY,v);showToast('Name saved');renderDashboard();}};
 function exportCSV(){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([['name,sector,service,value,status',...db.clients.map(c=>`"${c.name}","${c.sector||''}","${c.service||''}",${c.value||0},"${c.status||''}"`)].join('\n')],{type:'text/csv'}));a.download='salestracker.csv';a.click();showToast('Exported');}
-const clearAll=()=>{db={clients:[],deals:[],activities:[],aps:[],toComments:[],actionsToday:[],scheduledMeetings:[]};saveLocal();renderAll();showToast('Cleared');};
+const clearAll=()=>{db={clients:[],deals:[],activities:[],aps:[],toComments:[],actionsToday:[],scheduledMeetings:[],dismissedAlerts:[]};saveLocal();renderAll();showToast('Cleared');};
 function nav(id,el){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
@@ -1014,6 +1094,7 @@ function nav(id,el){
   if(id==='reports')renderReports();
   if(id==='alerts'){renderAlerts();updateBadge();}
   if(id==='meetings')renderMeetings();
+  if(id==='activities')renderActivities();
 }
 const showToast=msg=>{const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);};
 document.getElementById('modal-overlay').addEventListener('click',function(e){if(e.target===this)closeModal()});
