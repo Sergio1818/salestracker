@@ -40,9 +40,10 @@ body{font-family:var(--font);font-size:14px;color:var(--text);background:var(--b
 .nav-item.active{background:var(--bg);color:var(--text);font-weight:500;border-left-color:var(--blue)}
 .nav-item i{font-size:16px}
 .nav-badge{position:absolute;right:12px;background:var(--red);color:#fff;font-size:10px;font-weight:600;padding:1px 6px;border-radius:20px;min-width:18px;text-align:center}
+.nav-sep{height:0.5px;background:var(--border);margin:6px 12px}
 .sync-bar{padding:9px 13px;border-top:0.5px solid var(--border);font-size:11px;color:var(--text3);display:flex;align-items:center;gap:6px;cursor:pointer}
 .sync-bar:hover{color:var(--text)}
-.dot{width:6px;height:6px;border-radius:50%;background:#639922;flex-shrink:0;transition:background 0.3s}
+.dot{width:6px;height:6px;border-radius:50%;background:#639922;flex-shrink:0;transition:background .3s}
 .dot.syncing{background:var(--amber);animation:pulse 1s infinite}
 .dot.error{background:var(--red)}
 .dot.pending{background:var(--amber)}
@@ -50,9 +51,12 @@ body{font-family:var(--font);font-size:14px;color:var(--text);background:var(--b
 .main{flex:1;overflow-y:auto;padding:22px;min-width:0}
 .page{display:none}.page.active{display:block}
 h2{font-size:19px;font-weight:600;margin-bottom:16px}
+/* METRICS - clickable */
 .metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
-.metric{background:var(--bg2);border-radius:var(--r);padding:13px 15px;border:0.5px solid var(--border)}
-.metric .lbl{font-size:11px;color:var(--text3);margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px;font-weight:500}
+.metric{background:var(--bg2);border-radius:var(--r);padding:13px 15px;border:0.5px solid var(--border);cursor:pointer;transition:border-color .15s,box-shadow .15s}
+.metric:hover{border-color:var(--blue);box-shadow:0 0 0 3px var(--blue-bg)}
+.metric .lbl{font-size:11px;color:var(--text3);margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px;font-weight:500;display:flex;align-items:center;gap:5px}
+.metric .lbl i{font-size:12px;opacity:.6}
 .metric .val{font-size:23px;font-weight:600}
 .metric .sub{font-size:11px;color:var(--text3);margin-top:2px}
 .card{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--rl);padding:16px;margin-bottom:14px}
@@ -73,33 +77,44 @@ tr:hover td{background:var(--bg2)}
 .pcard .ps{font-size:11px;color:var(--text3);margin:2px 0}
 .pcard .pa{font-size:12px;color:var(--blue);font-weight:600}
 .pcard-btns{display:flex;justify-content:flex-end;gap:3px;margin-top:5px}
-.act-item{display:flex;gap:9px;align-items:flex-start;padding:10px 0;border-bottom:0.5px solid var(--border)}
+/* ACTIVITIES */
+.act-item{display:flex;gap:9px;align-items:flex-start;padding:12px 0;border-bottom:0.5px solid var(--border)}
 .act-item:last-child{border-bottom:none}
 .act-dot{width:7px;height:7px;border-radius:50%;margin-top:5px;flex-shrink:0}
 .d-call{background:var(--blue)}.d-email{background:var(--green)}.d-meet{background:var(--amber)}.d-prop{background:#993556}.d-other{background:var(--text3)}
 .act-body{flex:1;min-width:0}
-.act-meta{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:4px}
-.act-attendees{font-size:11px;color:var(--text2)}
-.act-notes{font-size:12px;color:var(--text2);margin-top:4px;line-height:1.5}
-.act-ns{margin-top:6px}
-.act-ns-item{font-size:12px;color:var(--text2);display:flex;align-items:flex-start;gap:5px;margin-bottom:3px}
-.act-ns-bullet{width:5px;height:5px;border-radius:50%;background:var(--blue);flex-shrink:0;margin-top:5px}
-.bar-wrap{display:flex;flex-direction:column;gap:10px}
-.bar-row{display:flex;align-items:center;gap:8px}
-.bar-lbl{width:88px;font-size:12px;color:var(--text2);text-align:right;flex-shrink:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.bar-bg{flex:1;height:8px;background:var(--bg2);border-radius:20px;overflow:hidden}
-.bar-fill{height:100%;border-radius:20px}
-.bar-val{width:44px;font-size:12px;font-weight:500;flex-shrink:0}
-.btn{display:inline-flex;align-items:center;gap:5px;padding:6px 12px;font-size:13px;border:0.5px solid var(--border2);border-radius:var(--r);cursor:pointer;background:transparent;color:var(--text);font-family:var(--font);transition:background .1s}
-.btn:hover{background:var(--bg2)}
-.btn-primary{background:var(--blue);color:#fff;border-color:var(--blue)}
-.btn-primary:hover{background:#0c447c}
-.btn-sm{padding:3px 8px;font-size:12px}
-.rb{background:none;border:none;cursor:pointer;color:var(--text3);padding:2px 4px;font-size:13px;border-radius:4px}
-.rb:hover{color:var(--text);background:var(--bg2)}
-.row-actions{opacity:0;display:flex;gap:3px}
-tr:hover .row-actions{opacity:1}
-/* DASHBOARD ALERTS WIDGET */
+.act-meta{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:3px}
+.act-notes{font-size:12px;color:var(--text2);margin-top:5px;line-height:1.5;padding:6px 9px;background:var(--bg2);border-radius:var(--r)}
+/* Activity next steps table */
+.act-ns-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:8px}
+.act-ns-table th{text-align:left;font-size:10px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.4px;padding:4px 8px;border-bottom:0.5px solid var(--border);background:var(--bg2)}
+.act-ns-table td{padding:5px 8px;border-bottom:0.5px solid var(--border);vertical-align:top;white-space:normal}
+.act-ns-table tr:last-child td{border-bottom:none}
+.act-ns-bullet{display:inline-flex;align-items:center;gap:5px}
+.act-ns-bullet::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--blue);flex-shrink:0;display:inline-block}
+/* DAILY PAGE */
+.daily-date{font-size:13px;color:var(--text3);margin-bottom:18px;display:flex;align-items:center;gap:6px}
+.daily-section{margin-bottom:22px}
+.daily-section-title{font-size:12px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;display:flex;align-items:center;gap:7px}
+.daily-item{display:flex;align-items:flex-start;gap:10px;padding:10px 14px;border-radius:var(--r);border:0.5px solid var(--border);background:var(--bg);margin-bottom:7px}
+.daily-item.urgent{border-left:3px solid var(--red)}
+.daily-item.warn{border-left:3px solid var(--amber)}
+.daily-item.normal{border-left:3px solid var(--blue)}
+.daily-icon{width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px}
+.daily-icon.urgent{background:var(--red-bg);color:var(--red-dark)}
+.daily-icon.warn{background:var(--amber-bg);color:var(--amber-dark)}
+.daily-icon.normal{background:var(--blue-bg);color:var(--blue)}
+.daily-body{flex:1;min-width:0}
+.daily-title{font-size:13px;font-weight:500;margin-bottom:2px}
+.daily-sub{font-size:11px;color:var(--text3)}
+.daily-right{font-size:11px;font-weight:600;white-space:nowrap;flex-shrink:0}
+.daily-right.urgent{color:var(--red-dark)}
+.daily-right.warn{color:var(--amber-dark)}
+.daily-right.normal{color:var(--blue)}
+.daily-note-area{width:100%;font-size:13px;font-family:var(--font);padding:10px 12px;border:0.5px solid var(--border2);border-radius:var(--r);background:var(--bg);color:var(--text);resize:vertical;min-height:80px;line-height:1.6}
+.daily-note-area:focus{outline:none;border-color:var(--blue)}
+.daily-empty{text-align:center;padding:20px;color:var(--text3);font-size:13px}
+/* ALERTS */
 .dash-alerts{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--rl);padding:16px;margin-bottom:14px}
 .dash-alert-item{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:0.5px solid var(--border)}
 .dash-alert-item:last-child{border-bottom:none}
@@ -142,7 +157,7 @@ tr:hover .row-actions{opacity:1}
 .meeting-info span{font-size:11px;color:var(--text3)}
 .meeting-meta{display:flex;align-items:center;gap:6px;flex-shrink:0}
 .meeting-body{display:none;padding:0 16px 14px 58px}.meeting-body.open{display:block}
-.meeting-notes{font-size:13px;color:var(--text2);line-height:1.55;white-space:pre-wrap;margin-bottom:12px;padding:10px 12px;background:var(--bg2);border-radius:var(--r);border:0.5px solid var(--border)}
+.meeting-notes-box{font-size:13px;color:var(--text2);line-height:1.55;white-space:pre-wrap;margin-bottom:12px;padding:10px 12px;background:var(--bg2);border-radius:var(--r);border:0.5px solid var(--border)}
 .ns-list{display:flex;flex-direction:column;gap:6px}
 .ns-item{display:flex;align-items:flex-start;gap:9px;padding:9px 11px;border-radius:var(--r);border:0.5px solid}
 .ns-item.sf{background:#edf4fd;border-color:#b8d4f5}
@@ -167,7 +182,7 @@ tr:hover .row-actions{opacity:1}
 .ns-rm:hover{color:var(--text)}
 .add-btn{font-size:12px;color:var(--blue);background:none;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:3px;padding:2px 0;margin-top:6px}
 .add-btn:hover{text-decoration:underline}
-/* ALERTS PAGE */
+/* ALERT PAGE */
 .alert-section{margin-bottom:20px}
 .alert-section-title{font-size:13px;font-weight:600;margin-bottom:10px;display:flex;align-items:center;gap:8px}
 .alert-card{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--r);padding:12px 14px;margin-bottom:8px;display:flex;align-items:flex-start;gap:12px}
@@ -180,7 +195,7 @@ tr:hover .row-actions{opacity:1}
 .alert-title{font-size:13px;font-weight:500;margin-bottom:2px}
 .alert-sub{font-size:12px;color:var(--text3)}
 .alert-right{display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex-shrink:0}
-/* Config */
+/* CFG */
 .cfg-section{border:0.5px solid var(--border);border-radius:var(--rl);padding:16px;margin-bottom:14px}
 .cfg-row{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:0.5px solid var(--border)}
 .cfg-row:last-child{border-bottom:none}
@@ -188,15 +203,13 @@ tr:hover .row-actions{opacity:1}
 .cfg-body{flex:1}
 .cfg-title{font-size:13px;font-weight:500;margin-bottom:2px}
 .cfg-desc{font-size:12px;color:var(--text2);margin-bottom:8px;line-height:1.5}
-/* NS input rows in modal */
+/* NS input rows */
 .ns-input-row{display:flex;gap:6px;align-items:center;margin-bottom:6px}
-.ns-input-row input{flex:1;font-size:12px;padding:5px 7px;border:0.5px solid var(--border2);border-radius:var(--r);background:var(--bg);color:var(--text);font-family:var(--font)}
-.ns-input-row button{background:none;border:none;cursor:pointer;color:var(--text3);font-size:16px;padding:2px 4px;flex-shrink:0}
-.ns-input-row button:hover{color:var(--text)}
-/* Modal */
+/* MODAL */
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);align-items:flex-start;justify-content:center;z-index:100;padding:24px;overflow-y:auto}
 .modal-overlay.open{display:flex}
-.modal{background:var(--bg);border-radius:var(--rl);border:0.5px solid var(--border);padding:20px;width:100%;max-width:460px;margin:auto}
+.modal{background:var(--bg);border-radius:var(--rl);border:0.5px solid var(--border);padding:20px;width:100%;max-width:500px;margin:auto}
+.modal.wide{max-width:640px}
 .modal h3{font-size:16px;font-weight:600;margin-bottom:14px}
 .field{margin-bottom:11px}
 .field label{display:block;font-size:12px;color:var(--text2);margin-bottom:4px;font-weight:500}
@@ -205,12 +218,24 @@ tr:hover .row-actions{opacity:1}
 .field textarea{resize:vertical;min-height:56px}
 .two-col-f{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .modal-btns{display:flex;gap:8px;justify-content:flex-end;margin-top:16px}
+/* Detail modal */
+.detail-list{display:flex;flex-direction:column;gap:8px;max-height:420px;overflow-y:auto}
+.detail-row{padding:10px 12px;border-radius:var(--r);border:0.5px solid var(--border);background:var(--bg2);font-size:13px}
+.detail-row strong{display:block;margin-bottom:2px}
+.detail-row span{font-size:12px;color:var(--text2)}
 .toast{position:fixed;bottom:18px;right:18px;background:var(--blue);color:#fff;padding:8px 15px;border-radius:var(--r);font-size:13px;opacity:0;transition:opacity .3s;pointer-events:none;z-index:200}
 .toast.show{opacity:1}
 .empty{text-align:center;padding:36px 20px;color:var(--text3)}
 .empty i{font-size:28px;display:block;margin-bottom:8px;opacity:.3}
-/* Drive modal */
-.drive-status{font-size:12px;margin-top:8px;padding:8px 10px;border-radius:var(--r);background:var(--bg2);border:0.5px solid var(--border)}
+.btn{display:inline-flex;align-items:center;gap:5px;padding:6px 12px;font-size:13px;border:0.5px solid var(--border2);border-radius:var(--r);cursor:pointer;background:transparent;color:var(--text);font-family:var(--font);transition:background .1s}
+.btn:hover{background:var(--bg2)}
+.btn-primary{background:var(--blue);color:#fff;border-color:var(--blue)}
+.btn-primary:hover{background:#0c447c}
+.btn-sm{padding:3px 8px;font-size:12px}
+.rb{background:none;border:none;cursor:pointer;color:var(--text3);padding:2px 4px;font-size:13px;border-radius:4px}
+.rb:hover{color:var(--text);background:var(--bg2)}
+.row-actions{opacity:0;display:flex;gap:3px}
+tr:hover .row-actions{opacity:1}
 </style>
 </head>
 <body>
@@ -223,37 +248,76 @@ tr:hover .row-actions{opacity:1}
     <div class="sidebar-logo"><strong>SalesTracker</strong><span>Globant · Salesforce</span></div>
     <div class="nav">
       <div class="nav-item active" onclick="nav('dashboard',this)"><i class="ti ti-layout-dashboard"></i> Dashboard</div>
+      <div class="nav-item" onclick="nav('daily',this)"><i class="ti ti-coffee"></i> Daily</div>
+      <div class="nav-sep"></div>
       <div class="nav-item" onclick="nav('clients',this)"><i class="ti ti-building-store"></i> Clients</div>
       <div class="nav-item" onclick="nav('pipeline',this)"><i class="ti ti-git-fork"></i> Pipeline</div>
       <div class="nav-item" onclick="nav('activities',this)"><i class="ti ti-calendar-event"></i> Activities</div>
       <div class="nav-item" onclick="nav('accountplans',this)"><i class="ti ti-map-2"></i> Account Plans</div>
+      <div class="nav-sep"></div>
       <div class="nav-item" onclick="nav('alerts',this)" id="nav-alerts"><i class="ti ti-bell"></i> Alerts<span class="nav-badge" id="alerts-badge" style="display:none">0</span></div>
       <div class="nav-item" onclick="nav('reports',this)"><i class="ti ti-file-analytics"></i> Reports</div>
       <div class="nav-item" onclick="nav('config',this)"><i class="ti ti-settings"></i> Settings</div>
     </div>
-    <div class="sync-bar" onclick="manualSync()" title="Click to sync with Drive">
-      <div class="dot" id="sdot2"></div><span id="slbl2">Loading...</span>
-    </div>
+    <div class="sync-bar" onclick="manualSync()"><div class="dot" id="sdot2"></div><span id="slbl2">Loading...</span></div>
   </div>
   <div class="main">
-
+ 
     <!-- DASHBOARD -->
     <div class="page active" id="page-dashboard">
       <h2 id="dash-greeting">Dashboard</h2>
       <div class="metrics">
-        <div class="metric"><div class="lbl">Closed YTD</div><div class="val" id="m-ytd">—</div><div class="sub" id="m-ytd-s"></div></div>
-        <div class="metric"><div class="lbl">Active pipeline</div><div class="val" id="m-pipe">—</div><div class="sub" id="m-pipe-s"></div></div>
-        <div class="metric"><div class="lbl">Clients</div><div class="val" id="m-cli">—</div><div class="sub" id="m-cli-s"></div></div>
-        <div class="metric"><div class="lbl">Open next steps</div><div class="val" id="m-ns">—</div><div class="sub" id="m-ns-s" style="color:var(--red-dark)"></div></div>
+        <div class="metric" onclick="showDetail('ytd')" title="Click to see details">
+          <div class="lbl"><i class="ti ti-trophy"></i> Closed YTD</div>
+          <div class="val" id="m-ytd">—</div><div class="sub" id="m-ytd-s"></div>
+        </div>
+        <div class="metric" onclick="showDetail('pipeline')" title="Click to see details">
+          <div class="lbl"><i class="ti ti-git-fork"></i> Active pipeline</div>
+          <div class="val" id="m-pipe">—</div><div class="sub" id="m-pipe-s"></div>
+        </div>
+        <div class="metric" onclick="showDetail('clients')" title="Click to see details">
+          <div class="lbl"><i class="ti ti-building-store"></i> Clients</div>
+          <div class="val" id="m-cli">—</div><div class="sub" id="m-cli-s"></div>
+        </div>
+        <div class="metric" onclick="showDetail('nextsteps')" title="Click to see details">
+          <div class="lbl"><i class="ti ti-checklist"></i> Open next steps</div>
+          <div class="val" id="m-ns">—</div><div class="sub" id="m-ns-s" style="color:var(--red-dark)"></div>
+        </div>
       </div>
-      <!-- Active alerts on dashboard -->
       <div id="dash-alerts-wrap"></div>
       <div class="two-col">
         <div class="card"><div class="card-title">Pipeline by service</div><div class="bar-wrap" id="dash-bars"></div></div>
         <div class="card"><div class="card-title">Upcoming activities</div><div id="dash-next"></div></div>
       </div>
     </div>
-
+ 
+    <!-- DAILY -->
+    <div class="page" id="page-daily">
+      <h2>Daily with Patruno</h2>
+      <div class="daily-date"><i class="ti ti-calendar"></i><span id="daily-date-str"></span></div>
+ 
+      <div class="daily-section">
+        <div class="daily-section-title"><i class="ti ti-alert-triangle" style="color:var(--red-dark)"></i> Overdue next steps</div>
+        <div id="daily-overdue"></div>
+      </div>
+ 
+      <div class="daily-section">
+        <div class="daily-section-title"><i class="ti ti-clock" style="color:var(--amber-dark)"></i> Due today & tomorrow</div>
+        <div id="daily-urgent"></div>
+      </div>
+ 
+      <div class="daily-section">
+        <div class="daily-section-title"><i class="ti ti-calendar-event" style="color:var(--blue)"></i> Today's activities</div>
+        <div id="daily-activities"></div>
+      </div>
+ 
+      <div class="daily-section">
+        <div class="daily-section-title"><i class="ti ti-notes" style="color:var(--text3)"></i> Notes for today's daily</div>
+        <textarea class="daily-note-area" id="daily-notes" placeholder="Write your notes for the daily here... What do you want to update Patruno on? Any blockers? Wins?" oninput="saveDailyNotes()"></textarea>
+        <div style="font-size:11px;color:var(--text3);margin-top:5px">Auto-saved locally</div>
+      </div>
+    </div>
+ 
     <!-- CLIENTS -->
     <div class="page" id="page-clients">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
@@ -267,7 +331,7 @@ tr:hover .row-actions{opacity:1}
         </table>
       </div></div>
     </div>
-
+ 
     <!-- PIPELINE -->
     <div class="page" id="page-pipeline">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
@@ -276,7 +340,7 @@ tr:hover .row-actions{opacity:1}
       </div>
       <div class="pipeline" id="pipe-board"></div>
     </div>
-
+ 
     <!-- ACTIVITIES -->
     <div class="page" id="page-activities">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
@@ -285,7 +349,7 @@ tr:hover .row-actions{opacity:1}
       </div>
       <div class="card" id="act-list"></div>
     </div>
-
+ 
     <!-- ACCOUNT PLANS -->
     <div class="page" id="page-accountplans">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
@@ -298,21 +362,21 @@ tr:hover .row-actions{opacity:1}
       </div>
       <div id="ae-list"></div>
     </div>
-
+ 
     <!-- ALERTS -->
     <div class="page" id="page-alerts">
       <h2>Alerts</h2>
       <p style="font-size:13px;color:var(--text2);margin-bottom:18px">Next steps overdue or due within 2 days.</p>
       <div id="alerts-content"></div>
     </div>
-
+ 
     <!-- REPORTS -->
     <div class="page" id="page-reports">
       <h2>Reports</h2>
       <div class="metrics" style="grid-template-columns:repeat(3,1fr);margin-bottom:16px">
-        <div class="metric"><div class="lbl">Closed this year</div><div class="val" id="r-ytd">—</div></div>
-        <div class="metric"><div class="lbl">Closed Q1</div><div class="val" id="r-q1">—</div><div class="sub" id="r-q1d"></div></div>
-        <div class="metric"><div class="lbl">Closed Q2</div><div class="val" id="r-q2">—</div><div class="sub" id="r-q2d"></div></div>
+        <div class="metric" style="cursor:default"><div class="lbl">Closed this year</div><div class="val" id="r-ytd">—</div></div>
+        <div class="metric" style="cursor:default"><div class="lbl">Closed Q1</div><div class="val" id="r-q1">—</div><div class="sub" id="r-q1d"></div></div>
+        <div class="metric" style="cursor:default"><div class="lbl">Closed Q2</div><div class="val" id="r-q2">—</div><div class="sub" id="r-q2d"></div></div>
       </div>
       <div class="two-col">
         <div class="card"><div class="card-title">Revenue by service (YTD)</div><div class="bar-wrap" id="rep-bars"></div></div>
@@ -323,7 +387,7 @@ tr:hover .row-actions{opacity:1}
       </div>
       <div style="margin-top:10px"><button class="btn" onclick="exportCSV()"><i class="ti ti-download"></i> Export CSV</button></div>
     </div>
-
+ 
     <!-- SETTINGS -->
     <div class="page" id="page-config">
       <h2>Settings</h2>
@@ -333,24 +397,23 @@ tr:hover .row-actions{opacity:1}
           <div class="cfg-num">1</div>
           <div class="cfg-body">
             <div class="cfg-title">Google Apps Script URL</div>
-            <div class="cfg-desc">Paste the web app URL from your Google Apps Script. See setup instructions.</div>
+            <div class="cfg-desc">Paste the web app URL from your Google Apps Script.</div>
             <div style="display:flex;gap:8px">
               <input style="flex:1;font-size:13px;padding:7px 9px;border:0.5px solid var(--border2);border-radius:var(--r);background:var(--bg);color:var(--text)" type="text" id="cfg-gas" placeholder="https://script.google.com/macros/s/...">
               <button class="btn btn-primary" onclick="saveGAS()">Save & Sync</button>
             </div>
-            <div id="cfg-gas-st" class="drive-status" style="display:none"></div>
+            <div id="cfg-gas-st" style="font-size:11px;color:var(--text3);margin-top:6px"></div>
           </div>
         </div>
         <div class="cfg-row">
           <div class="cfg-num">2</div>
           <div class="cfg-body">
             <div class="cfg-title">Sync status</div>
-            <div id="cfg-sync-desc" style="font-size:12px;color:var(--text2);margin-bottom:8px">Not configured yet. Add your Apps Script URL above.</div>
+            <div id="cfg-sync-desc" style="font-size:12px;color:var(--text2);margin-bottom:8px">Not configured yet.</div>
             <div style="display:flex;gap:8px">
               <button class="btn" onclick="manualSync()"><i class="ti ti-refresh"></i> Sync now</button>
               <button class="btn" onclick="loadFromDrive()"><i class="ti ti-cloud-download"></i> Load from Drive</button>
             </div>
-            <div id="cfg-drive-link" style="font-size:11px;color:var(--text3);margin-top:8px"></div>
           </div>
         </div>
       </div>
@@ -371,20 +434,19 @@ tr:hover .row-actions{opacity:1}
         <div class="card-title" style="margin-bottom:12px">Data</div>
         <div style="display:flex;gap:8px">
           <button class="btn" onclick="exportCSV()"><i class="ti ti-download"></i> Export CSV</button>
-          <button class="btn" style="color:var(--red-dark);border-color:#f09595" onclick="if(confirm('Delete all local data?')){clearAll()}"><i class="ti ti-trash"></i> Clear local data</button>
+          <button class="btn" style="color:var(--red-dark);border-color:#f09595" onclick="if(confirm('Delete all local data?')){clearAll()}"><i class="ti ti-trash"></i> Clear data</button>
         </div>
       </div>
     </div>
-
+ 
   </div>
 </div>
+ 
 <div class="modal-overlay" id="modal-overlay"><div class="modal" id="modal-body"></div></div>
 <div class="toast" id="toast"></div>
-
+ 
 <script>
-const DB_KEY='st_db_v4';
-const GAS_KEY='st_gas_url';
-const NAME_KEY='st_name';
+const DB_KEY='st_db_v5', GAS_KEY='st_gas', NAME_KEY='st_name', DAILY_KEY='st_daily';
 const ALERT_DAYS=2;
 const STAGES=['Lead','Demo','Proposal','Negotiation','Won','Lost'];
 const SERVICES=['Sales Cloud','Service Cloud','Marketing Cloud','Commerce Cloud','Platform','Data Cloud','Other'];
@@ -393,103 +455,77 @@ const ACT_TYPES=['Call','Email','Meeting','Proposal sent','Demo','Other'];
 const DOT_CLS={Call:'d-call',Email:'d-email',Meeting:'d-meet','Proposal sent':'d-prop',Demo:'d-meet',Other:'d-other'};
 const SVC_CLR={'Sales Cloud':'#185fa5','Service Cloud':'#1d9e75','Marketing Cloud':'#ba7517','Commerce Cloud':'#993556','Platform':'#534AB7','Data Cloud':'#0f6e56','Other':'#888780'};
 const BADGE_ST={Lead:'b-gray',Active:'b-green',Proposal:'b-amber',Negotiation:'b-amber',Inactive:'b-red'};
-
+ 
 let db={clients:[],deals:[],activities:[],aps:[]};
-let gasUrl='';
-let isSyncing=false;
-
-function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,6)}
-function today(){return new Date().toISOString().slice(0,10)}
-function fmtEur(v){return'€'+Math.round(v).toLocaleString('en')}
-function fmtDate(d){if(!d)return'';const[y,m,day]=d.split('-');return day+'/'+m+'/'+y.slice(2)}
-function daysFrom(d){if(!d)return null;return Math.round((new Date(d)-new Date(today()))/86400000)}
-
+let gasUrl='', isSyncing=false;
+ 
+const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+const today=()=>new Date().toISOString().slice(0,10);
+const fmtEur=v=>'€'+Math.round(v).toLocaleString('en');
+const fmtDate=d=>{if(!d)return'';const[y,m,day]=d.split('-');return day+'/'+m+'/'+y.slice(2)};
+const daysFrom=d=>{if(!d)return null;return Math.round((new Date(d)-new Date(today()))/86400000)};
+const dLabel=d=>{const x=daysFrom(d);if(x===null)return'';if(x<0)return Math.abs(x)+'d overdue';if(x===0)return'Today';if(x===1)return'Tomorrow';return'In '+x+'d'};
+ 
 function load(){
   try{const r=localStorage.getItem(DB_KEY);if(r){const p=JSON.parse(r);db.clients=p.clients||[];db.deals=p.deals||[];db.activities=p.activities||[];db.aps=p.aps||[];}}catch(e){}
   gasUrl=localStorage.getItem(GAS_KEY)||'';
-  try{const n=localStorage.getItem(NAME_KEY);if(n)document.getElementById('cfg-name').value=n}catch(e){}
+  try{const n=localStorage.getItem(NAME_KEY);if(n)document.getElementById('cfg-name').value=n;}catch(e){}
+  try{const dn=localStorage.getItem(DAILY_KEY);if(dn)document.getElementById('daily-notes').value=dn;}catch(e){}
   if(gasUrl)document.getElementById('cfg-gas').value=gasUrl;
-  if(!db.clients.length&&!db.aps.length) seedDemo();
+  if(!db.clients.length&&!db.aps.length)seedDemo();
   renderAll();
-  if(gasUrl){setSyncState('pending','Drive: syncing...');syncToDrive();}
-  else setSyncState('ok','Local only — set up Drive in Settings');
+  setSyncState(gasUrl?'pending':'ok',gasUrl?'Syncing...':'Local only');
+  if(gasUrl)syncToDrive();
 }
-function saveLocal(){try{localStorage.setItem(DB_KEY,JSON.stringify(db))}catch(e){}}
-function persist(){saveLocal();renderAll();if(gasUrl)syncToDrive();}
-
-/* ── DRIVE SYNC ── */
+const saveLocal=()=>{try{localStorage.setItem(DB_KEY,JSON.stringify(db))}catch(e){}};
+const persist=()=>{saveLocal();renderAll();if(gasUrl)syncToDrive();};
+const saveDailyNotes=()=>{try{localStorage.setItem(DAILY_KEY,document.getElementById('daily-notes').value)}catch(e){}};
+ 
+/* ── DRIVE ── */
 async function syncToDrive(){
   if(!gasUrl||isSyncing)return;
-  isSyncing=true;setSyncState('syncing','Syncing with Drive...');
+  isSyncing=true;setSyncState('syncing','Syncing...');
   try{
-    const payload={clients:db.clients,deals:db.deals,activities:db.activities,aps:db.aps};
-    const res=await fetch(gasUrl,{method:'POST',body:JSON.stringify(payload)});
+    const res=await fetch(gasUrl,{method:'POST',body:JSON.stringify({clients:db.clients,deals:db.deals,activities:db.activities,aps:db.aps})});
     const data=await res.json();
-    if(data.ok){
-      setSyncState('ok','Drive: synced '+new Date().toLocaleTimeString('en',{hour:'2-digit',minute:'2-digit'}));
-      document.getElementById('cfg-sync-desc').textContent='Last sync: '+new Date().toLocaleString('en');
-    }else throw new Error(data.error||'Unknown error');
-  }catch(e){
-    setSyncState('error','Drive sync failed');
-    document.getElementById('cfg-sync-desc').textContent='Error: '+e.message+'. Check your Apps Script URL.';
-  }
+    if(data.ok){setSyncState('ok','Drive: synced '+new Date().toLocaleTimeString('en',{hour:'2-digit',minute:'2-digit'}));document.getElementById('cfg-sync-desc').textContent='Last sync: '+new Date().toLocaleString('en');}
+    else throw new Error(data.error);
+  }catch(e){setSyncState('error','Sync failed');document.getElementById('cfg-sync-desc').textContent='Error: '+e.message;}
   isSyncing=false;
 }
-
 async function loadFromDrive(){
-  if(!gasUrl){alert('Please configure your Apps Script URL in Settings first.');return;}
+  if(!gasUrl){alert('Configure Apps Script URL in Settings first.');return;}
   setSyncState('syncing','Loading from Drive...');
   try{
-    const res=await fetch(gasUrl);
-    const data=await res.json();
-    if(data.clients||data.deals||data.activities||data.aps){
-      db.clients=data.clients||[];db.deals=data.deals||[];db.activities=data.activities||[];db.aps=data.aps||[];
-      saveLocal();renderAll();setSyncState('ok','Loaded from Drive');showToast('Data loaded from Drive');
-    }else throw new Error('No data returned');
-  }catch(e){setSyncState('error','Load failed: '+e.message);showToast('Could not load from Drive');}
+    const res=await fetch(gasUrl);const data=await res.json();
+    db.clients=data.clients||[];db.deals=data.deals||[];db.activities=data.activities||[];db.aps=data.aps||[];
+    saveLocal();renderAll();setSyncState('ok','Loaded from Drive');showToast('Data loaded from Drive');
+  }catch(e){setSyncState('error','Load failed');showToast('Could not load from Drive');}
 }
-
-function manualSync(){
-  if(!gasUrl){nav('config',document.getElementById('nav-alerts').parentElement.querySelector('[onclick*="config"]'));showToast('Configure Drive URL in Settings');return;}
-  syncToDrive();showToast('Syncing...');
-}
-
-function saveGAS(){
-  const v=document.getElementById('cfg-gas').value.trim();
-  if(!v){alert('Please paste your Apps Script URL');return;}
-  gasUrl=v;localStorage.setItem(GAS_KEY,v);
-  const st=document.getElementById('cfg-gas-st');st.style.display='block';st.textContent='Saved. Testing connection...';
-  syncToDrive().then?undefined:undefined;
-  showToast('URL saved — syncing...');
-}
-
-function setSyncState(state,lbl){
-  ['sdot','sdot2'].forEach(id=>{
-    const d=document.getElementById(id);
-    d.className='dot'+(state==='syncing'?' syncing':state==='error'?' error':state==='pending'?' pending':'');
-  });
-  document.getElementById('slbl').textContent=lbl;
-  document.getElementById('slbl2').textContent=lbl;
-}
-
+function saveGAS(){const v=document.getElementById('cfg-gas').value.trim();if(!v)return;gasUrl=v;localStorage.setItem(GAS_KEY,v);document.getElementById('cfg-gas-st').textContent='Saved. Testing...';syncToDrive();showToast('Saved — syncing...');}
+function manualSync(){if(!gasUrl){showToast('Set up Drive URL in Settings');return;}syncToDrive();showToast('Syncing...');}
+function setSyncState(s,l){['sdot','sdot2'].forEach(id=>{const d=document.getElementById(id);d.className='dot'+(s==='syncing'?' syncing':s==='error'?' error':s==='pending'?' pending':'');});document.getElementById('slbl').textContent=l;document.getElementById('slbl2').textContent=l;}
+ 
 /* ── SEED ── */
 function seedDemo(){
   db.clients=[
     {id:'cl1',name:'Telefónica',sector:'Telco',service:'Sales Cloud',value:42000,status:'Active',nextAction:'QBR Q2'},
     {id:'cl2',name:'BBVA',sector:'Banking',service:'Service Cloud',value:61000,status:'Active',nextAction:'Renewal Q3'},
     {id:'cl3',name:'Mapfre',sector:'Insurance',service:'Service Cloud',value:38000,status:'Proposal',nextAction:'Contract signature'},
+    {id:'cl4',name:'Repsol',sector:'Energy',service:'Sales Cloud',value:28000,status:'Negotiation',nextAction:'Final proposal'},
   ];
   db.deals=[
     {id:'d1',client:'Telefónica',service:'Sales Cloud',value:42000,stage:'Won',closeDate:'2026-01-15',notes:''},
     {id:'d2',client:'BBVA',service:'Service Cloud',value:61000,stage:'Won',closeDate:'2026-03-10',notes:''},
     {id:'d3',client:'Mapfre',service:'Service Cloud',value:38000,stage:'Proposal',closeDate:'2026-06-30',notes:''},
-    {id:'d4',client:'Repsol',service:'Sales Cloud',value:28000,stage:'Demo',closeDate:'2026-08-01',notes:''},
+    {id:'d4',client:'Repsol',service:'Sales Cloud',value:28000,stage:'Negotiation',closeDate:'2026-07-15',notes:''},
+    {id:'d5',client:'Inditex',service:'Commerce Cloud',value:55000,stage:'Demo',closeDate:'2026-08-01',notes:''},
   ];
   const tom=new Date();tom.setDate(tom.getDate()+1);const t1=tom.toISOString().slice(0,10);
   const yest=new Date();yest.setDate(yest.getDate()-1);const y1=yest.toISOString().slice(0,10);
   db.activities=[
-    {id:'a1',client:'Telefónica',type:'Meeting',description:'QBR Q2 kick-off',date:'2026-05-08',attendees:'Carlos (SF), Maria (Telefónica)',notes:'Client happy with progress. Wants faster delivery on integration.',nextSteps:['Send updated project timeline','Schedule follow-up for June 2']},
-    {id:'a2',client:'BBVA',type:'Call',description:'Annual renewal review',date:'2026-05-02',attendees:'Juan, Pedro (BBVA)',notes:'Positive call. Budget confirmed for renewal.',nextSteps:['Prepare contract draft','Send pricing options']},
+    {id:'a1',client:'Telefónica',type:'Meeting',description:'QBR Q2 kick-off',date:today(),attendees:'Carlos (SF), Maria (Telefónica), Juan',notes:'Client happy with progress. Wants faster delivery on integration module.',nextSteps:[{person:'Juan',description:'Send updated project timeline by EOW'},{person:'Carlos (SF)',description:'Share Q3 product roadmap'}]},
+    {id:'a2',client:'BBVA',type:'Call',description:'Annual renewal review',date:'2026-05-02',attendees:'Juan, Pedro (BBVA)',notes:'Positive. Budget confirmed for renewal.',nextSteps:[{person:'Juan',description:'Prepare contract draft'},{person:'Juan',description:'Send pricing options for 3-year deal'}]},
   ];
   db.aps=[{
     id:'ap1',aeName:'Carlos Ruiz',aeTerritory:'SF · Madrid',
@@ -498,12 +534,10 @@ function seedDemo(){
         {id:'m1',title:'Q2 Planning Session',date:'2026-04-10',notes:'Reviewed renewal timeline. Client wants to accelerate before Q3.',
          nextSteps:[
            {id:'ns1',title:'Send updated renewal proposal',company:'globant',person:'Juan',dueDate:t1,done:false},
-           {id:'ns2',title:'Share Q3 product roadmap',company:'sf',person:'Carlos Ruiz',dueDate:'2026-05-28',done:true},
+           {id:'ns2',title:'Share Q3 roadmap',company:'sf',person:'Carlos Ruiz',dueDate:'2026-05-28',done:true},
          ]},
-        {id:'m2',title:'Technical Review',date:'2026-04-28',notes:'Identified 3 quick wins for upsell.',
-         nextSteps:[
-           {id:'ns3',title:'Prepare quick wins deck',company:'globant',person:'Juan',dueDate:y1,done:false},
-         ]},
+        {id:'m2',title:'Technical Review',date:'2026-04-28',notes:'Identified 3 quick wins.',
+         nextSteps:[{id:'ns3',title:'Prepare quick wins deck',company:'globant',person:'Juan',dueDate:y1,done:false}]},
       ]},
       {id:'ac2',name:'BBVA',meetings:[
         {id:'m3',title:'Upsell Discovery',date:'2026-04-22',notes:'Strong interest in Service Cloud Enterprise.',
@@ -516,22 +550,21 @@ function seedDemo(){
   }];
   saveLocal();
 }
-
-/* ── ALL NS helper ── */
-function allNS(){
-  return db.aps.flatMap(ap=>ap.accounts.flatMap(ac=>ac.meetings.flatMap(m=>m.nextSteps.map(ns=>({...ns,_apId:ap.id,_aeName:ap.aeName,_acId:ac.id,_acName:ac.name,_mId:m.id,_mTitle:m.title})))));
-}
-
-/* ── RENDER ALL ── */
-function renderAll(){renderDashboard();renderClients();renderPipeline();renderActivities();renderAP();renderAlerts();renderReports();updateBadge();}
-
+ 
+/* ── HELPERS ── */
+const allNS=()=>db.aps.flatMap(ap=>ap.accounts.flatMap(ac=>ac.meetings.flatMap(m=>m.nextSteps.map(ns=>({...ns,_apId:ap.id,_aeName:ap.aeName,_acId:ac.id,_acName:ac.name,_mId:m.id,_mTitle:m.title})))));
+ 
+function renderAll(){renderDashboard();renderDaily();renderClients();renderPipeline();renderActivities();renderAP();renderAlerts();renderReports();updateBadge();}
+ 
 /* ── DASHBOARD ── */
 function renderDashboard(){
   const name=document.getElementById('cfg-name').value.trim();
   const h=new Date().getHours();
   document.getElementById('dash-greeting').textContent=(h<12?'Good morning':h<18?'Good afternoon':'Good evening')+(name?', '+name:'')+' 👋';
   const won=db.deals.filter(d=>d.stage==='Won');
-  document.getElementById('m-ytd').textContent=fmtEur(won.reduce((s,d)=>s+(+d.value||0),0));
+  const ytd=won.reduce((s,d)=>s+(+d.value||0),0);
+  document.getElementById('m-ytd').textContent=fmtEur(ytd);
+  document.getElementById('m-ytd-s').textContent=won.length+' deals closed';
   const active=db.deals.filter(d=>!['Won','Lost'].includes(d.stage));
   document.getElementById('m-pipe').textContent=fmtEur(active.reduce((s,d)=>s+(+d.value||0),0));
   document.getElementById('m-pipe-s').textContent=active.length+' opportunities';
@@ -545,51 +578,98 @@ function renderDashboard(){
   const svcMap={};active.forEach(d=>{const s=d.service||'Other';svcMap[s]=(svcMap[s]||0)+(+d.value||0)});
   const entries=Object.entries(svcMap).sort((a,b)=>b[1]-a[1]);const maxV=entries[0]?entries[0][1]:1;
   document.getElementById('dash-bars').innerHTML=entries.length?entries.slice(0,5).map(([s,v])=>`<div class="bar-row"><span class="bar-lbl">${s.replace(' Cloud','')}</span><div class="bar-bg"><div class="bar-fill" style="width:${Math.round(v/maxV*100)}%;background:${SVC_CLR[s]||'#888780'}"></div></div><span class="bar-val">${fmtEur(v)}</span></div>`).join(''):'<p style="font-size:12px;color:var(--text3)">No active deals</p>';
-  // upcoming activities
   const acts=[...db.activities].filter(a=>a.date>=today()).sort((a,b)=>a.date.localeCompare(b.date)).slice(0,4);
-  document.getElementById('dash-next').innerHTML=acts.length?acts.map(a=>`<div class="act-item"><div class="act-dot ${DOT_CLS[a.type]||'d-other'}"></div><div style="flex:1;font-size:13px"><strong>${a.type}</strong> with ${a.client||'—'}${a.description?' — '+a.description:''}</div><div style="font-size:11px;color:var(--text3);white-space:nowrap">${fmtDate(a.date)}</div></div>`).join(''):'<p style="font-size:12px;color:var(--text3)">No upcoming activities</p>';
-  // ALERTS WIDGET ON DASHBOARD
+  document.getElementById('dash-next').innerHTML=acts.length?acts.map(a=>`<div class="act-item" style="padding:7px 0"><div class="act-dot ${DOT_CLS[a.type]||'d-other'}" style="margin-top:5px"></div><div style="flex:1;font-size:13px"><strong>${a.type}</strong> with ${a.client||'—'}${a.description?' — '+a.description:''}</div><div style="font-size:11px;color:var(--text3);white-space:nowrap">${fmtDate(a.date)}</div></div>`).join(''):'<p style="font-size:12px;color:var(--text3)">No upcoming activities</p>';
+  // alerts widget
   const ns=allNS();
   const overdue=ns.filter(n=>!n.done&&n.dueDate&&daysFrom(n.dueDate)<0).sort((a,b)=>a.dueDate.localeCompare(b.dueDate));
   const warn=ns.filter(n=>!n.done&&n.dueDate&&daysFrom(n.dueDate)>=0&&daysFrom(n.dueDate)<=ALERT_DAYS).sort((a,b)=>a.dueDate.localeCompare(b.dueDate));
   const wrap=document.getElementById('dash-alerts-wrap');
-  if(!overdue.length&&!warn.length){wrap.innerHTML='';return;}
-  const allAlerts=[...overdue.map(n=>({...n,_type:'overdue'})),...warn.map(n=>({...n,_type:'warn'}))];
+  const all=[...overdue.map(n=>({...n,_t:'overdue'})),...warn.map(n=>({...n,_t:'warn'}))];
+  if(!all.length){wrap.innerHTML='';return;}
   wrap.innerHTML=`<div class="dash-alerts" style="margin-bottom:14px">
     <div class="card-title" style="margin-bottom:10px;display:flex;align-items:center;justify-content:space-between">
-      <span><i class="ti ti-bell" style="margin-right:5px;color:var(--amber-dark)"></i>Active alerts (${allAlerts.length})</span>
-      <button class="btn btn-sm" onclick="nav('alerts',document.querySelector('[onclick*=alerts]'))" style="font-size:11px">View all</button>
+      <span><i class="ti ti-bell" style="margin-right:5px;color:var(--amber-dark)"></i>Active alerts (${all.length})</span>
+      <button class="btn btn-sm" onclick="nav('alerts',document.querySelector('#nav-alerts'))">View all</button>
     </div>
-    ${allAlerts.slice(0,6).map(n=>{
-      const d=daysFrom(n.dueDate);
-      const dLabel=d<0?Math.abs(d)+'d overdue':d===0?'Today':d===1?'Tomorrow':'In '+d+'d';
-      return`<div class="dash-alert-item">
-        <div class="dash-alert-dot ${n._type}"></div>
-        <div class="dash-alert-body">
-          <div class="dash-alert-title">${n.title}</div>
-          <div class="dash-alert-sub">${n._aeName} → ${n._acName} → ${n._mTitle}</div>
-        </div>
-        <div class="dash-alert-right ${n._type}">${dLabel}</div>
-      </div>`;
-    }).join('')}
+    ${all.slice(0,5).map(n=>`<div class="dash-alert-item"><div class="dash-alert-dot ${n._t}"></div><div class="dash-alert-body"><div class="dash-alert-title">${n.title}</div><div class="dash-alert-sub">${n._aeName} → ${n._acName} → ${n._mTitle}</div></div><div class="dash-alert-right ${n._t}">${dLabel(n.dueDate)}</div></div>`).join('')}
   </div>`;
 }
-
+ 
+/* ── DETAIL MODAL (dashboard click) ── */
+function showDetail(type){
+  const mb=document.getElementById('modal-body');
+  mb.className='modal wide';
+  if(type==='ytd'){
+    const won=db.deals.filter(d=>d.stage==='Won').sort((a,b)=>(b.closeDate||'').localeCompare(a.closeDate||''));
+    mb.innerHTML=`<h3>Closed deals YTD — ${fmtEur(won.reduce((s,d)=>s+(+d.value||0),0))}</h3>
+    <div class="detail-list">${won.length?won.map(d=>`<div class="detail-row"><strong>${d.client}</strong><span>${(d.service||'').replace(' Cloud','')} · ${fmtEur(d.value)} · Closed ${fmtDate(d.closeDate)}</span></div>`).join(''):'<p style="color:var(--text3)">No closed deals yet.</p>'}</div>
+    <div class="modal-btns"><button class="btn btn-primary" onclick="closeModal()">Close</button></div>`;
+  } else if(type==='pipeline'){
+    const active=db.deals.filter(d=>!['Won','Lost'].includes(d.stage)).sort((a,b)=>(+b.value||0)-(+a.value||0));
+    mb.innerHTML=`<h3>Active pipeline — ${fmtEur(active.reduce((s,d)=>s+(+d.value||0),0))}</h3>
+    <div class="detail-list">${active.length?active.map(d=>`<div class="detail-row"><strong>${d.client} <span class="badge ${d.stage==='Negotiation'?'b-amber':d.stage==='Proposal'?'b-amber':d.stage==='Demo'?'b-blue':'b-gray'}" style="font-size:10px;vertical-align:middle">${d.stage}</span></strong><span>${(d.service||'').replace(' Cloud','')} · ${fmtEur(d.value)} · Est. close ${fmtDate(d.closeDate)}</span></div>`).join(''):'<p style="color:var(--text3)">No active deals.</p>'}</div>
+    <div class="modal-btns"><button class="btn btn-primary" onclick="closeModal()">Close</button></div>`;
+  } else if(type==='clients'){
+    const sorted=[...db.clients].sort((a,b)=>a.name.localeCompare(b.name));
+    mb.innerHTML=`<h3>All clients (${sorted.length})</h3>
+    <div class="detail-list">${sorted.length?sorted.map(c=>`<div class="detail-row"><strong>${c.name} <span class="badge ${BADGE_ST[c.status]||'b-gray'}" style="font-size:10px;vertical-align:middle">${c.status}</span></strong><span>${c.sector||''} · ${c.service||''} · ${c.value?fmtEur(c.value):'No value'} · Next: ${c.nextAction||'—'}</span></div>`).join(''):'<p style="color:var(--text3)">No clients yet.</p>'}</div>
+    <div class="modal-btns"><button class="btn btn-primary" onclick="closeModal()">Close</button></div>`;
+  } else if(type==='nextsteps'){
+    const open=allNS().filter(n=>!n.done).sort((a,b)=>(a.dueDate||'9').localeCompare(b.dueDate||'9'));
+    mb.innerHTML=`<h3>Open next steps (${open.length})</h3>
+    <div class="detail-list">${open.length?open.map(n=>{const d=daysFrom(n.dueDate);const cls=d===null?'':d<0?'overdue':d<=ALERT_DAYS?'warn':'';return`<div class="detail-row" style="border-left:3px solid ${n.company==='sf'?'var(--blue)':'var(--green)'}"><strong>${n.title}</strong><span>${n._aeName} → ${n._acName} · ${n.person||''}${n.dueDate?` · <span style="font-weight:600;color:var(--${cls==='overdue'?'red-dark':cls==='warn'?'amber-dark':'text2'})">${dLabel(n.dueDate)}</span>`:''}</span></div>`}).join(''):'<p style="color:var(--text3)">All done!</p>'}</div>
+    <div class="modal-btns"><button class="btn btn-primary" onclick="closeModal()">Close</button></div>`;
+  }
+  document.getElementById('modal-overlay').classList.add('open');
+}
+ 
+/* ── DAILY ── */
+function renderDaily(){
+  const dateStr=new Date().toLocaleDateString('en-GB',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  document.getElementById('daily-date-str').textContent=dateStr;
+  const ns=allNS();
+  // overdue
+  const overdue=ns.filter(n=>!n.done&&n.dueDate&&daysFrom(n.dueDate)<0).sort((a,b)=>a.dueDate.localeCompare(b.dueDate));
+  const odEl=document.getElementById('daily-overdue');
+  odEl.innerHTML=overdue.length?overdue.map(n=>`<div class="daily-item urgent">
+    <div class="daily-icon urgent"><i class="ti ti-clock-x"></i></div>
+    <div class="daily-body"><div class="daily-title">${n.title}</div><div class="daily-sub">${n._aeName} → ${n._acName} → ${n._mTitle} · <strong>${n.person||'—'}</strong></div></div>
+    <div class="daily-right urgent">${Math.abs(daysFrom(n.dueDate))}d overdue</div>
+  </div>`).join(''):`<div class="daily-empty"><i class="ti ti-circle-check" style="color:var(--green)"></i> No overdue next steps 🎉</div>`;
+  // urgent (today + tomorrow)
+  const urgent=ns.filter(n=>!n.done&&n.dueDate&&daysFrom(n.dueDate)>=0&&daysFrom(n.dueDate)<=1).sort((a,b)=>a.dueDate.localeCompare(b.dueDate));
+  const ugEl=document.getElementById('daily-urgent');
+  ugEl.innerHTML=urgent.length?urgent.map(n=>`<div class="daily-item warn">
+    <div class="daily-icon warn"><i class="ti ti-clock"></i></div>
+    <div class="daily-body"><div class="daily-title">${n.title}</div><div class="daily-sub">${n._aeName} → ${n._acName} · <strong>${n.person||'—'}</strong></div></div>
+    <div class="daily-right warn">${dLabel(n.dueDate)}</div>
+  </div>`).join(''):`<div class="daily-empty">Nothing due today or tomorrow</div>`;
+  // today's activities
+  const todayActs=db.activities.filter(a=>a.date===today());
+  const taEl=document.getElementById('daily-activities');
+  taEl.innerHTML=todayActs.length?todayActs.map(a=>`<div class="daily-item normal">
+    <div class="daily-icon normal"><i class="ti ti-${a.type==='Call'?'phone':a.type==='Email'?'mail':a.type==='Meeting'?'users':'calendar'}"></i></div>
+    <div class="daily-body"><div class="daily-title">${a.type} with ${a.client||'—'}${a.description?' — '+a.description:''}</div>${a.attendees?`<div class="daily-sub"><i class="ti ti-users" style="font-size:10px"></i> ${a.attendees}</div>`:''}</div>
+    <div class="daily-right normal">Today</div>
+  </div>`).join(''):`<div class="daily-empty">No activities logged for today</div>`;
+}
+ 
 /* ── CLIENTS ── */
 function renderClients(){
   const tbody=document.getElementById('cli-tbody');
   if(!db.clients.length){tbody.innerHTML='<tr><td colspan="7" style="text-align:center;color:var(--text3);padding:22px">No clients yet.</td></tr>';return}
-  tbody.innerHTML=db.clients.map(c=>`<tr><td title="${c.name}"><strong>${c.name}</strong></td><td>${c.sector||'—'}</td><td><span class="badge b-blue" style="font-size:10px">${c.service||'—'}</span></td><td>${c.value?fmtEur(c.value):'—'}</td><td><span class="badge ${BADGE_ST[c.status]||'b-gray'}">${c.status||'—'}</span></td><td title="${c.nextAction||''}">${c.nextAction||'—'}</td><td><div class="row-actions"><button class="rb" onclick="openModal('edit-client','${c.id}')" title="Edit"><i class="ti ti-edit"></i></button><button class="rb" onclick="delItem('clients','${c.id}')" title="Delete"><i class="ti ti-trash"></i></button></div></td></tr>`).join('');
+  tbody.innerHTML=db.clients.map(c=>`<tr><td title="${c.name}"><strong>${c.name}</strong></td><td>${c.sector||'—'}</td><td><span class="badge b-blue" style="font-size:10px">${c.service||'—'}</span></td><td>${c.value?fmtEur(c.value):'—'}</td><td><span class="badge ${BADGE_ST[c.status]||'b-gray'}">${c.status||'—'}</span></td><td title="${c.nextAction||''}">${c.nextAction||'—'}</td><td><div class="row-actions"><button class="rb" onclick="openModal('edit-client','${c.id}')"><i class="ti ti-edit"></i></button><button class="rb" onclick="delItem('clients','${c.id}')"><i class="ti ti-trash"></i></button></div></td></tr>`).join('');
 }
-
+ 
 /* ── PIPELINE ── */
 function renderPipeline(){
   document.getElementById('pipe-board').innerHTML=STAGES.map(stage=>{
     const cards=db.deals.filter(d=>d.stage===stage);
-    return`<div class="pcol"><div class="pcol-hdr"><span>${stage}</span><span style="background:var(--bg);border:0.5px solid var(--border);border-radius:20px;font-size:10px;padding:1px 6px">${cards.length}</span></div>${cards.map(d=>`<div class="pcard"><div class="pc">${d.client||'—'}</div><div class="ps">${d.service||'—'}</div><div class="pa">${d.value?fmtEur(d.value):'—'}</div><div class="pcard-btns"><button class="rb" onclick="openModal('edit-deal','${d.id}')" title="Edit"><i class="ti ti-edit" style="font-size:12px"></i></button><button class="rb" onclick="delItem('deals','${d.id}')" title="Delete"><i class="ti ti-trash" style="font-size:12px"></i></button></div></div>`).join('')}${!cards.length?`<div style="font-size:11px;color:var(--text3);padding:8px 0;text-align:center">—</div>`:''}</div>`;
+    return`<div class="pcol"><div class="pcol-hdr"><span>${stage}</span><span style="background:var(--bg);border:0.5px solid var(--border);border-radius:20px;font-size:10px;padding:1px 6px">${cards.length}</span></div>${cards.map(d=>`<div class="pcard"><div class="pc">${d.client||'—'}</div><div class="ps">${d.service||'—'}</div><div class="pa">${d.value?fmtEur(d.value):'—'}</div><div class="pcard-btns"><button class="rb" onclick="openModal('edit-deal','${d.id}')"><i class="ti ti-edit" style="font-size:12px"></i></button><button class="rb" onclick="delItem('deals','${d.id}')"><i class="ti ti-trash" style="font-size:12px"></i></button></div></div>`).join('')}${!cards.length?`<div style="font-size:11px;color:var(--text3);padding:8px 0;text-align:center">—</div>`:''}</div>`;
   }).join('');
 }
-
+ 
 /* ── ACTIVITIES ── */
 function renderActivities(){
   const el=document.getElementById('act-list');
@@ -606,15 +686,19 @@ function renderActivities(){
         </div>
         <div class="act-meta">
           <span style="font-size:11px;color:var(--text3)">${fmtDate(a.date)}</span>
-          ${a.attendees?`<span class="act-attendees"><i class="ti ti-users" style="font-size:10px"></i> ${a.attendees}</span>`:''}
+          ${a.attendees?`<span style="font-size:11px;color:var(--text2)"><i class="ti ti-users" style="font-size:10px"></i> ${a.attendees}</span>`:''}
         </div>
         ${a.notes?`<div class="act-notes">${a.notes}</div>`:''}
-        ${a.nextSteps&&a.nextSteps.length?`<div class="act-ns">${a.nextSteps.map(ns=>`<div class="act-ns-item"><div class="act-ns-bullet"></div><span>${ns}</span></div>`).join('')}</div>`:''}
+        ${a.nextSteps&&a.nextSteps.length?`
+          <table class="act-ns-table">
+            <thead><tr><th style="width:110px">Person</th><th>Next step</th></tr></thead>
+            <tbody>${a.nextSteps.map(ns=>`<tr><td style="color:var(--text2);font-weight:500">${ns.person||'—'}</td><td><span class="act-ns-bullet">${ns.description||ns}</span></td></tr>`).join('')}</tbody>
+          </table>`:''}
       </div>
-      <button class="rb" onclick="delItem('activities','${a.id}')" title="Delete" style="flex-shrink:0;margin-top:2px"><i class="ti ti-trash"></i></button>
+      <button class="rb" onclick="delItem('activities','${a.id}')" style="flex-shrink:0;margin-top:2px"><i class="ti ti-trash"></i></button>
     </div>`).join('');
 }
-
+ 
 /* ── ACCOUNT PLANS ── */
 function renderAP(){
   const q=(document.getElementById('ap-search').value||'').toLowerCase();
@@ -643,7 +727,7 @@ function renderAP(){
     </div>`;
   }).join('');
 }
-
+ 
 function renderAccount(apId,ac){
   const openNS=ac.meetings.flatMap(m=>m.nextSteps.filter(n=>!n.done));
   return`<div class="acct-block">
@@ -659,7 +743,7 @@ function renderAccount(apId,ac){
       </div>
     </div>
     <div class="acct-body" id="acbody-${ac.id}">
-      ${openNS.length?`<div class="global-ns-bar"><span style="font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.4px">All open next steps · ${ac.name}</span><span class="badge b-amber" style="font-size:10px">${openNS.length} open</span></div>
+      ${openNS.length?`<div class="global-ns-bar"><span style="font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.4px">All open NS · ${ac.name}</span><span class="badge b-amber" style="font-size:10px">${openNS.length} open</span></div>
       <div class="global-ns-list">${openNS.map(ns=>{const d=daysFrom(ns.dueDate);const dCls=d===null?'':d<0?'overdue':d<=ALERT_DAYS?'warn':'';return`<div class="ns-item ${ns.company}"><div class="ns-check ${ns.company}${ns.done?' checked':''}" onclick="toggleNS('${apId}','${ac.id}','_','${ns.id}')">${ns.done?'<i class="ti ti-check" style="font-size:10px;color:#fff"></i>':''}</div><div class="ns-body"><div class="ns-title">${ns.title}</div><div class="ns-footer"><span class="ns-tag ${ns.company}">${ns.company==='sf'?'SF':'Globant'}</span><span class="ns-person">${ns.person||''}</span>${ns.dueDate?`<span class="ns-due ${dCls}"><i class="ti ti-calendar" style="font-size:10px"></i> ${fmtDate(ns.dueDate)}${d!==null&&d<0?' · overdue':d!==null&&d<=ALERT_DAYS?' · due soon':''}</span>`:''}<span style="font-size:10px;color:var(--text3);margin-left:2px">· ${ns._mTitle||'—'}</span></div></div></div>`;}).join('')}</div>`:''}
       <div style="${openNS.length?'border-top:0.5px solid var(--border)':''}">
         <div style="padding:8px 16px 8px 36px;display:flex;justify-content:space-between;align-items:center;background:var(--bg2)">
@@ -671,7 +755,7 @@ function renderAccount(apId,ac){
     </div>
   </div>`;
 }
-
+ 
 function renderMeeting(apId,acId,m){
   const openNS=m.nextSteps.filter(n=>!n.done).length;const doneNS=m.nextSteps.filter(n=>n.done).length;
   return`<div class="meeting-block">
@@ -687,34 +771,29 @@ function renderMeeting(apId,acId,m){
       </div>
     </div>
     <div class="meeting-body" id="mbody-${m.id}">
-      ${m.notes?`<div class="meeting-notes">${m.notes}</div>`:''}
+      ${m.notes?`<div class="meeting-notes-box">${m.notes}</div>`:''}
       <div style="font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px">Next steps</div>
       ${m.nextSteps.length?`<div class="ns-list">${m.nextSteps.map(ns=>{const d=daysFrom(ns.dueDate);const dCls=d===null?'':d<0?'overdue':d<=ALERT_DAYS?'warn':'';return`<div class="ns-item ${ns.company}${ns.done?' done':''}"><div class="ns-check ${ns.company}${ns.done?' checked':''}" onclick="toggleNS('${apId}','${acId}','${m.id}','${ns.id}')">${ns.done?'<i class="ti ti-check" style="font-size:10px;color:#fff"></i>':''}</div><div class="ns-body"><div class="ns-title${ns.done?' done':''}">${ns.title}</div><div class="ns-footer"><span class="ns-tag ${ns.company}">${ns.company==='sf'?'SF':'Globant'}</span><span class="ns-person">${ns.person||''}</span>${ns.dueDate?`<span class="ns-due ${dCls}"><i class="ti ti-calendar" style="font-size:10px"></i> ${fmtDate(ns.dueDate)}${d!==null&&d<0?' · overdue':d!==null&&d<=ALERT_DAYS?' · due soon':''}</span>`:''}</div></div><button class="ns-rm" onclick="removeNS('${apId}','${acId}','${m.id}','${ns.id}')"><i class="ti ti-x"></i></button></div>`;}).join('')}</div>`:`<p style="font-size:12px;color:var(--text3)">No next steps yet.</p>`}
       <button class="add-btn" onclick="openModal('ns','${apId}:${acId}:${m.id}')"><i class="ti ti-plus" style="font-size:11px"></i> Add next step</button>
     </div>
   </div>`;
 }
-
-/* ── ALERTS PAGE ── */
+ 
+/* ── ALERTS ── */
 function renderAlerts(){
   const ns=allNS();
   const overdue=ns.filter(n=>!n.done&&n.dueDate&&daysFrom(n.dueDate)<0).sort((a,b)=>a.dueDate.localeCompare(b.dueDate));
   const warn=ns.filter(n=>!n.done&&n.dueDate&&daysFrom(n.dueDate)>=0&&daysFrom(n.dueDate)<=ALERT_DAYS).sort((a,b)=>a.dueDate.localeCompare(b.dueDate));
   const el=document.getElementById('alerts-content');
   if(!overdue.length&&!warn.length){el.innerHTML='<div class="empty"><i class="ti ti-circle-check"></i><p>No alerts — all next steps on track.</p></div>';return}
-  const card=(n,type)=>{const d=daysFrom(n.dueDate);const dLabel=d<0?Math.abs(d)+'d overdue':d===0?'Due today':d===1?'Due tomorrow':'Due in '+d+'d';return`<div class="alert-card ${type}"><div class="alert-icon ${type}"><i class="ti ti-${type==='overdue'?'clock-x':'clock'}"></i></div><div class="alert-body"><div class="alert-title">${n.title}</div><div class="alert-sub">${n._aeName} → ${n._acName} → ${n._mTitle}</div></div><div class="alert-right"><span class="ns-tag ${n.company}">${n.company==='sf'?'SF':'Globant'}</span><span style="font-size:11px;font-weight:600;color:var(--${type==='overdue'?'red-dark':'amber-dark'})">${dLabel}</span>${n.person?`<span style="font-size:11px;color:var(--text3)">${n.person}</span>`:''}</div></div>`;};
+  const card=(n,t)=>`<div class="alert-card ${t}"><div class="alert-icon ${t}"><i class="ti ti-${t==='overdue'?'clock-x':'clock'}"></i></div><div class="alert-body"><div class="alert-title">${n.title}</div><div class="alert-sub">${n._aeName} → ${n._acName} → ${n._mTitle}</div></div><div class="alert-right"><span class="ns-tag ${n.company}">${n.company==='sf'?'SF':'Globant'}</span><span style="font-size:11px;font-weight:600;color:var(--${t==='overdue'?'red-dark':'amber-dark'})">${dLabel(n.dueDate)}</span>${n.person?`<span style="font-size:11px;color:var(--text3)">${n.person}</span>`:''}</div></div>`;
   let html='';
   if(overdue.length)html+=`<div class="alert-section"><div class="alert-section-title"><i class="ti ti-alert-circle" style="color:var(--red-dark)"></i> Overdue (${overdue.length})</div>${overdue.map(n=>card(n,'overdue')).join('')}</div>`;
   if(warn.length)html+=`<div class="alert-section"><div class="alert-section-title"><i class="ti ti-bell" style="color:var(--amber-dark)"></i> Due within ${ALERT_DAYS} days (${warn.length})</div>${warn.map(n=>card(n,'warn')).join('')}</div>`;
   el.innerHTML=html;
 }
-
-function updateBadge(){
-  const count=allNS().filter(n=>!n.done&&n.dueDate&&daysFrom(n.dueDate)<=ALERT_DAYS).length;
-  const b=document.getElementById('alerts-badge');
-  if(count){b.textContent=count;b.style.display='';}else b.style.display='none';
-}
-
+function updateBadge(){const c=allNS().filter(n=>!n.done&&n.dueDate&&daysFrom(n.dueDate)<=ALERT_DAYS).length;const b=document.getElementById('alerts-badge');if(c){b.textContent=c;b.style.display='';}else b.style.display='none';}
+ 
 /* ── REPORTS ── */
 function renderReports(){
   const won=db.deals.filter(d=>d.stage==='Won');
@@ -729,35 +808,28 @@ function renderReports(){
   document.getElementById('rep-bars').innerHTML=entries.length?entries.map(([s,v])=>`<div class="bar-row"><span class="bar-lbl">${s.replace(' Cloud','')}</span><div class="bar-bg"><div class="bar-fill" style="width:${Math.round(v/maxV*100)}%;background:${SVC_CLR[s]||'#888780'}"></div></div><span class="bar-val">${fmtEur(v)}</span></div>`).join(''):'<p style="font-size:12px;color:var(--text3)">No closed deals</p>';
   document.getElementById('rep-closed').innerHTML=won.length?[...won].sort((a,b)=>(b.closeDate||'').localeCompare(a.closeDate||'')).slice(0,10).map(d=>`<tr><td>${d.client||'—'}</td><td><span class="badge b-blue" style="font-size:10px">${(d.service||'').replace(' Cloud','')}</span></td><td>${d.value?fmtEur(d.value):'—'}</td><td>${fmtDate(d.closeDate)}</td></tr>`).join(''):'<tr><td colspan="4" style="text-align:center;color:var(--text3);padding:16px">No closed deals</td></tr>';
 }
-
-/* ── TOGGLE ── */
-function tog(bodyId,chevId){const b=document.getElementById(bodyId);const c=document.getElementById(chevId);if(!b)return;const o=b.classList.contains('open');b.classList.toggle('open',!o);if(c)c.style.transform=o?'':'rotate(90deg)';}
-
-/* ── NS OPS ── */
-function findNS(apId,acId,mId,nsId){
-  const ap=db.aps.find(a=>a.id===apId);if(!ap)return null;
-  const ac=ap.accounts.find(a=>a.id===acId);if(!ac)return null;
-  if(mId==='_'){for(const m of ac.meetings){const n=m.nextSteps.find(x=>x.id===nsId);if(n)return{m,ns:n}}return null;}
-  const m=ac.meetings.find(x=>x.id===mId);if(!m)return null;
-  const ns=m.nextSteps.find(x=>x.id===nsId);return ns?{m,ns}:null;
-}
-function toggleNS(apId,acId,mId,nsId){const r=findNS(apId,acId,mId,nsId);if(!r)return;r.ns.done=!r.ns.done;persist();}
-function removeNS(apId,acId,mId,nsId){const ap=db.aps.find(a=>a.id===apId);if(!ap)return;const ac=ap.accounts.find(a=>a.id===acId);if(!ac)return;const m=ac.meetings.find(x=>x.id===mId);if(!m)return;m.nextSteps=m.nextSteps.filter(x=>x.id!==nsId);persist();}
-function delMeeting(apId,acId,mId){if(!confirm('Delete this meeting and all next steps?'))return;const ap=db.aps.find(a=>a.id===apId);if(!ap)return;const ac=ap.accounts.find(a=>a.id===acId);if(!ac)return;ac.meetings=ac.meetings.filter(m=>m.id!==mId);persist();showToast('Deleted');}
-function delAccount(apId,acId){if(!confirm('Delete this account?'))return;const ap=db.aps.find(a=>a.id===apId);if(!ap)return;ap.accounts=ap.accounts.filter(a=>a.id!==acId);persist();showToast('Deleted');}
-function delAP(id){if(!confirm('Delete this account plan?'))return;db.aps=db.aps.filter(a=>a.id!==id);persist();showToast('Deleted');}
-function delItem(col,id){if(!confirm('Delete?'))return;db[col]=db[col].filter(x=>x.id!==id);persist();showToast('Deleted');}
-
+ 
+/* ── TOGGLES & NS OPS ── */
+const tog=(b,c)=>{const el=document.getElementById(b);const cv=document.getElementById(c);if(!el)return;const o=el.classList.contains('open');el.classList.toggle('open',!o);if(cv)cv.style.transform=o?'':'rotate(90deg)';};
+function findNS(apId,acId,mId,nsId){const ap=db.aps.find(a=>a.id===apId);if(!ap)return null;const ac=ap.accounts.find(a=>a.id===acId);if(!ac)return null;if(mId==='_'){for(const m of ac.meetings){const n=m.nextSteps.find(x=>x.id===nsId);if(n)return{m,ns:n}}return null;}const m=ac.meetings.find(x=>x.id===mId);if(!m)return null;const ns=m.nextSteps.find(x=>x.id===nsId);return ns?{m,ns}:null;}
+const toggleNS=(apId,acId,mId,nsId)=>{const r=findNS(apId,acId,mId,nsId);if(!r)return;r.ns.done=!r.ns.done;persist();};
+const removeNS=(apId,acId,mId,nsId)=>{const ap=db.aps.find(a=>a.id===apId);if(!ap)return;const ac=ap.accounts.find(a=>a.id===acId);if(!ac)return;const m=ac.meetings.find(x=>x.id===mId);if(!m)return;m.nextSteps=m.nextSteps.filter(x=>x.id!==nsId);persist();};
+const delMeeting=(apId,acId,mId)=>{if(!confirm('Delete this meeting?'))return;const ap=db.aps.find(a=>a.id===apId);if(!ap)return;const ac=ap.accounts.find(a=>a.id===acId);if(!ac)return;ac.meetings=ac.meetings.filter(m=>m.id!==mId);persist();showToast('Deleted');};
+const delAccount=(apId,acId)=>{if(!confirm('Delete this account?'))return;const ap=db.aps.find(a=>a.id===apId);if(!ap)return;ap.accounts=ap.accounts.filter(a=>a.id!==acId);persist();showToast('Deleted');};
+const delAP=(id)=>{if(!confirm('Delete this account plan?'))return;db.aps=db.aps.filter(a=>a.id!==id);persist();showToast('Deleted');};
+const delItem=(col,id)=>{if(!confirm('Delete?'))return;db[col]=db[col].filter(x=>x.id!==id);persist();showToast('Deleted');};
+ 
 /* ── MODALS ── */
 function openModal(type,extra){
   const mb=document.getElementById('modal-body');
+  mb.className='modal';
   const cliOpts=db.clients.map(c=>`<option value="${c.name}">${c.name}</option>`).join('');
   const fld=(lbl,inner)=>`<div class="field"><label>${lbl}</label>${inner}</div>`;
-  const inp=(id,type,val,ph)=>`<input id="${id}" type="${type}" value="${val||''}" placeholder="${ph||''}" style="width:100%;font-size:13px;padding:7px 9px;border:0.5px solid var(--border2);border-radius:var(--r);background:var(--bg);color:var(--text);font-family:var(--font)">`;
+  const inp=(id,t,val,ph)=>`<input id="${id}" type="${t||'text'}" value="${val||''}" placeholder="${ph||''}" style="width:100%;font-size:13px;padding:7px 9px;border:0.5px solid var(--border2);border-radius:var(--r);background:var(--bg);color:var(--text);font-family:var(--font)">`;
   const sel=(id,opts,val)=>`<select id="${id}" style="width:100%;font-size:13px;padding:7px 9px;border:0.5px solid var(--border2);border-radius:var(--r);background:var(--bg);color:var(--text)">${opts.map(o=>`<option${o===val?' selected':''}>${o}</option>`).join('')}</select>`;
   const ta=(id,val,ph,rows)=>`<textarea id="${id}" rows="${rows||3}" placeholder="${ph||''}" style="width:100%;font-size:13px;padding:7px 9px;border:0.5px solid var(--border2);border-radius:var(--r);background:var(--bg);color:var(--text);resize:vertical;font-family:var(--font)">${val||''}</textarea>`;
-  const btns=(saveFn)=>`<div class="modal-btns"><button class="btn" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="${saveFn}">Save</button></div>`;
-
+  const btns=(fn,lbl)=>`<div class="modal-btns"><button class="btn" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="${fn}">${lbl||'Save'}</button></div>`;
+ 
   if(type==='client'||type==='edit-client'){
     const ex=type==='edit-client'?db.clients.find(c=>c.id===extra):{};
     mb.innerHTML=`<h3>${type==='edit-client'?'Edit':'New'} client</h3>
@@ -783,13 +855,12 @@ function openModal(type,extra){
     ${fld('Attendees',inp('f-att','text','','e.g. Carlos (SF), Maria (Client)'))}
     ${fld('Notes',ta('f-notes','','Key points, decisions...',3))}
     <div class="field">
-      <label>Next steps <span style="color:var(--text3);font-weight:400">(one per line)</span></label>
-      <div id="ns-rows">
-        <div class="ns-input-row"><input placeholder="e.g. Send proposal..." style="flex:1;font-size:12px;padding:5px 7px;border:0.5px solid var(--border2);border-radius:var(--r);background:var(--bg);color:var(--text);font-family:var(--font)"><button onclick="this.closest('.ns-input-row').remove()" style="background:none;border:none;cursor:pointer;color:var(--text3);font-size:16px;padding:2px 4px">×</button></div>
-      </div>
-      <button class="add-btn" onclick="addNSRow()" style="margin-top:4px"><i class="ti ti-plus" style="font-size:11px"></i> Add next step</button>
+      <label>Next steps</label>
+      <div id="ns-rows" style="display:flex;flex-direction:column;gap:6px;margin-bottom:6px"></div>
+      <button class="add-btn" onclick="addActNSRow()" style="margin-top:0"><i class="ti ti-plus" style="font-size:11px"></i> Add next step</button>
     </div>
     <div class="modal-btns"><button class="btn" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="saveActivity()">Save</button></div>`;
+    addActNSRow();
   } else if(type==='ae'){
     mb.innerHTML=`<h3>New Account Plan</h3>
     <div class="two-col-f">${fld('AE name',inp('f-ae-n','text','','e.g. Carlos Ruiz'))}${fld('Territory',inp('f-ae-t','text','','SF · Madrid'))}</div>
@@ -812,7 +883,7 @@ function openModal(type,extra){
     mb.innerHTML=`<h3>${type==='edit-meeting'?'Edit':'Add'} meeting · <span style="font-weight:400">${ac.name}</span></h3>
     ${fld('Title',inp('f-m-t','text',m.title,'e.g. Q2 Planning Session'))}
     ${fld('Date',inp('f-m-d','date',m.date||today()))}
-    ${fld('Notes',ta('f-m-n',m.notes,'Key points, decisions, context...',4))}
+    ${fld('Notes',ta('f-m-n',m.notes,'Key points, decisions...',4))}
     ${btns(`saveMeeting('${apId}','${acId}','${type==='edit-meeting'?mId:''}')`)}`;
   } else if(type==='ns'){
     const[apId,acId,mId]=extra.split(':');
@@ -825,13 +896,17 @@ function openModal(type,extra){
   }
   document.getElementById('modal-overlay').classList.add('open');
 }
-
-function addNSRow(){
-  const row=document.createElement('div');row.className='ns-input-row';
-  row.innerHTML=`<input placeholder="e.g. Follow up, Prepare deck..." style="flex:1;font-size:12px;padding:5px 7px;border:0.5px solid var(--border2);border-radius:var(--r);background:var(--bg);color:var(--text);font-family:var(--font)"><button onclick="this.closest('.ns-input-row').remove()" style="background:none;border:none;cursor:pointer;color:var(--text3);font-size:16px;padding:2px 4px">×</button>`;
+ 
+function addActNSRow(){
+  const row=document.createElement('div');
+  row.style.cssText='display:grid;grid-template-columns:130px 1fr auto;gap:6px;align-items:center';
+  row.innerHTML=`
+    <input placeholder="Person" style="font-size:12px;padding:5px 7px;border:0.5px solid var(--border2);border-radius:var(--r);background:var(--bg);color:var(--text);font-family:var(--font)" data-ns-person>
+    <input placeholder="Description of next step..." style="font-size:12px;padding:5px 7px;border:0.5px solid var(--border2);border-radius:var(--r);background:var(--bg);color:var(--text);font-family:var(--font)" data-ns-desc>
+    <button onclick="this.closest('div').remove()" style="background:none;border:none;cursor:pointer;color:var(--text3);font-size:16px;padding:2px 4px;flex-shrink:0">×</button>`;
   document.getElementById('ns-rows').appendChild(row);
 }
-
+ 
 /* ── SAVE FUNCTIONS ── */
 function saveClient(eid){
   const n=document.getElementById('f-name').value.trim();if(!n){alert('Name required');return}
@@ -846,8 +921,8 @@ function saveDeal(eid){
   closeModal();persist();showToast('Deal saved');
 }
 function saveActivity(){
-  const nsInputs=document.querySelectorAll('#ns-rows input');
-  const nextSteps=[...nsInputs].map(i=>i.value.trim()).filter(Boolean);
+  const rows=document.querySelectorAll('#ns-rows > div');
+  const nextSteps=[...rows].map(r=>({person:(r.querySelector('[data-ns-person]')||{}).value?.trim()||'',description:(r.querySelector('[data-ns-desc]')||{}).value?.trim()||''})).filter(ns=>ns.description);
   db.activities.push({id:uid(),client:document.getElementById('f-cli').value,type:document.getElementById('f-type').value,description:document.getElementById('f-desc').value.trim(),date:document.getElementById('f-date').value,attendees:document.getElementById('f-att').value.trim(),notes:document.getElementById('f-notes').value.trim(),nextSteps});
   closeModal();persist();showToast('Activity logged');
 }
@@ -857,21 +932,9 @@ function saveAP(){
   db.aps.unshift({id:uid(),aeName:n,aeTerritory:document.getElementById('f-ae-t').value.trim(),accounts:accounts.map(name=>({id:uid(),name,meetings:[]}))});
   closeModal();persist();showToast('Account plan created');
 }
-function saveEditAP(id){
-  const ap=db.aps.find(a=>a.id===id);if(!ap)return;
-  ap.aeName=document.getElementById('f-ae-n').value.trim()||ap.aeName;
-  ap.aeTerritory=document.getElementById('f-ae-t').value.trim();
-  closeModal();persist();showToast('Updated');
-}
-function saveAccount(apId){
-  const n=document.getElementById('f-ac-n').value.trim();if(!n){alert('Name required');return}
-  const ap=db.aps.find(a=>a.id===apId);if(!ap)return;
-  ap.accounts.push({id:uid(),name:n,meetings:[]});closeModal();persist();showToast('Account added');
-}
-function saveEditAccount(apId,acId){
-  const ap=db.aps.find(a=>a.id===apId);if(!ap)return;const ac=ap.accounts.find(a=>a.id===acId);if(!ac)return;
-  ac.name=document.getElementById('f-ac-n').value.trim()||ac.name;closeModal();persist();showToast('Updated');
-}
+function saveEditAP(id){const ap=db.aps.find(a=>a.id===id);if(!ap)return;ap.aeName=document.getElementById('f-ae-n').value.trim()||ap.aeName;ap.aeTerritory=document.getElementById('f-ae-t').value.trim();closeModal();persist();showToast('Updated');}
+function saveAccount(apId){const n=document.getElementById('f-ac-n').value.trim();if(!n){alert('Name required');return}const ap=db.aps.find(a=>a.id===apId);if(!ap)return;ap.accounts.push({id:uid(),name:n,meetings:[]});closeModal();persist();showToast('Account added');}
+function saveEditAccount(apId,acId){const ap=db.aps.find(a=>a.id===apId);if(!ap)return;const ac=ap.accounts.find(a=>a.id===acId);if(!ac)return;ac.name=document.getElementById('f-ac-n').value.trim()||ac.name;closeModal();persist();showToast('Updated');}
 function saveMeeting(apId,acId,mId){
   const t=document.getElementById('f-m-t').value.trim();if(!t){alert('Title required');return}
   const ap=db.aps.find(a=>a.id===apId);if(!ap)return;const ac=ap.accounts.find(a=>a.id===acId);if(!ac)return;
@@ -885,13 +948,10 @@ function saveNS(apId,acId,mId){
   m.nextSteps.push({id:uid(),title:t,company:document.getElementById('f-ns-co').value,person:document.getElementById('f-ns-p').value.trim(),dueDate:document.getElementById('f-ns-d').value,done:false});
   closeModal();persist();showToast('Next step added');
 }
-function closeModal(){document.getElementById('modal-overlay').classList.remove('open')}
-function saveName(){const v=document.getElementById('cfg-name').value.trim();if(v){localStorage.setItem(NAME_KEY,v);showToast('Name saved');renderDashboard();}}
-function exportCSV(){
-  function toCSV(cols,rows){return[cols.join(','),...rows.map(r=>cols.map(k=>'"'+(String(r[k]||'').replace(/"/g,'""'))+'"').join(','))].join('\n')}
-  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([toCSV(['name','sector','service','value','status','nextAction'],db.clients)],{type:'text/csv'}));a.download='salestracker_export.csv';a.click();showToast('Exported');
-}
-function clearAll(){db={clients:[],deals:[],activities:[],aps:[]};saveLocal();renderAll();showToast('Data cleared');}
+const closeModal=()=>{document.getElementById('modal-overlay').classList.remove('open');document.getElementById('modal-body').className='modal';};
+const saveName=()=>{const v=document.getElementById('cfg-name').value.trim();if(v){localStorage.setItem(NAME_KEY,v);showToast('Name saved');renderDashboard();}};
+function exportCSV(){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([['name,sector,service,value,status',...db.clients.map(c=>`"${c.name}","${c.sector||''}","${c.service||''}",${c.value||0},"${c.status||''}"`)].join('\n')],{type:'text/csv'}));a.download='salestracker.csv';a.click();showToast('Exported');}
+const clearAll=()=>{db={clients:[],deals:[],activities:[],aps:[]};saveLocal();renderAll();showToast('Cleared');};
 function nav(id,el){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
@@ -899,8 +959,9 @@ function nav(id,el){
   if(el)el.classList.add('active');
   if(id==='reports')renderReports();
   if(id==='alerts'){renderAlerts();updateBadge();}
+  if(id==='daily')renderDaily();
 }
-function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500)}
+const showToast=msg=>{const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);};
 document.getElementById('modal-overlay').addEventListener('click',function(e){if(e.target===this)closeModal()});
 load();
 </script>
