@@ -314,7 +314,7 @@ tr:hover .row-actions{opacity:1}
       <div class="pinned-sections">
         <div class="card" style="margin-bottom:0">
           <div class="section-hdr">
-            <div class="section-title"><i class="ti ti-message-circle" style="color:var(--blue)"></i> To Comment</div>
+            <div class="section-title"><i class="ti ti-message-circle" style="color:var(--blue)"></i> To Comment in Patruno&#39;s Daily</div>
             <button class="btn btn-sm" onclick="openAddTC()"><i class="ti ti-plus" style="font-size:11px"></i> Add</button>
           </div>
           <div id="tc-list"></div>
@@ -895,7 +895,7 @@ function renderMeetings(){
 function renderToComment(){
   const el=document.getElementById('tc-list');
   const items=[...db.toComments.filter(t=>!t.done),...db.toComments.filter(t=>t.done)];
-  if(!items.length){el.innerHTML='<div class="empty" style="padding:16px"><i class="ti ti-message-circle"></i>Nothing to comment yet</div>';return;}
+  if(!items.length){el.innerHTML='<div class="empty" style="padding:16px"><i class="ti ti-message-circle"></i>Nothing to comment in Patruno&#39;s Daily yet</div>';return;}
   el.innerHTML=items.map(t=>`<div class="tc-item${t.done?' done':''}">
     <div class="tc-check${t.done?' done':''}" onclick="toggleTC('${t.id}')">${t.done?'<i class="ti ti-check" style="font-size:10px;color:#fff"></i>':''}</div>
     <div class="tc-body">
