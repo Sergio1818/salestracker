@@ -11,7 +11,7 @@
   --bg:#ffffff;--bg2:#f7f7f5;--bg3:#f1efe8;
   --text:#1a1a18;--text2:#5f5e5a;--text3:#888780;
   --border:rgba(0,0,0,0.1);--border2:rgba(0,0,0,0.2);
-  --blue:#185fa5;--blue-bg:#e6f1fb;
+  --blue:#185fa5;--blue-bg:#e6f1fb;--blue-dark:#0c447c;
   --green:#1d9e75;--green-bg:#eaf3de;--green-dark:#3b6d11;
   --amber:#ba7517;--amber-bg:#faeeda;--amber-dark:#854f0b;
   --red:#e24b4a;--red-bg:#fcebeb;--red-dark:#a32d2d;
@@ -43,7 +43,7 @@ body{font-family:var(--font);font-size:14px;color:var(--text);background:var(--b
 .nav-sep{height:0.5px;background:var(--border);margin:6px 12px}
 .sync-bar{padding:9px 13px;border-top:0.5px solid var(--border);font-size:11px;color:var(--text3);display:flex;align-items:center;gap:6px;cursor:pointer}
 .sync-bar:hover{color:var(--text)}
-.dot{width:6px;height:6px;border-radius:50%;background:#639922;flex-shrink:0;transition:background .3s}
+.dot{width:6px;height:6px;border-radius:50%;background:#639922;flex-shrink:0}
 .dot.syncing{background:var(--amber);animation:pulse 1s infinite}
 .dot.error{background:var(--red)}
 .dot.pending{background:var(--amber)}
@@ -51,12 +51,10 @@ body{font-family:var(--font);font-size:14px;color:var(--text);background:var(--b
 .main{flex:1;overflow-y:auto;padding:22px;min-width:0}
 .page{display:none}.page.active{display:block}
 h2{font-size:19px;font-weight:600;margin-bottom:16px}
-/* METRICS - clickable */
 .metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
 .metric{background:var(--bg2);border-radius:var(--r);padding:13px 15px;border:0.5px solid var(--border);cursor:pointer;transition:border-color .15s,box-shadow .15s}
 .metric:hover{border-color:var(--blue);box-shadow:0 0 0 3px var(--blue-bg)}
 .metric .lbl{font-size:11px;color:var(--text3);margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px;font-weight:500;display:flex;align-items:center;gap:5px}
-.metric .lbl i{font-size:12px;opacity:.6}
 .metric .val{font-size:23px;font-weight:600}
 .metric .sub{font-size:11px;color:var(--text3);margin-top:2px}
 .card{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--rl);padding:16px;margin-bottom:14px}
@@ -77,44 +75,23 @@ tr:hover td{background:var(--bg2)}
 .pcard .ps{font-size:11px;color:var(--text3);margin:2px 0}
 .pcard .pa{font-size:12px;color:var(--blue);font-weight:600}
 .pcard-btns{display:flex;justify-content:flex-end;gap:3px;margin-top:5px}
-/* ACTIVITIES */
-.act-item{display:flex;gap:9px;align-items:flex-start;padding:12px 0;border-bottom:0.5px solid var(--border)}
+.act-item{display:flex;gap:9px;align-items:flex-start;padding:10px 0;border-bottom:0.5px solid var(--border)}
 .act-item:last-child{border-bottom:none}
 .act-dot{width:7px;height:7px;border-radius:50%;margin-top:5px;flex-shrink:0}
 .d-call{background:var(--blue)}.d-email{background:var(--green)}.d-meet{background:var(--amber)}.d-prop{background:#993556}.d-other{background:var(--text3)}
 .act-body{flex:1;min-width:0}
-.act-meta{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:3px}
 .act-notes{font-size:12px;color:var(--text2);margin-top:5px;line-height:1.5;padding:6px 9px;background:var(--bg2);border-radius:var(--r)}
-/* Activity next steps table */
 .act-ns-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:8px}
 .act-ns-table th{text-align:left;font-size:10px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.4px;padding:4px 8px;border-bottom:0.5px solid var(--border);background:var(--bg2)}
 .act-ns-table td{padding:5px 8px;border-bottom:0.5px solid var(--border);vertical-align:top;white-space:normal}
 .act-ns-table tr:last-child td{border-bottom:none}
-.act-ns-bullet{display:inline-flex;align-items:center;gap:5px}
-.act-ns-bullet::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--blue);flex-shrink:0;display:inline-block}
-/* DAILY PAGE */
-.daily-date{font-size:13px;color:var(--text3);margin-bottom:18px;display:flex;align-items:center;gap:6px}
-.daily-section{margin-bottom:22px}
-.daily-section-title{font-size:12px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;display:flex;align-items:center;gap:7px}
-.daily-item{display:flex;align-items:flex-start;gap:10px;padding:10px 14px;border-radius:var(--r);border:0.5px solid var(--border);background:var(--bg);margin-bottom:7px}
-.daily-item.urgent{border-left:3px solid var(--red)}
-.daily-item.warn{border-left:3px solid var(--amber)}
-.daily-item.normal{border-left:3px solid var(--blue)}
-.daily-icon{width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px}
-.daily-icon.urgent{background:var(--red-bg);color:var(--red-dark)}
-.daily-icon.warn{background:var(--amber-bg);color:var(--amber-dark)}
-.daily-icon.normal{background:var(--blue-bg);color:var(--blue)}
-.daily-body{flex:1;min-width:0}
-.daily-title{font-size:13px;font-weight:500;margin-bottom:2px}
-.daily-sub{font-size:11px;color:var(--text3)}
-.daily-right{font-size:11px;font-weight:600;white-space:nowrap;flex-shrink:0}
-.daily-right.urgent{color:var(--red-dark)}
-.daily-right.warn{color:var(--amber-dark)}
-.daily-right.normal{color:var(--blue)}
-.daily-note-area{width:100%;font-size:13px;font-family:var(--font);padding:10px 12px;border:0.5px solid var(--border2);border-radius:var(--r);background:var(--bg);color:var(--text);resize:vertical;min-height:80px;line-height:1.6}
-.daily-note-area:focus{outline:none;border-color:var(--blue)}
-.daily-empty{text-align:center;padding:20px;color:var(--text3);font-size:13px}
-/* ALERTS */
+.act-ns-bullet::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--blue);flex-shrink:0;display:inline-block;margin-right:5px;vertical-align:middle}
+.bar-wrap{display:flex;flex-direction:column;gap:10px}
+.bar-row{display:flex;align-items:center;gap:8px}
+.bar-lbl{width:88px;font-size:12px;color:var(--text2);text-align:right;flex-shrink:0}
+.bar-bg{flex:1;height:8px;background:var(--bg2);border-radius:20px;overflow:hidden}
+.bar-fill{height:100%;border-radius:20px}
+.bar-val{width:44px;font-size:12px;font-weight:500;flex-shrink:0}
 .dash-alerts{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--rl);padding:16px;margin-bottom:14px}
 .dash-alert-item{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:0.5px solid var(--border)}
 .dash-alert-item:last-child{border-bottom:none}
@@ -127,6 +104,74 @@ tr:hover td{background:var(--bg2)}
 .dash-alert-right{font-size:11px;font-weight:600;white-space:nowrap;flex-shrink:0}
 .dash-alert-right.overdue{color:var(--red-dark)}
 .dash-alert-right.warn{color:var(--amber-dark)}
+
+/* ═══ MEETINGS PAGE ═══ */
+.meetings-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
+.meetings-date{font-size:12px;color:var(--text3);margin-bottom:18px}
+
+/* Pinned sections */
+.pinned-sections{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px;margin-bottom:18px}
+
+/* TO COMMENT */
+.tc-item{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:var(--r);border:0.5px solid var(--border);background:var(--bg);margin-bottom:7px;transition:opacity .2s}
+.tc-item.done{opacity:.45;border-color:var(--border)}
+.tc-check{width:18px;height:18px;border-radius:50%;border:1.5px solid var(--border2);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;transition:all .15s}
+.tc-check.done{background:var(--blue);border-color:var(--blue)}
+.tc-body{flex:1;min-width:0}
+.tc-point{font-size:13px;font-weight:500;line-height:1.4}
+.tc-point.done{text-decoration:line-through;color:var(--text3)}
+.tc-ref{font-size:11px;color:var(--text3);margin-top:3px;font-style:italic}
+.tc-ref:not(:empty)::before{content:'↳ '}
+.tc-footer{display:flex;align-items:center;gap:8px;margin-top:5px;flex-wrap:wrap}
+.tc-ns-check{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--text3);cursor:pointer}
+.tc-ns-check input{width:12px;height:12px;cursor:pointer;accent-color:var(--blue)}
+.tc-rm{background:none;border:none;cursor:pointer;color:var(--text3);font-size:11px;padding:1px 4px;border-radius:3px;margin-left:auto}
+.tc-rm:hover{color:var(--red-dark)}
+.tc-add-row{display:flex;gap:7px;margin-top:6px}
+
+/* ACTIONS FOR TODAY */
+.af-item{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:var(--r);border:0.5px solid var(--border);background:var(--bg);margin-bottom:7px;transition:opacity .2s}
+.af-item.done{opacity:.45}
+.af-check{width:16px;height:16px;border-radius:4px;border:1.5px solid var(--border2);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;transition:all .15s;flex-shrink:0}
+.af-check.done{background:var(--green);border-color:var(--green)}
+.af-body{flex:1;min-width:0}
+.af-title{font-size:13px;font-weight:500}
+.af-title.done{text-decoration:line-through;color:var(--text3)}
+.af-meta{display:flex;align-items:center;gap:8px;margin-top:4px;flex-wrap:wrap}
+.prio-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.prio-dot.high{background:var(--red)}
+.prio-dot.medium{background:var(--amber)}
+.prio-dot.low{background:var(--green)}
+.prio-label.high{font-size:11px;color:var(--red-dark);font-weight:500}
+.prio-label.medium{font-size:11px;color:var(--amber-dark);font-weight:500}
+.prio-label.low{font-size:11px;color:var(--green-dark);font-weight:500}
+.af-time{font-size:11px;color:var(--text3);display:flex;align-items:center;gap:3px}
+.af-client-link{font-size:11px;color:var(--blue);display:flex;align-items:center;gap:3px}
+.af-rm{background:none;border:none;cursor:pointer;color:var(--text3);font-size:11px;padding:1px 4px;border-radius:3px;margin-left:auto;flex-shrink:0}
+.af-rm:hover{color:var(--red-dark)}
+
+/* MEETING CARDS */
+.mtg-card{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--rl);margin-bottom:12px;overflow:hidden}
+.mtg-card-hdr{padding:13px 16px;display:flex;align-items:flex-start;gap:12px;cursor:pointer}
+.mtg-card-hdr:hover{background:var(--bg2)}
+.mtg-icon{width:34px;height:34px;border-radius:8px;background:var(--blue-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px;color:var(--blue)}
+.mtg-info{flex:1;min-width:0}
+.mtg-title{font-size:14px;font-weight:600;margin-bottom:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mtg-sub{font-size:12px;color:var(--text2);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.mtg-meta{display:flex;align-items:center;gap:6px;flex-shrink:0}
+.mtg-body{display:none;padding:0 16px 16px;border-top:0.5px solid var(--border)}
+.mtg-body.open{display:block}
+.mtg-section{margin-top:14px}
+.mtg-section-lbl{font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.4px;margin-bottom:6px}
+.mtg-text{font-size:13px;color:var(--text2);line-height:1.55;white-space:pre-wrap}
+.mtg-agenda-item{display:flex;align-items:flex-start;gap:8px;padding:6px 0;border-bottom:0.5px solid var(--border);font-size:13px}
+.mtg-agenda-item:last-child{border-bottom:none}
+.mtg-agenda-cb{width:14px;height:14px;border-radius:3px;border:1.5px solid var(--border2);cursor:pointer;flex-shrink:0;margin-top:1px;accent-color:var(--blue)}
+.mtg-link{font-size:12px;color:var(--blue);display:flex;align-items:center;gap:4px;margin-top:4px;word-break:break-all}
+.mtg-link i{flex-shrink:0}
+.section-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.section-title{font-size:13px;font-weight:600;display:flex;align-items:center;gap:7px}
+
 /* ACCOUNT PLANS */
 .ae-card{border:0.5px solid var(--border);border-radius:var(--rl);margin-bottom:12px;overflow:hidden}
 .ae-hdr{padding:12px 16px;display:flex;align-items:center;gap:10px;cursor:pointer;background:var(--bg2);user-select:none}
@@ -150,8 +195,8 @@ tr:hover td{background:var(--bg2)}
 .meeting-block{border-bottom:0.5px solid var(--border);margin-left:20px}.meeting-block:last-child{border-bottom:none}
 .meeting-hdr{padding:9px 16px;display:flex;align-items:center;gap:9px;cursor:pointer;user-select:none}
 .meeting-hdr:hover{background:var(--bg2)}
-.meeting-icon{width:28px;height:28px;border-radius:6px;background:var(--blue-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.meeting-icon i{font-size:14px;color:var(--blue)}
+.meeting-icon2{width:28px;height:28px;border-radius:6px;background:var(--blue-bg);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.meeting-icon2 i{font-size:14px;color:var(--blue)}
 .meeting-info{flex:1;min-width:0}
 .meeting-info strong{font-size:13px;font-weight:500;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .meeting-info span{font-size:11px;color:var(--text3)}
@@ -182,7 +227,6 @@ tr:hover td{background:var(--bg2)}
 .ns-rm:hover{color:var(--text)}
 .add-btn{font-size:12px;color:var(--blue);background:none;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:3px;padding:2px 0;margin-top:6px}
 .add-btn:hover{text-decoration:underline}
-/* ALERT PAGE */
 .alert-section{margin-bottom:20px}
 .alert-section-title{font-size:13px;font-weight:600;margin-bottom:10px;display:flex;align-items:center;gap:8px}
 .alert-card{background:var(--bg);border:0.5px solid var(--border);border-radius:var(--r);padding:12px 14px;margin-bottom:8px;display:flex;align-items:flex-start;gap:12px}
@@ -195,7 +239,6 @@ tr:hover td{background:var(--bg2)}
 .alert-title{font-size:13px;font-weight:500;margin-bottom:2px}
 .alert-sub{font-size:12px;color:var(--text3)}
 .alert-right{display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex-shrink:0}
-/* CFG */
 .cfg-section{border:0.5px solid var(--border);border-radius:var(--rl);padding:16px;margin-bottom:14px}
 .cfg-row{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:0.5px solid var(--border)}
 .cfg-row:last-child{border-bottom:none}
@@ -203,9 +246,6 @@ tr:hover td{background:var(--bg2)}
 .cfg-body{flex:1}
 .cfg-title{font-size:13px;font-weight:500;margin-bottom:2px}
 .cfg-desc{font-size:12px;color:var(--text2);margin-bottom:8px;line-height:1.5}
-/* NS input rows */
-.ns-input-row{display:flex;gap:6px;align-items:center;margin-bottom:6px}
-/* MODAL */
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);align-items:flex-start;justify-content:center;z-index:100;padding:24px;overflow-y:auto}
 .modal-overlay.open{display:flex}
 .modal{background:var(--bg);border-radius:var(--rl);border:0.5px solid var(--border);padding:20px;width:100%;max-width:500px;margin:auto}
@@ -218,19 +258,18 @@ tr:hover td{background:var(--bg2)}
 .field textarea{resize:vertical;min-height:56px}
 .two-col-f{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .modal-btns{display:flex;gap:8px;justify-content:flex-end;margin-top:16px}
-/* Detail modal */
 .detail-list{display:flex;flex-direction:column;gap:8px;max-height:420px;overflow-y:auto}
 .detail-row{padding:10px 12px;border-radius:var(--r);border:0.5px solid var(--border);background:var(--bg2);font-size:13px}
 .detail-row strong{display:block;margin-bottom:2px}
 .detail-row span{font-size:12px;color:var(--text2)}
 .toast{position:fixed;bottom:18px;right:18px;background:var(--blue);color:#fff;padding:8px 15px;border-radius:var(--r);font-size:13px;opacity:0;transition:opacity .3s;pointer-events:none;z-index:200}
 .toast.show{opacity:1}
-.empty{text-align:center;padding:36px 20px;color:var(--text3)}
-.empty i{font-size:28px;display:block;margin-bottom:8px;opacity:.3}
+.empty{text-align:center;padding:24px 20px;color:var(--text3);font-size:13px}
+.empty i{font-size:24px;display:block;margin-bottom:6px;opacity:.3}
 .btn{display:inline-flex;align-items:center;gap:5px;padding:6px 12px;font-size:13px;border:0.5px solid var(--border2);border-radius:var(--r);cursor:pointer;background:transparent;color:var(--text);font-family:var(--font);transition:background .1s}
 .btn:hover{background:var(--bg2)}
 .btn-primary{background:var(--blue);color:#fff;border-color:var(--blue)}
-.btn-primary:hover{background:#0c447c}
+.btn-primary:hover{background:var(--blue-dark)}
 .btn-sm{padding:3px 8px;font-size:12px}
 .rb{background:none;border:none;cursor:pointer;color:var(--text3);padding:2px 4px;font-size:13px;border-radius:4px}
 .rb:hover{color:var(--text);background:var(--bg2)}
@@ -248,7 +287,7 @@ tr:hover .row-actions{opacity:1}
     <div class="sidebar-logo"><strong>SalesTracker</strong><span>Globant · Salesforce</span></div>
     <div class="nav">
       <div class="nav-item active" onclick="nav('dashboard',this)"><i class="ti ti-layout-dashboard"></i> Dashboard</div>
-      <div class="nav-item" onclick="nav('daily',this)"><i class="ti ti-coffee"></i> Daily</div>
+      <div class="nav-item" onclick="nav('meetings',this)"><i class="ti ti-coffee"></i> Meetings</div>
       <div class="nav-sep"></div>
       <div class="nav-item" onclick="nav('clients',this)"><i class="ti ti-building-store"></i> Clients</div>
       <div class="nav-item" onclick="nav('pipeline',this)"><i class="ti ti-git-fork"></i> Pipeline</div>
@@ -262,27 +301,15 @@ tr:hover .row-actions{opacity:1}
     <div class="sync-bar" onclick="manualSync()"><div class="dot" id="sdot2"></div><span id="slbl2">Loading...</span></div>
   </div>
   <div class="main">
- 
+
     <!-- DASHBOARD -->
     <div class="page active" id="page-dashboard">
       <h2 id="dash-greeting">Dashboard</h2>
       <div class="metrics">
-        <div class="metric" onclick="showDetail('ytd')" title="Click to see details">
-          <div class="lbl"><i class="ti ti-trophy"></i> Closed YTD</div>
-          <div class="val" id="m-ytd">—</div><div class="sub" id="m-ytd-s"></div>
-        </div>
-        <div class="metric" onclick="showDetail('pipeline')" title="Click to see details">
-          <div class="lbl"><i class="ti ti-git-fork"></i> Active pipeline</div>
-          <div class="val" id="m-pipe">—</div><div class="sub" id="m-pipe-s"></div>
-        </div>
-        <div class="metric" onclick="showDetail('clients')" title="Click to see details">
-          <div class="lbl"><i class="ti ti-building-store"></i> Clients</div>
-          <div class="val" id="m-cli">—</div><div class="sub" id="m-cli-s"></div>
-        </div>
-        <div class="metric" onclick="showDetail('nextsteps')" title="Click to see details">
-          <div class="lbl"><i class="ti ti-checklist"></i> Open next steps</div>
-          <div class="val" id="m-ns">—</div><div class="sub" id="m-ns-s" style="color:var(--red-dark)"></div>
-        </div>
+        <div class="metric" onclick="showDetail('ytd')"><div class="lbl"><i class="ti ti-trophy"></i> Closed YTD</div><div class="val" id="m-ytd">—</div><div class="sub" id="m-ytd-s"></div></div>
+        <div class="metric" onclick="showDetail('pipeline')"><div class="lbl"><i class="ti ti-git-fork"></i> Active pipeline</div><div class="val" id="m-pipe">—</div><div class="sub" id="m-pipe-s"></div></div>
+        <div class="metric" onclick="showDetail('clients')"><div class="lbl"><i class="ti ti-building-store"></i> Clients</div><div class="val" id="m-cli">—</div><div class="sub" id="m-cli-s"></div></div>
+        <div class="metric" onclick="showDetail('nextsteps')"><div class="lbl"><i class="ti ti-checklist"></i> Open next steps</div><div class="val" id="m-ns">—</div><div class="sub" id="m-ns-s" style="color:var(--red-dark)"></div></div>
       </div>
       <div id="dash-alerts-wrap"></div>
       <div class="two-col">
@@ -290,34 +317,57 @@ tr:hover .row-actions{opacity:1}
         <div class="card"><div class="card-title">Upcoming activities</div><div id="dash-next"></div></div>
       </div>
     </div>
- 
-    <!-- DAILY -->
-    <div class="page" id="page-daily">
-      <h2>Daily with Patruno</h2>
-      <div class="daily-date"><i class="ti ti-calendar"></i><span id="daily-date-str"></span></div>
- 
-      <div class="daily-section">
-        <div class="daily-section-title"><i class="ti ti-alert-triangle" style="color:var(--red-dark)"></i> Overdue next steps</div>
-        <div id="daily-overdue"></div>
+
+    <!-- MEETINGS -->
+    <div class="page" id="page-meetings">
+      <div class="meetings-header">
+        <h2 style="margin:0">Meetings</h2>
+        <button class="btn btn-primary" onclick="openModal('newmeeting')"><i class="ti ti-plus"></i> New Meeting</button>
       </div>
- 
-      <div class="daily-section">
-        <div class="daily-section-title"><i class="ti ti-clock" style="color:var(--amber-dark)"></i> Due today & tomorrow</div>
-        <div id="daily-urgent"></div>
+      <div class="meetings-date" id="mtg-date-str"></div>
+
+      <!-- PINNED: To Comment + Actions for Today -->
+      <div class="pinned-sections">
+
+        <!-- TO COMMENT -->
+        <div class="card" style="margin-bottom:0">
+          <div class="section-hdr">
+            <div class="section-title"><i class="ti ti-message-circle" style="color:var(--blue)"></i> To Comment</div>
+            <button class="btn btn-sm" onclick="openAddTC()"><i class="ti ti-plus" style="font-size:11px"></i> Add</button>
+          </div>
+          <div id="tc-list"></div>
+          <div id="tc-add-form" style="display:none;margin-top:8px">
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <input id="tc-input-point" type="text" placeholder="Key point or question..." style="font-size:13px;padding:7px 9px;border:0.5px solid var(--border2);border-radius:var(--r);background:var(--bg);color:var(--text);font-family:var(--font);width:100%">
+              <input id="tc-input-ref" type="text" placeholder="Reference / response (optional)" style="font-size:12px;padding:5px 9px;border:0.5px solid var(--border2);border-radius:var(--r);background:var(--bg);color:var(--text);font-family:var(--font);width:100%">
+              <div style="display:flex;gap:6px">
+                <button class="btn btn-primary btn-sm" onclick="saveTC()">Add</button>
+                <button class="btn btn-sm" onclick="closeAddTC()">Cancel</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ACTIONS FOR TODAY -->
+        <div class="card" style="margin-bottom:0">
+          <div class="section-hdr">
+            <div class="section-title"><i class="ti ti-bolt" style="color:var(--amber-dark)"></i> Actions for Today</div>
+            <button class="btn btn-sm" onclick="openModal('newaction')"><i class="ti ti-plus" style="font-size:11px"></i> Add</button>
+          </div>
+          <div id="af-list"></div>
+        </div>
+
       </div>
- 
-      <div class="daily-section">
-        <div class="daily-section-title"><i class="ti ti-calendar-event" style="color:var(--blue)"></i> Today's activities</div>
-        <div id="daily-activities"></div>
-      </div>
- 
-      <div class="daily-section">
-        <div class="daily-section-title"><i class="ti ti-notes" style="color:var(--text3)"></i> Notes for today's daily</div>
-        <textarea class="daily-note-area" id="daily-notes" placeholder="Write your notes for the daily here... What do you want to update Patruno on? Any blockers? Wins?" oninput="saveDailyNotes()"></textarea>
-        <div style="font-size:11px;color:var(--text3);margin-top:5px">Auto-saved locally</div>
+
+      <!-- SCHEDULED MEETINGS -->
+      <div style="margin-top:4px">
+        <div class="section-hdr" style="margin-bottom:10px">
+          <div class="section-title"><i class="ti ti-calendar-event" style="color:var(--text3)"></i> Scheduled Meetings</div>
+        </div>
+        <div id="mtg-list"></div>
       </div>
     </div>
- 
+
     <!-- CLIENTS -->
     <div class="page" id="page-clients">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
@@ -331,7 +381,7 @@ tr:hover .row-actions{opacity:1}
         </table>
       </div></div>
     </div>
- 
+
     <!-- PIPELINE -->
     <div class="page" id="page-pipeline">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
@@ -340,7 +390,7 @@ tr:hover .row-actions{opacity:1}
       </div>
       <div class="pipeline" id="pipe-board"></div>
     </div>
- 
+
     <!-- ACTIVITIES -->
     <div class="page" id="page-activities">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
@@ -349,7 +399,7 @@ tr:hover .row-actions{opacity:1}
       </div>
       <div class="card" id="act-list"></div>
     </div>
- 
+
     <!-- ACCOUNT PLANS -->
     <div class="page" id="page-accountplans">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
@@ -357,19 +407,17 @@ tr:hover .row-actions{opacity:1}
         <button class="btn btn-primary" onclick="openModal('ae')"><i class="ti ti-plus"></i> New Account Plan</button>
       </div>
       <p style="font-size:12px;color:var(--text3);margin-bottom:14px">AE → Accounts → Meetings → Next Steps</p>
-      <div style="margin-bottom:14px">
-        <input style="font-size:13px;padding:7px 10px;border:0.5px solid var(--border2);border-radius:var(--r);background:var(--bg);color:var(--text);width:220px" type="text" id="ap-search" placeholder="Search AE or account..." oninput="renderAP()">
-      </div>
+      <div style="margin-bottom:14px"><input style="font-size:13px;padding:7px 10px;border:0.5px solid var(--border2);border-radius:var(--r);background:var(--bg);color:var(--text);width:220px" type="text" id="ap-search" placeholder="Search AE or account..." oninput="renderAP()"></div>
       <div id="ae-list"></div>
     </div>
- 
+
     <!-- ALERTS -->
     <div class="page" id="page-alerts">
       <h2>Alerts</h2>
       <p style="font-size:13px;color:var(--text2);margin-bottom:18px">Next steps overdue or due within 2 days.</p>
       <div id="alerts-content"></div>
     </div>
- 
+
     <!-- REPORTS -->
     <div class="page" id="page-reports">
       <h2>Reports</h2>
@@ -387,7 +435,7 @@ tr:hover .row-actions{opacity:1}
       </div>
       <div style="margin-top:10px"><button class="btn" onclick="exportCSV()"><i class="ti ti-download"></i> Export CSV</button></div>
     </div>
- 
+
     <!-- SETTINGS -->
     <div class="page" id="page-config">
       <h2>Settings</h2>
@@ -409,16 +457,13 @@ tr:hover .row-actions{opacity:1}
           <div class="cfg-num">2</div>
           <div class="cfg-body">
             <div class="cfg-title">Sync status</div>
-            <div id="cfg-sync-desc" style="font-size:12px;color:var(--text2);margin-bottom:8px">Not configured yet.</div>
+            <div id="cfg-sync-desc" style="font-size:12px;color:var(--text2);margin-bottom:8px">Not configured.</div>
             <div style="display:flex;gap:8px">
               <button class="btn" onclick="manualSync()"><i class="ti ti-refresh"></i> Sync now</button>
               <button class="btn" onclick="loadFromDrive()"><i class="ti ti-cloud-download"></i> Load from Drive</button>
             </div>
           </div>
         </div>
-      </div>
-      <div class="cfg-section">
-        <div class="card-title" style="margin-bottom:12px">Profile</div>
         <div class="cfg-row">
           <div class="cfg-num">3</div>
           <div class="cfg-body">
@@ -438,39 +483,43 @@ tr:hover .row-actions{opacity:1}
         </div>
       </div>
     </div>
- 
+
   </div>
 </div>
- 
+
 <div class="modal-overlay" id="modal-overlay"><div class="modal" id="modal-body"></div></div>
 <div class="toast" id="toast"></div>
- 
+
 <script>
-const DB_KEY='st_db_v5', GAS_KEY='st_gas', NAME_KEY='st_name', DAILY_KEY='st_daily';
+const DB_KEY='st_db_v6', GAS_KEY='st_gas', NAME_KEY='st_name';
 const ALERT_DAYS=2;
 const STAGES=['Lead','Demo','Proposal','Negotiation','Won','Lost'];
 const SERVICES=['Sales Cloud','Service Cloud','Marketing Cloud','Commerce Cloud','Platform','Data Cloud','Other'];
 const STATUSES=['Lead','Active','Proposal','Negotiation','Inactive'];
 const ACT_TYPES=['Call','Email','Meeting','Proposal sent','Demo','Other'];
+const PRIOS=['High','Medium','Low'];
+const TIME_OPTS=['15 min','30 min','45 min','1h','1.5h','2h','3h+'];
 const DOT_CLS={Call:'d-call',Email:'d-email',Meeting:'d-meet','Proposal sent':'d-prop',Demo:'d-meet',Other:'d-other'};
 const SVC_CLR={'Sales Cloud':'#185fa5','Service Cloud':'#1d9e75','Marketing Cloud':'#ba7517','Commerce Cloud':'#993556','Platform':'#534AB7','Data Cloud':'#0f6e56','Other':'#888780'};
 const BADGE_ST={Lead:'b-gray',Active:'b-green',Proposal:'b-amber',Negotiation:'b-amber',Inactive:'b-red'};
- 
-let db={clients:[],deals:[],activities:[],aps:[]};
+const PRIO_CLS={High:'high',Medium:'medium',Low:'low'};
+
+let db={clients:[],deals:[],activities:[],aps:[],toComments:[],actionsToday:[],scheduledMeetings:[]};
 let gasUrl='', isSyncing=false;
- 
+
 const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,6);
 const today=()=>new Date().toISOString().slice(0,10);
+const now=()=>new Date().toISOString();
 const fmtEur=v=>'€'+Math.round(v).toLocaleString('en');
-const fmtDate=d=>{if(!d)return'';const[y,m,day]=d.split('-');return day+'/'+m+'/'+y.slice(2)};
-const daysFrom=d=>{if(!d)return null;return Math.round((new Date(d)-new Date(today()))/86400000)};
+const fmtDate=d=>{if(!d)return'';const[y,m,day]=d.split('T')[0].split('-');return day+'/'+m+'/'+y.slice(2)};
+const fmtDateTime=d=>{if(!d)return'';const dt=new Date(d);return dt.toLocaleDateString('en-GB',{day:'2-digit',month:'2-digit',year:'2-digit'})+' '+dt.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'})};
+const daysFrom=d=>{if(!d)return null;return Math.round((new Date(d.split('T')[0])-new Date(today()))/86400000)};
 const dLabel=d=>{const x=daysFrom(d);if(x===null)return'';if(x<0)return Math.abs(x)+'d overdue';if(x===0)return'Today';if(x===1)return'Tomorrow';return'In '+x+'d'};
- 
+
 function load(){
-  try{const r=localStorage.getItem(DB_KEY);if(r){const p=JSON.parse(r);db.clients=p.clients||[];db.deals=p.deals||[];db.activities=p.activities||[];db.aps=p.aps||[];}}catch(e){}
+  try{const r=localStorage.getItem(DB_KEY);if(r){const p=JSON.parse(r);Object.keys(db).forEach(k=>{if(p[k])db[k]=p[k];});}}catch(e){}
   gasUrl=localStorage.getItem(GAS_KEY)||'';
   try{const n=localStorage.getItem(NAME_KEY);if(n)document.getElementById('cfg-name').value=n;}catch(e){}
-  try{const dn=localStorage.getItem(DAILY_KEY);if(dn)document.getElementById('daily-notes').value=dn;}catch(e){}
   if(gasUrl)document.getElementById('cfg-gas').value=gasUrl;
   if(!db.clients.length&&!db.aps.length)seedDemo();
   renderAll();
@@ -479,33 +528,33 @@ function load(){
 }
 const saveLocal=()=>{try{localStorage.setItem(DB_KEY,JSON.stringify(db))}catch(e){}};
 const persist=()=>{saveLocal();renderAll();if(gasUrl)syncToDrive();};
-const saveDailyNotes=()=>{try{localStorage.setItem(DAILY_KEY,document.getElementById('daily-notes').value)}catch(e){}};
- 
+
 /* ── DRIVE ── */
 async function syncToDrive(){
   if(!gasUrl||isSyncing)return;
   isSyncing=true;setSyncState('syncing','Syncing...');
   try{
-    const res=await fetch(gasUrl,{method:'POST',body:JSON.stringify({clients:db.clients,deals:db.deals,activities:db.activities,aps:db.aps})});
+    const payload={clients:db.clients,deals:db.deals,activities:db.activities,aps:db.aps,toComments:db.toComments,actionsToday:db.actionsToday,scheduledMeetings:db.scheduledMeetings};
+    const res=await fetch(gasUrl,{method:'POST',body:JSON.stringify(payload)});
     const data=await res.json();
     if(data.ok){setSyncState('ok','Drive: synced '+new Date().toLocaleTimeString('en',{hour:'2-digit',minute:'2-digit'}));document.getElementById('cfg-sync-desc').textContent='Last sync: '+new Date().toLocaleString('en');}
-    else throw new Error(data.error);
+    else throw new Error(data.error||'Unknown');
   }catch(e){setSyncState('error','Sync failed');document.getElementById('cfg-sync-desc').textContent='Error: '+e.message;}
   isSyncing=false;
 }
 async function loadFromDrive(){
   if(!gasUrl){alert('Configure Apps Script URL in Settings first.');return;}
-  setSyncState('syncing','Loading from Drive...');
+  setSyncState('syncing','Loading...');
   try{
     const res=await fetch(gasUrl);const data=await res.json();
-    db.clients=data.clients||[];db.deals=data.deals||[];db.activities=data.activities||[];db.aps=data.aps||[];
+    Object.keys(db).forEach(k=>{if(data[k])db[k]=data[k];});
     saveLocal();renderAll();setSyncState('ok','Loaded from Drive');showToast('Data loaded from Drive');
   }catch(e){setSyncState('error','Load failed');showToast('Could not load from Drive');}
 }
 function saveGAS(){const v=document.getElementById('cfg-gas').value.trim();if(!v)return;gasUrl=v;localStorage.setItem(GAS_KEY,v);document.getElementById('cfg-gas-st').textContent='Saved. Testing...';syncToDrive();showToast('Saved — syncing...');}
-function manualSync(){if(!gasUrl){showToast('Set up Drive URL in Settings');return;}syncToDrive();showToast('Syncing...');}
+function manualSync(){if(!gasUrl){showToast('Set up Drive URL in Settings');return;}isSyncing=false;syncToDrive();showToast('Syncing...');}
 function setSyncState(s,l){['sdot','sdot2'].forEach(id=>{const d=document.getElementById(id);d.className='dot'+(s==='syncing'?' syncing':s==='error'?' error':s==='pending'?' pending':'');});document.getElementById('slbl').textContent=l;document.getElementById('slbl2').textContent=l;}
- 
+
 /* ── SEED ── */
 function seedDemo(){
   db.clients=[
@@ -519,51 +568,38 @@ function seedDemo(){
     {id:'d2',client:'BBVA',service:'Service Cloud',value:61000,stage:'Won',closeDate:'2026-03-10',notes:''},
     {id:'d3',client:'Mapfre',service:'Service Cloud',value:38000,stage:'Proposal',closeDate:'2026-06-30',notes:''},
     {id:'d4',client:'Repsol',service:'Sales Cloud',value:28000,stage:'Negotiation',closeDate:'2026-07-15',notes:''},
-    {id:'d5',client:'Inditex',service:'Commerce Cloud',value:55000,stage:'Demo',closeDate:'2026-08-01',notes:''},
   ];
-  const tom=new Date();tom.setDate(tom.getDate()+1);const t1=tom.toISOString().slice(0,10);
-  const yest=new Date();yest.setDate(yest.getDate()-1);const y1=yest.toISOString().slice(0,10);
+  const t1=new Date();t1.setDate(t1.getDate()+1);
+  const y1=new Date();y1.setDate(y1.getDate()-1);
   db.activities=[
-    {id:'a1',client:'Telefónica',type:'Meeting',description:'QBR Q2 kick-off',date:today(),attendees:'Carlos (SF), Maria (Telefónica), Juan',notes:'Client happy with progress. Wants faster delivery on integration module.',nextSteps:[{person:'Juan',description:'Send updated project timeline by EOW'},{person:'Carlos (SF)',description:'Share Q3 product roadmap'}]},
-    {id:'a2',client:'BBVA',type:'Call',description:'Annual renewal review',date:'2026-05-02',attendees:'Juan, Pedro (BBVA)',notes:'Positive. Budget confirmed for renewal.',nextSteps:[{person:'Juan',description:'Prepare contract draft'},{person:'Juan',description:'Send pricing options for 3-year deal'}]},
+    {id:'a1',client:'Telefónica',type:'Meeting',description:'QBR Q2 kick-off',date:today(),attendees:'Carlos (SF), Maria (Telefónica)',notes:'Client happy with progress.',nextSteps:[{person:'Juan',description:'Send updated timeline'},{person:'Carlos (SF)',description:'Share Q3 roadmap'}]},
   ];
-  db.aps=[{
-    id:'ap1',aeName:'Carlos Ruiz',aeTerritory:'SF · Madrid',
-    accounts:[
-      {id:'ac1',name:'Telefónica',meetings:[
-        {id:'m1',title:'Q2 Planning Session',date:'2026-04-10',notes:'Reviewed renewal timeline. Client wants to accelerate before Q3.',
-         nextSteps:[
-           {id:'ns1',title:'Send updated renewal proposal',company:'globant',person:'Juan',dueDate:t1,done:false},
-           {id:'ns2',title:'Share Q3 roadmap',company:'sf',person:'Carlos Ruiz',dueDate:'2026-05-28',done:true},
-         ]},
-        {id:'m2',title:'Technical Review',date:'2026-04-28',notes:'Identified 3 quick wins.',
-         nextSteps:[{id:'ns3',title:'Prepare quick wins deck',company:'globant',person:'Juan',dueDate:y1,done:false}]},
-      ]},
-      {id:'ac2',name:'BBVA',meetings:[
-        {id:'m3',title:'Upsell Discovery',date:'2026-04-22',notes:'Strong interest in Service Cloud Enterprise.',
-         nextSteps:[
-           {id:'ns4',title:'Build banking business case',company:'globant',person:'Juan',dueDate:'2026-05-18',done:false},
-           {id:'ns5',title:'Set up technical workshop',company:'sf',person:'Carlos Ruiz',dueDate:'2026-05-25',done:false},
-         ]},
-      ]},
-    ]
-  }];
+  db.toComments=[
+    {id:'tc1',point:'Ask about Q3 budget approval status',ref:'',nsCreated:false,done:false,createdAt:now()},
+    {id:'tc2',point:'Clarify implementation timeline with BBVA',ref:'They mentioned delays on their side',nsCreated:false,done:false,createdAt:now()},
+  ];
+  db.actionsToday=[
+    {id:'af1',title:'Send renewal proposal to Telefónica',priority:'High',client:'Telefónica',timeBlock:'30 min',done:false,createdAt:now()},
+    {id:'af2',title:'Prepare BBVA business case deck',priority:'Medium',client:'BBVA',timeBlock:'2h',done:false,createdAt:now()},
+    {id:'af3',title:'Review Mapfre contract draft',priority:'Low',client:'Mapfre',timeBlock:'45 min',done:true,createdAt:now()},
+  ];
+  db.scheduledMeetings=[
+    {id:'sm1',title:'Q2 Review — Telefónica',datetime:today()+'T10:00',participants:'Telefónica',objective:'Close renewal contract for Q3',agenda:['Review Q1 results','Present Q3 roadmap','Confirm renewal terms'],materials:'https://drive.google.com/...',notes:'',createdAt:now()},
+  ];
   saveLocal();
 }
- 
-/* ── HELPERS ── */
+
 const allNS=()=>db.aps.flatMap(ap=>ap.accounts.flatMap(ac=>ac.meetings.flatMap(m=>m.nextSteps.map(ns=>({...ns,_apId:ap.id,_aeName:ap.aeName,_acId:ac.id,_acName:ac.name,_mId:m.id,_mTitle:m.title})))));
- 
-function renderAll(){renderDashboard();renderDaily();renderClients();renderPipeline();renderActivities();renderAP();renderAlerts();renderReports();updateBadge();}
- 
+
+function renderAll(){renderDashboard();renderMeetings();renderClients();renderPipeline();renderActivities();renderAP();renderAlerts();renderReports();updateBadge();}
+
 /* ── DASHBOARD ── */
 function renderDashboard(){
   const name=document.getElementById('cfg-name').value.trim();
   const h=new Date().getHours();
   document.getElementById('dash-greeting').textContent=(h<12?'Good morning':h<18?'Good afternoon':'Good evening')+(name?', '+name:'')+' 👋';
   const won=db.deals.filter(d=>d.stage==='Won');
-  const ytd=won.reduce((s,d)=>s+(+d.value||0),0);
-  document.getElementById('m-ytd').textContent=fmtEur(ytd);
+  document.getElementById('m-ytd').textContent=fmtEur(won.reduce((s,d)=>s+(+d.value||0),0));
   document.getElementById('m-ytd-s').textContent=won.length+' deals closed';
   const active=db.deals.filter(d=>!['Won','Lost'].includes(d.stage));
   document.getElementById('m-pipe').textContent=fmtEur(active.reduce((s,d)=>s+(+d.value||0),0));
@@ -574,13 +610,11 @@ function renderDashboard(){
   const urgentNS=openNS.filter(n=>n.dueDate&&daysFrom(n.dueDate)<=ALERT_DAYS);
   document.getElementById('m-ns').textContent=openNS.length;
   document.getElementById('m-ns-s').textContent=urgentNS.length?urgentNS.length+' need attention':'';
-  // bars
   const svcMap={};active.forEach(d=>{const s=d.service||'Other';svcMap[s]=(svcMap[s]||0)+(+d.value||0)});
   const entries=Object.entries(svcMap).sort((a,b)=>b[1]-a[1]);const maxV=entries[0]?entries[0][1]:1;
   document.getElementById('dash-bars').innerHTML=entries.length?entries.slice(0,5).map(([s,v])=>`<div class="bar-row"><span class="bar-lbl">${s.replace(' Cloud','')}</span><div class="bar-bg"><div class="bar-fill" style="width:${Math.round(v/maxV*100)}%;background:${SVC_CLR[s]||'#888780'}"></div></div><span class="bar-val">${fmtEur(v)}</span></div>`).join(''):'<p style="font-size:12px;color:var(--text3)">No active deals</p>';
   const acts=[...db.activities].filter(a=>a.date>=today()).sort((a,b)=>a.date.localeCompare(b.date)).slice(0,4);
   document.getElementById('dash-next').innerHTML=acts.length?acts.map(a=>`<div class="act-item" style="padding:7px 0"><div class="act-dot ${DOT_CLS[a.type]||'d-other'}" style="margin-top:5px"></div><div style="flex:1;font-size:13px"><strong>${a.type}</strong> with ${a.client||'—'}${a.description?' — '+a.description:''}</div><div style="font-size:11px;color:var(--text3);white-space:nowrap">${fmtDate(a.date)}</div></div>`).join(''):'<p style="font-size:12px;color:var(--text3)">No upcoming activities</p>';
-  // alerts widget
   const ns=allNS();
   const overdue=ns.filter(n=>!n.done&&n.dueDate&&daysFrom(n.dueDate)<0).sort((a,b)=>a.dueDate.localeCompare(b.dueDate));
   const warn=ns.filter(n=>!n.done&&n.dueDate&&daysFrom(n.dueDate)>=0&&daysFrom(n.dueDate)<=ALERT_DAYS).sort((a,b)=>a.dueDate.localeCompare(b.dueDate));
@@ -590,78 +624,155 @@ function renderDashboard(){
   wrap.innerHTML=`<div class="dash-alerts" style="margin-bottom:14px">
     <div class="card-title" style="margin-bottom:10px;display:flex;align-items:center;justify-content:space-between">
       <span><i class="ti ti-bell" style="margin-right:5px;color:var(--amber-dark)"></i>Active alerts (${all.length})</span>
-      <button class="btn btn-sm" onclick="nav('alerts',document.querySelector('#nav-alerts'))">View all</button>
+      <button class="btn btn-sm" onclick="nav('alerts',document.getElementById('nav-alerts'))">View all</button>
     </div>
     ${all.slice(0,5).map(n=>`<div class="dash-alert-item"><div class="dash-alert-dot ${n._t}"></div><div class="dash-alert-body"><div class="dash-alert-title">${n.title}</div><div class="dash-alert-sub">${n._aeName} → ${n._acName} → ${n._mTitle}</div></div><div class="dash-alert-right ${n._t}">${dLabel(n.dueDate)}</div></div>`).join('')}
   </div>`;
 }
- 
-/* ── DETAIL MODAL (dashboard click) ── */
+
+/* ── DETAIL MODALS ── */
 function showDetail(type){
-  const mb=document.getElementById('modal-body');
-  mb.className='modal wide';
-  if(type==='ytd'){
-    const won=db.deals.filter(d=>d.stage==='Won').sort((a,b)=>(b.closeDate||'').localeCompare(a.closeDate||''));
-    mb.innerHTML=`<h3>Closed deals YTD — ${fmtEur(won.reduce((s,d)=>s+(+d.value||0),0))}</h3>
-    <div class="detail-list">${won.length?won.map(d=>`<div class="detail-row"><strong>${d.client}</strong><span>${(d.service||'').replace(' Cloud','')} · ${fmtEur(d.value)} · Closed ${fmtDate(d.closeDate)}</span></div>`).join(''):'<p style="color:var(--text3)">No closed deals yet.</p>'}</div>
-    <div class="modal-btns"><button class="btn btn-primary" onclick="closeModal()">Close</button></div>`;
-  } else if(type==='pipeline'){
-    const active=db.deals.filter(d=>!['Won','Lost'].includes(d.stage)).sort((a,b)=>(+b.value||0)-(+a.value||0));
-    mb.innerHTML=`<h3>Active pipeline — ${fmtEur(active.reduce((s,d)=>s+(+d.value||0),0))}</h3>
-    <div class="detail-list">${active.length?active.map(d=>`<div class="detail-row"><strong>${d.client} <span class="badge ${d.stage==='Negotiation'?'b-amber':d.stage==='Proposal'?'b-amber':d.stage==='Demo'?'b-blue':'b-gray'}" style="font-size:10px;vertical-align:middle">${d.stage}</span></strong><span>${(d.service||'').replace(' Cloud','')} · ${fmtEur(d.value)} · Est. close ${fmtDate(d.closeDate)}</span></div>`).join(''):'<p style="color:var(--text3)">No active deals.</p>'}</div>
-    <div class="modal-btns"><button class="btn btn-primary" onclick="closeModal()">Close</button></div>`;
-  } else if(type==='clients'){
-    const sorted=[...db.clients].sort((a,b)=>a.name.localeCompare(b.name));
-    mb.innerHTML=`<h3>All clients (${sorted.length})</h3>
-    <div class="detail-list">${sorted.length?sorted.map(c=>`<div class="detail-row"><strong>${c.name} <span class="badge ${BADGE_ST[c.status]||'b-gray'}" style="font-size:10px;vertical-align:middle">${c.status}</span></strong><span>${c.sector||''} · ${c.service||''} · ${c.value?fmtEur(c.value):'No value'} · Next: ${c.nextAction||'—'}</span></div>`).join(''):'<p style="color:var(--text3)">No clients yet.</p>'}</div>
-    <div class="modal-btns"><button class="btn btn-primary" onclick="closeModal()">Close</button></div>`;
-  } else if(type==='nextsteps'){
-    const open=allNS().filter(n=>!n.done).sort((a,b)=>(a.dueDate||'9').localeCompare(b.dueDate||'9'));
-    mb.innerHTML=`<h3>Open next steps (${open.length})</h3>
-    <div class="detail-list">${open.length?open.map(n=>{const d=daysFrom(n.dueDate);const cls=d===null?'':d<0?'overdue':d<=ALERT_DAYS?'warn':'';return`<div class="detail-row" style="border-left:3px solid ${n.company==='sf'?'var(--blue)':'var(--green)'}"><strong>${n.title}</strong><span>${n._aeName} → ${n._acName} · ${n.person||''}${n.dueDate?` · <span style="font-weight:600;color:var(--${cls==='overdue'?'red-dark':cls==='warn'?'amber-dark':'text2'})">${dLabel(n.dueDate)}</span>`:''}</span></div>`}).join(''):'<p style="color:var(--text3)">All done!</p>'}</div>
-    <div class="modal-btns"><button class="btn btn-primary" onclick="closeModal()">Close</button></div>`;
-  }
+  const mb=document.getElementById('modal-body');mb.className='modal wide';
+  if(type==='ytd'){const won=db.deals.filter(d=>d.stage==='Won').sort((a,b)=>(b.closeDate||'').localeCompare(a.closeDate||''));mb.innerHTML=`<h3>Closed deals YTD — ${fmtEur(won.reduce((s,d)=>s+(+d.value||0),0))}</h3><div class="detail-list">${won.length?won.map(d=>`<div class="detail-row"><strong>${d.client}</strong><span>${(d.service||'').replace(' Cloud','')} · ${fmtEur(d.value)} · Closed ${fmtDate(d.closeDate)}</span></div>`).join(''):'<p style="color:var(--text3)">No closed deals yet.</p>'}</div><div class="modal-btns"><button class="btn btn-primary" onclick="closeModal()">Close</button></div>`;}
+  else if(type==='pipeline'){const active=db.deals.filter(d=>!['Won','Lost'].includes(d.stage)).sort((a,b)=>(+b.value||0)-(+a.value||0));mb.innerHTML=`<h3>Active pipeline — ${fmtEur(active.reduce((s,d)=>s+(+d.value||0),0))}</h3><div class="detail-list">${active.length?active.map(d=>`<div class="detail-row"><strong>${d.client} <span class="badge ${d.stage==='Negotiation'||d.stage==='Proposal'?'b-amber':d.stage==='Demo'?'b-blue':'b-gray'}" style="font-size:10px;vertical-align:middle">${d.stage}</span></strong><span>${(d.service||'').replace(' Cloud','')} · ${fmtEur(d.value)} · Est. close ${fmtDate(d.closeDate)}</span></div>`).join(''):'<p style="color:var(--text3)">No active deals.</p>'}</div><div class="modal-btns"><button class="btn btn-primary" onclick="closeModal()">Close</button></div>`;}
+  else if(type==='clients'){const sorted=[...db.clients].sort((a,b)=>a.name.localeCompare(b.name));mb.innerHTML=`<h3>All clients (${sorted.length})</h3><div class="detail-list">${sorted.length?sorted.map(c=>`<div class="detail-row"><strong>${c.name} <span class="badge ${BADGE_ST[c.status]||'b-gray'}" style="font-size:10px;vertical-align:middle">${c.status}</span></strong><span>${c.sector||''} · ${c.service||''} · ${c.value?fmtEur(c.value):'—'} · Next: ${c.nextAction||'—'}</span></div>`).join(''):'<p style="color:var(--text3)">No clients.</p>'}</div><div class="modal-btns"><button class="btn btn-primary" onclick="closeModal()">Close</button></div>`;}
+  else if(type==='nextsteps'){const open=allNS().filter(n=>!n.done).sort((a,b)=>(a.dueDate||'9').localeCompare(b.dueDate||'9'));mb.innerHTML=`<h3>Open next steps (${open.length})</h3><div class="detail-list">${open.length?open.map(n=>{const d=daysFrom(n.dueDate);const cls=d===null?'':d<0?'var(--red-dark)':d<=ALERT_DAYS?'var(--amber-dark)':'var(--text2)';return`<div class="detail-row" style="border-left:3px solid ${n.company==='sf'?'var(--blue)':'var(--green)'}"><strong>${n.title}</strong><span>${n._aeName} → ${n._acName} · ${n.person||''}${n.dueDate?` · <span style="font-weight:600;color:${cls}">${dLabel(n.dueDate)}</span>`:''}</span></div>`}).join(''):'<p style="color:var(--text3)">All done!</p>'}</div><div class="modal-btns"><button class="btn btn-primary" onclick="closeModal()">Close</button></div>`;}
   document.getElementById('modal-overlay').classList.add('open');
 }
- 
-/* ── DAILY ── */
-function renderDaily(){
-  const dateStr=new Date().toLocaleDateString('en-GB',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
-  document.getElementById('daily-date-str').textContent=dateStr;
-  const ns=allNS();
-  // overdue
-  const overdue=ns.filter(n=>!n.done&&n.dueDate&&daysFrom(n.dueDate)<0).sort((a,b)=>a.dueDate.localeCompare(b.dueDate));
-  const odEl=document.getElementById('daily-overdue');
-  odEl.innerHTML=overdue.length?overdue.map(n=>`<div class="daily-item urgent">
-    <div class="daily-icon urgent"><i class="ti ti-clock-x"></i></div>
-    <div class="daily-body"><div class="daily-title">${n.title}</div><div class="daily-sub">${n._aeName} → ${n._acName} → ${n._mTitle} · <strong>${n.person||'—'}</strong></div></div>
-    <div class="daily-right urgent">${Math.abs(daysFrom(n.dueDate))}d overdue</div>
-  </div>`).join(''):`<div class="daily-empty"><i class="ti ti-circle-check" style="color:var(--green)"></i> No overdue next steps 🎉</div>`;
-  // urgent (today + tomorrow)
-  const urgent=ns.filter(n=>!n.done&&n.dueDate&&daysFrom(n.dueDate)>=0&&daysFrom(n.dueDate)<=1).sort((a,b)=>a.dueDate.localeCompare(b.dueDate));
-  const ugEl=document.getElementById('daily-urgent');
-  ugEl.innerHTML=urgent.length?urgent.map(n=>`<div class="daily-item warn">
-    <div class="daily-icon warn"><i class="ti ti-clock"></i></div>
-    <div class="daily-body"><div class="daily-title">${n.title}</div><div class="daily-sub">${n._aeName} → ${n._acName} · <strong>${n.person||'—'}</strong></div></div>
-    <div class="daily-right warn">${dLabel(n.dueDate)}</div>
-  </div>`).join(''):`<div class="daily-empty">Nothing due today or tomorrow</div>`;
-  // today's activities
-  const todayActs=db.activities.filter(a=>a.date===today());
-  const taEl=document.getElementById('daily-activities');
-  taEl.innerHTML=todayActs.length?todayActs.map(a=>`<div class="daily-item normal">
-    <div class="daily-icon normal"><i class="ti ti-${a.type==='Call'?'phone':a.type==='Email'?'mail':a.type==='Meeting'?'users':'calendar'}"></i></div>
-    <div class="daily-body"><div class="daily-title">${a.type} with ${a.client||'—'}${a.description?' — '+a.description:''}</div>${a.attendees?`<div class="daily-sub"><i class="ti ti-users" style="font-size:10px"></i> ${a.attendees}</div>`:''}</div>
-    <div class="daily-right normal">Today</div>
-  </div>`).join(''):`<div class="daily-empty">No activities logged for today</div>`;
+
+/* ── MEETINGS PAGE ── */
+function renderMeetings(){
+  document.getElementById('mtg-date-str').textContent=new Date().toLocaleDateString('en-GB',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  renderToComment();
+  renderActionsToday();
+  renderScheduledMeetings();
 }
- 
+
+/* TO COMMENT */
+function renderToComment(){
+  const el=document.getElementById('tc-list');
+  // sort: undone first (in creation order), done after
+  const items=[...db.toComments.filter(t=>!t.done),...db.toComments.filter(t=>t.done)];
+  if(!items.length){el.innerHTML='<div class="empty" style="padding:16px"><i class="ti ti-message-circle"></i>Nothing to comment yet</div>';return;}
+  el.innerHTML=items.map(t=>`
+    <div class="tc-item${t.done?' done':''}">
+      <div class="tc-check${t.done?' done':''}" onclick="toggleTC('${t.id}')" title="${t.done?'Mark pending':'Mark done'}">
+        ${t.done?'<i class="ti ti-check" style="font-size:10px;color:#fff"></i>':''}
+      </div>
+      <div class="tc-body">
+        <div class="tc-point${t.done?' done':''}">${t.point}</div>
+        ${t.ref?`<div class="tc-ref">${t.ref}</div>`:''}
+        <div class="tc-footer">
+          ${!t.done?`<label class="tc-ns-check" title="Create an action for today from this item">
+            <input type="checkbox" ${t.nsCreated?'checked':''} onchange="tcToAction('${t.id}',this.checked)"> → Action for today
+          </label>`:''}
+          ${t.nsCreated&&!t.done?`<span class="badge b-blue" style="font-size:10px">Action created</span>`:''}
+        </div>
+      </div>
+      <button class="tc-rm" onclick="deleteTC('${t.id}')" title="Remove"><i class="ti ti-x"></i></button>
+    </div>`).join('');
+}
+
+function openAddTC(){document.getElementById('tc-add-form').style.display='block';document.getElementById('tc-input-point').focus();}
+function closeAddTC(){document.getElementById('tc-add-form').style.display='none';document.getElementById('tc-input-point').value='';document.getElementById('tc-input-ref').value='';}
+function saveTC(){
+  const point=document.getElementById('tc-input-point').value.trim();if(!point)return;
+  db.toComments.unshift({id:uid(),point,ref:document.getElementById('tc-input-ref').value.trim(),nsCreated:false,done:false,createdAt:now()});
+  closeAddTC();persist();
+}
+function toggleTC(id){
+  const t=db.toComments.find(x=>x.id===id);if(!t)return;
+  t.done=!t.done;persist();
+}
+function deleteTC(id){db.toComments=db.toComments.filter(x=>x.id!==id);persist();}
+function tcToAction(id,checked){
+  const t=db.toComments.find(x=>x.id===id);if(!t)return;
+  if(checked&&!t.nsCreated){
+    db.actionsToday.unshift({id:uid(),title:t.point,priority:'Medium',client:'',timeBlock:'30 min',done:false,createdAt:now()});
+    t.nsCreated=true;
+  } else if(!checked){
+    t.nsCreated=false;
+  }
+  persist();
+}
+
+/* ACTIONS FOR TODAY */
+function renderActionsToday(){
+  const el=document.getElementById('af-list');
+  const items=[...db.actionsToday.filter(a=>!a.done),...db.actionsToday.filter(a=>a.done)];
+  if(!items.length){el.innerHTML='<div class="empty" style="padding:16px"><i class="ti ti-bolt"></i>No actions yet</div>';return;}
+  el.innerHTML=items.map(a=>{
+    const pc=PRIO_CLS[a.priority]||'low';
+    const client=a.client?db.clients.find(c=>c.name===a.client):null;
+    return`<div class="af-item${a.done?' done':''}">
+      <div class="af-check${a.done?' done':''}" onclick="toggleAF('${a.id}')" title="${a.done?'Mark pending':'Mark done'}">
+        ${a.done?'<i class="ti ti-check" style="font-size:10px;color:#fff"></i>':''}
+      </div>
+      <div class="af-body">
+        <div class="af-title${a.done?' done':''}">${a.title}</div>
+        <div class="af-meta">
+          <div class="prio-dot ${pc}"></div><span class="prio-label ${pc}">${a.priority}</span>
+          ${a.timeBlock?`<span class="af-time"><i class="ti ti-clock" style="font-size:10px"></i> ${a.timeBlock}</span>`:''}
+          ${client?`<span class="af-client-link"><i class="ti ti-building-store" style="font-size:10px"></i> ${a.client}</span>`:''}
+        </div>
+      </div>
+      <button class="af-rm" onclick="deleteAF('${a.id}')" title="Remove"><i class="ti ti-x"></i></button>
+    </div>`;
+  }).join('');
+}
+function toggleAF(id){const a=db.actionsToday.find(x=>x.id===id);if(!a)return;a.done=!a.done;persist();}
+function deleteAF(id){db.actionsToday=db.actionsToday.filter(x=>x.id!==id);persist();}
+
+/* SCHEDULED MEETINGS */
+function renderScheduledMeetings(){
+  const el=document.getElementById('mtg-list');
+  const sorted=[...db.scheduledMeetings].sort((a,b)=>a.datetime.localeCompare(b.datetime));
+  if(!sorted.length){el.innerHTML='<div class="empty"><i class="ti ti-calendar-event"></i>No meetings scheduled. Create one with the button above.</div>';return;}
+  el.innerHTML=sorted.map(m=>{
+    const isPast=m.datetime<now();
+    return`<div class="mtg-card">
+      <div class="mtg-card-hdr" onclick="tog('mtgbody-${m.id}','mtgchev-${m.id}')">
+        <div class="mtg-icon" style="${isPast?'opacity:.5':''}"><i class="ti ti-users"></i></div>
+        <div class="mtg-info">
+          <div class="mtg-title">${m.title}</div>
+          <div class="mtg-sub">
+            <span><i class="ti ti-clock" style="font-size:10px"></i> ${fmtDateTime(m.datetime)}</span>
+            ${m.participants?`<span><i class="ti ti-user" style="font-size:10px"></i> ${m.participants}</span>`:''}
+            ${isPast?`<span class="badge b-gray" style="font-size:10px">Past</span>`:'<span class="badge b-blue" style="font-size:10px">Upcoming</span>'}
+          </div>
+        </div>
+        <div class="mtg-meta">
+          <i class="ti ti-chevron-right chev" id="mtgchev-${m.id}" style="font-size:14px"></i>
+          <button class="btn btn-sm" onclick="event.stopPropagation();openModal('editmeeting','${m.id}')"><i class="ti ti-edit" style="font-size:11px"></i></button>
+          <button class="btn btn-sm" onclick="event.stopPropagation();deleteMtg('${m.id}')"><i class="ti ti-trash" style="font-size:11px"></i></button>
+        </div>
+      </div>
+      <div class="mtg-body" id="mtgbody-${m.id}">
+        ${m.objective?`<div class="mtg-section"><div class="mtg-section-lbl">Objective</div><div class="mtg-text" style="font-weight:500;color:var(--text)">${m.objective}</div></div>`:''}
+        ${m.agenda&&m.agenda.length?`<div class="mtg-section"><div class="mtg-section-lbl">Agenda</div>${m.agenda.filter(a=>a).map((a,i)=>`<div class="mtg-agenda-item"><input type="checkbox" class="mtg-agenda-cb" onchange="toggleAgenda('${m.id}',${i},this.checked)"><span style="${m.agendaDone&&m.agendaDone[i]?'text-decoration:line-through;color:var(--text3)':''}">${a}</span></div>`).join('')}</div>`:''}
+        ${m.materials?`<div class="mtg-section"><div class="mtg-section-lbl">Materials</div><a href="${m.materials}" target="_blank" class="mtg-link"><i class="ti ti-link"></i> ${m.materials}</a></div>`:''}
+        ${m.notes?`<div class="mtg-section"><div class="mtg-section-lbl">Notes</div><div class="mtg-text">${m.notes}</div></div>`:''}
+      </div>
+    </div>`;
+  }).join('');
+  // restore agenda checkbox states
+  sorted.forEach(m=>{if(m.agendaDone)m.agendaDone.forEach((done,i)=>{const cb=document.querySelector(`[onchange="toggleAgenda('${m.id}',${i},this.checked)"]`);if(cb)cb.checked=done;});});
+}
+
+function toggleAgenda(mId,idx,checked){
+  const m=db.scheduledMeetings.find(x=>x.id===mId);if(!m)return;
+  if(!m.agendaDone)m.agendaDone=m.agenda.map(()=>false);
+  m.agendaDone[idx]=checked;persist();
+}
+function deleteMtg(id){if(!confirm('Delete this meeting?'))return;db.scheduledMeetings=db.scheduledMeetings.filter(x=>x.id!==id);persist();showToast('Meeting deleted');}
+
 /* ── CLIENTS ── */
 function renderClients(){
   const tbody=document.getElementById('cli-tbody');
   if(!db.clients.length){tbody.innerHTML='<tr><td colspan="7" style="text-align:center;color:var(--text3);padding:22px">No clients yet.</td></tr>';return}
   tbody.innerHTML=db.clients.map(c=>`<tr><td title="${c.name}"><strong>${c.name}</strong></td><td>${c.sector||'—'}</td><td><span class="badge b-blue" style="font-size:10px">${c.service||'—'}</span></td><td>${c.value?fmtEur(c.value):'—'}</td><td><span class="badge ${BADGE_ST[c.status]||'b-gray'}">${c.status||'—'}</span></td><td title="${c.nextAction||''}">${c.nextAction||'—'}</td><td><div class="row-actions"><button class="rb" onclick="openModal('edit-client','${c.id}')"><i class="ti ti-edit"></i></button><button class="rb" onclick="delItem('clients','${c.id}')"><i class="ti ti-trash"></i></button></div></td></tr>`).join('');
 }
- 
+
 /* ── PIPELINE ── */
 function renderPipeline(){
   document.getElementById('pipe-board').innerHTML=STAGES.map(stage=>{
@@ -669,7 +780,7 @@ function renderPipeline(){
     return`<div class="pcol"><div class="pcol-hdr"><span>${stage}</span><span style="background:var(--bg);border:0.5px solid var(--border);border-radius:20px;font-size:10px;padding:1px 6px">${cards.length}</span></div>${cards.map(d=>`<div class="pcard"><div class="pc">${d.client||'—'}</div><div class="ps">${d.service||'—'}</div><div class="pa">${d.value?fmtEur(d.value):'—'}</div><div class="pcard-btns"><button class="rb" onclick="openModal('edit-deal','${d.id}')"><i class="ti ti-edit" style="font-size:12px"></i></button><button class="rb" onclick="delItem('deals','${d.id}')"><i class="ti ti-trash" style="font-size:12px"></i></button></div></div>`).join('')}${!cards.length?`<div style="font-size:11px;color:var(--text3);padding:8px 0;text-align:center">—</div>`:''}</div>`;
   }).join('');
 }
- 
+
 /* ── ACTIVITIES ── */
 function renderActivities(){
   const el=document.getElementById('act-list');
@@ -684,21 +795,17 @@ function renderActivities(){
           <span style="font-size:13px">with <strong>${a.client||'—'}</strong></span>
           ${a.description?`<span style="font-size:13px;color:var(--text2)">— ${a.description}</span>`:''}
         </div>
-        <div class="act-meta">
+        <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:3px">
           <span style="font-size:11px;color:var(--text3)">${fmtDate(a.date)}</span>
           ${a.attendees?`<span style="font-size:11px;color:var(--text2)"><i class="ti ti-users" style="font-size:10px"></i> ${a.attendees}</span>`:''}
         </div>
         ${a.notes?`<div class="act-notes">${a.notes}</div>`:''}
-        ${a.nextSteps&&a.nextSteps.length?`
-          <table class="act-ns-table">
-            <thead><tr><th style="width:110px">Person</th><th>Next step</th></tr></thead>
-            <tbody>${a.nextSteps.map(ns=>`<tr><td style="color:var(--text2);font-weight:500">${ns.person||'—'}</td><td><span class="act-ns-bullet">${ns.description||ns}</span></td></tr>`).join('')}</tbody>
-          </table>`:''}
+        ${a.nextSteps&&a.nextSteps.length?`<table class="act-ns-table"><thead><tr><th style="width:110px">Person</th><th>Next step</th></tr></thead><tbody>${a.nextSteps.map(ns=>`<tr><td style="color:var(--text2);font-weight:500">${ns.person||'—'}</td><td><span class="act-ns-bullet">${ns.description||ns}</span></td></tr>`).join('')}</tbody></table>`:''}
       </div>
       <button class="rb" onclick="delItem('activities','${a.id}')" style="flex-shrink:0;margin-top:2px"><i class="ti ti-trash"></i></button>
     </div>`).join('');
 }
- 
+
 /* ── ACCOUNT PLANS ── */
 function renderAP(){
   const q=(document.getElementById('ap-search').value||'').toLowerCase();
@@ -709,83 +816,33 @@ function renderAP(){
   el.innerHTML=aps.map(ap=>{
     const allNSap=ap.accounts.flatMap(ac=>ac.meetings.flatMap(m=>m.nextSteps));
     const openNS=allNSap.filter(n=>!n.done).length;const doneNS=allNSap.filter(n=>n.done).length;
-    return`<div class="ae-card">
-      <div class="ae-hdr" onclick="tog('aebody-${ap.id}','aechev-${ap.id}')">
-        <i class="ti ti-chevron-right chev" id="aechev-${ap.id}"></i>
-        <div class="ae-info"><strong>${ap.aeName}</strong><span>${ap.aeTerritory||''} · ${ap.accounts.length} account${ap.accounts.length!==1?'s':''}</span></div>
-        <div class="ae-meta">
-          ${allNSap.length?`<span class="badge b-blue">${doneNS}/${allNSap.length} NS</span>`:''}
-          ${openNS?`<span class="badge b-amber">${openNS} open</span>`:''}
-          <button class="btn btn-sm" onclick="event.stopPropagation();openModal('edit-ae','${ap.id}')"><i class="ti ti-edit" style="font-size:11px"></i></button>
-          <button class="btn btn-sm" onclick="event.stopPropagation();delAP('${ap.id}')"><i class="ti ti-trash" style="font-size:11px"></i></button>
-        </div>
-      </div>
-      <div class="ae-body" id="aebody-${ap.id}">
-        <div class="ae-toolbar"><span style="font-size:12px;color:var(--text2)">${ap.accounts.length} accounts</span><button class="btn btn-sm btn-primary" onclick="openModal('account','${ap.id}')"><i class="ti ti-plus" style="font-size:11px"></i> Add account</button></div>
-        ${ap.accounts.map(ac=>renderAccount(ap.id,ac)).join('')}
-      </div>
-    </div>`;
+    return`<div class="ae-card"><div class="ae-hdr" onclick="tog('aebody-${ap.id}','aechev-${ap.id}')"><i class="ti ti-chevron-right chev" id="aechev-${ap.id}"></i><div class="ae-info"><strong>${ap.aeName}</strong><span>${ap.aeTerritory||''} · ${ap.accounts.length} account${ap.accounts.length!==1?'s':''}</span></div><div class="ae-meta">${allNSap.length?`<span class="badge b-blue">${doneNS}/${allNSap.length} NS</span>`:''} ${openNS?`<span class="badge b-amber">${openNS} open</span>`:''}<button class="btn btn-sm" onclick="event.stopPropagation();openModal('edit-ae','${ap.id}')"><i class="ti ti-edit" style="font-size:11px"></i></button><button class="btn btn-sm" onclick="event.stopPropagation();delAP('${ap.id}')"><i class="ti ti-trash" style="font-size:11px"></i></button></div></div><div class="ae-body" id="aebody-${ap.id}"><div class="ae-toolbar"><span style="font-size:12px;color:var(--text2)">${ap.accounts.length} accounts</span><button class="btn btn-sm btn-primary" onclick="openModal('account','${ap.id}')"><i class="ti ti-plus" style="font-size:11px"></i> Add account</button></div>${ap.accounts.map(ac=>renderAccount(ap.id,ac)).join('')}</div></div>`;
   }).join('');
 }
- 
+
 function renderAccount(apId,ac){
   const openNS=ac.meetings.flatMap(m=>m.nextSteps.filter(n=>!n.done));
-  return`<div class="acct-block">
-    <div class="acct-hdr" onclick="tog('acbody-${ac.id}','acchev-${ac.id}')">
-      <i class="ti ti-building" style="font-size:14px;color:var(--text3);flex-shrink:0"></i>
-      <span class="acct-name">${ac.name}</span>
-      <div class="acct-meta">
-        <span class="badge b-gray" style="font-size:10px">${ac.meetings.length} meeting${ac.meetings.length!==1?'s':''}</span>
-        ${openNS.length?`<span class="badge b-amber" style="font-size:10px">${openNS.length} open NS</span>`:''}
-        <button class="btn btn-sm" onclick="event.stopPropagation();openModal('edit-account','${apId}:${ac.id}')"><i class="ti ti-edit" style="font-size:11px"></i></button>
-        <button class="btn btn-sm" onclick="event.stopPropagation();delAccount('${apId}','${ac.id}')"><i class="ti ti-trash" style="font-size:11px"></i></button>
-        <i class="ti ti-chevron-right chev" id="acchev-${ac.id}" style="font-size:12px"></i>
-      </div>
-    </div>
-    <div class="acct-body" id="acbody-${ac.id}">
-      ${openNS.length?`<div class="global-ns-bar"><span style="font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.4px">All open NS · ${ac.name}</span><span class="badge b-amber" style="font-size:10px">${openNS.length} open</span></div>
-      <div class="global-ns-list">${openNS.map(ns=>{const d=daysFrom(ns.dueDate);const dCls=d===null?'':d<0?'overdue':d<=ALERT_DAYS?'warn':'';return`<div class="ns-item ${ns.company}"><div class="ns-check ${ns.company}${ns.done?' checked':''}" onclick="toggleNS('${apId}','${ac.id}','_','${ns.id}')">${ns.done?'<i class="ti ti-check" style="font-size:10px;color:#fff"></i>':''}</div><div class="ns-body"><div class="ns-title">${ns.title}</div><div class="ns-footer"><span class="ns-tag ${ns.company}">${ns.company==='sf'?'SF':'Globant'}</span><span class="ns-person">${ns.person||''}</span>${ns.dueDate?`<span class="ns-due ${dCls}"><i class="ti ti-calendar" style="font-size:10px"></i> ${fmtDate(ns.dueDate)}${d!==null&&d<0?' · overdue':d!==null&&d<=ALERT_DAYS?' · due soon':''}</span>`:''}<span style="font-size:10px;color:var(--text3);margin-left:2px">· ${ns._mTitle||'—'}</span></div></div></div>`;}).join('')}</div>`:''}
+  return`<div class="acct-block"><div class="acct-hdr" onclick="tog('acbody-${ac.id}','acchev-${ac.id}')"><i class="ti ti-building" style="font-size:14px;color:var(--text3);flex-shrink:0"></i><span class="acct-name">${ac.name}</span><div class="acct-meta"><span class="badge b-gray" style="font-size:10px">${ac.meetings.length} meetings</span>${openNS.length?`<span class="badge b-amber" style="font-size:10px">${openNS.length} open NS</span>`:''}<button class="btn btn-sm" onclick="event.stopPropagation();openModal('edit-account','${apId}:${ac.id}')"><i class="ti ti-edit" style="font-size:11px"></i></button><button class="btn btn-sm" onclick="event.stopPropagation();delAccount('${apId}','${ac.id}')"><i class="ti ti-trash" style="font-size:11px"></i></button><i class="ti ti-chevron-right chev" id="acchev-${ac.id}" style="font-size:12px"></i></div></div><div class="acct-body" id="acbody-${ac.id}">${openNS.length?`<div class="global-ns-bar"><span style="font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.4px">All open NS · ${ac.name}</span><span class="badge b-amber" style="font-size:10px">${openNS.length} open</span></div><div class="global-ns-list">${openNS.map(ns=>{const d=daysFrom(ns.dueDate);const dCls=d===null?'':d<0?'overdue':d<=ALERT_DAYS?'warn':'';return`<div class="ns-item ${ns.company}"><div class="ns-check ${ns.company}${ns.done?' checked':''}" onclick="toggleNS('${apId}','${ac.id}','_','${ns.id}')">${ns.done?'<i class="ti ti-check" style="font-size:10px;color:#fff"></i>':''}</div><div class="ns-body"><div class="ns-title">${ns.title}</div><div class="ns-footer"><span class="ns-tag ${ns.company}">${ns.company==='sf'?'SF':'Globant'}</span><span class="ns-person">${ns.person||''}</span>${ns.dueDate?`<span class="ns-due ${dCls}"><i class="ti ti-calendar" style="font-size:10px"></i> ${fmtDate(ns.dueDate)}${d!==null&&d<0?' · overdue':d!==null&&d<=ALERT_DAYS?' · due soon':''}</span>`:''}</div></div></div>`;}).join('')}</div>`:''}
       <div style="${openNS.length?'border-top:0.5px solid var(--border)':''}">
-        <div style="padding:8px 16px 8px 36px;display:flex;justify-content:space-between;align-items:center;background:var(--bg2)">
-          <span style="font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.4px">Meetings</span>
-          <button class="btn btn-sm btn-primary" onclick="openModal('meeting','${apId}:${ac.id}')"><i class="ti ti-plus" style="font-size:11px"></i> Add meeting</button>
-        </div>
-        ${ac.meetings.length?ac.meetings.sort((a,b)=>b.date.localeCompare(a.date)).map(m=>renderMeeting(apId,ac.id,m)).join(''):`<div style="padding:16px 36px;font-size:12px;color:var(--text3)">No meetings yet.</div>`}
+        <div style="padding:8px 16px 8px 36px;display:flex;justify-content:space-between;align-items:center;background:var(--bg2)"><span style="font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.4px">Meetings</span><button class="btn btn-sm btn-primary" onclick="openModal('ap-meeting','${apId}:${ac.id}')"><i class="ti ti-plus" style="font-size:11px"></i> Add</button></div>
+        ${ac.meetings.length?ac.meetings.sort((a,b)=>b.date.localeCompare(a.date)).map(m=>renderAPMeeting(apId,ac.id,m)).join(''):`<div style="padding:16px 36px;font-size:12px;color:var(--text3)">No meetings yet.</div>`}
       </div>
     </div>
   </div>`;
 }
- 
-function renderMeeting(apId,acId,m){
+
+function renderAPMeeting(apId,acId,m){
   const openNS=m.nextSteps.filter(n=>!n.done).length;const doneNS=m.nextSteps.filter(n=>n.done).length;
-  return`<div class="meeting-block">
-    <div class="meeting-hdr" onclick="tog('mbody-${m.id}','mchev-${m.id}')">
-      <div class="meeting-icon"><i class="ti ti-users"></i></div>
-      <div class="meeting-info"><strong>${m.title}</strong><span>${fmtDate(m.date)}${m.nextSteps.length?' · '+doneNS+'/'+m.nextSteps.length+' NS':''}</span></div>
-      <div class="meeting-meta">
-        ${openNS?`<span class="badge b-amber" style="font-size:10px">${openNS} open</span>`:''}
-        ${m.nextSteps.length&&!openNS?`<span class="badge b-green" style="font-size:10px">All done ✓</span>`:''}
-        <button class="btn btn-sm" onclick="event.stopPropagation();openModal('edit-meeting','${apId}:${acId}:${m.id}')"><i class="ti ti-edit" style="font-size:11px"></i></button>
-        <button class="btn btn-sm" onclick="event.stopPropagation();delMeeting('${apId}','${acId}','${m.id}')"><i class="ti ti-trash" style="font-size:11px"></i></button>
-        <i class="ti ti-chevron-right chev" id="mchev-${m.id}" style="font-size:12px"></i>
-      </div>
-    </div>
-    <div class="meeting-body" id="mbody-${m.id}">
-      ${m.notes?`<div class="meeting-notes-box">${m.notes}</div>`:''}
-      <div style="font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px">Next steps</div>
-      ${m.nextSteps.length?`<div class="ns-list">${m.nextSteps.map(ns=>{const d=daysFrom(ns.dueDate);const dCls=d===null?'':d<0?'overdue':d<=ALERT_DAYS?'warn':'';return`<div class="ns-item ${ns.company}${ns.done?' done':''}"><div class="ns-check ${ns.company}${ns.done?' checked':''}" onclick="toggleNS('${apId}','${acId}','${m.id}','${ns.id}')">${ns.done?'<i class="ti ti-check" style="font-size:10px;color:#fff"></i>':''}</div><div class="ns-body"><div class="ns-title${ns.done?' done':''}">${ns.title}</div><div class="ns-footer"><span class="ns-tag ${ns.company}">${ns.company==='sf'?'SF':'Globant'}</span><span class="ns-person">${ns.person||''}</span>${ns.dueDate?`<span class="ns-due ${dCls}"><i class="ti ti-calendar" style="font-size:10px"></i> ${fmtDate(ns.dueDate)}${d!==null&&d<0?' · overdue':d!==null&&d<=ALERT_DAYS?' · due soon':''}</span>`:''}</div></div><button class="ns-rm" onclick="removeNS('${apId}','${acId}','${m.id}','${ns.id}')"><i class="ti ti-x"></i></button></div>`;}).join('')}</div>`:`<p style="font-size:12px;color:var(--text3)">No next steps yet.</p>`}
-      <button class="add-btn" onclick="openModal('ns','${apId}:${acId}:${m.id}')"><i class="ti ti-plus" style="font-size:11px"></i> Add next step</button>
-    </div>
-  </div>`;
+  return`<div class="meeting-block"><div class="meeting-hdr" onclick="tog('mbody-${m.id}','mchev-${m.id}')"><div class="meeting-icon2"><i class="ti ti-users"></i></div><div class="meeting-info"><strong>${m.title}</strong><span>${fmtDate(m.date)}${m.nextSteps.length?' · '+doneNS+'/'+m.nextSteps.length+' NS':''}</span></div><div class="meeting-meta">${openNS?`<span class="badge b-amber" style="font-size:10px">${openNS} open</span>`:''}${m.nextSteps.length&&!openNS?`<span class="badge b-green" style="font-size:10px">All done ✓</span>`:''}<button class="btn btn-sm" onclick="event.stopPropagation();openModal('edit-ap-meeting','${apId}:${acId}:${m.id}')"><i class="ti ti-edit" style="font-size:11px"></i></button><button class="btn btn-sm" onclick="event.stopPropagation();delAPMeeting('${apId}','${acId}','${m.id}')"><i class="ti ti-trash" style="font-size:11px"></i></button><i class="ti ti-chevron-right chev" id="mchev-${m.id}" style="font-size:12px"></i></div></div><div class="meeting-body" id="mbody-${m.id}">${m.notes?`<div class="meeting-notes-box">${m.notes}</div>`:''}<div style="font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px">Next steps</div>${m.nextSteps.length?`<div class="ns-list">${m.nextSteps.map(ns=>{const d=daysFrom(ns.dueDate);const dCls=d===null?'':d<0?'overdue':d<=ALERT_DAYS?'warn':'';return`<div class="ns-item ${ns.company}${ns.done?' done':''}"><div class="ns-check ${ns.company}${ns.done?' checked':''}" onclick="toggleNS('${apId}','${acId}','${m.id}','${ns.id}')">${ns.done?'<i class="ti ti-check" style="font-size:10px;color:#fff"></i>':''}</div><div class="ns-body"><div class="ns-title${ns.done?' done':''}">${ns.title}</div><div class="ns-footer"><span class="ns-tag ${ns.company}">${ns.company==='sf'?'SF':'Globant'}</span><span class="ns-person">${ns.person||''}</span>${ns.dueDate?`<span class="ns-due ${dCls}"><i class="ti ti-calendar" style="font-size:10px"></i> ${fmtDate(ns.dueDate)}${d!==null&&d<0?' · overdue':d!==null&&d<=ALERT_DAYS?' · due soon':''}</span>`:''}</div></div><button class="ns-rm" onclick="removeNS('${apId}','${acId}','${m.id}','${ns.id}')"><i class="ti ti-x"></i></button></div>`;}).join('')}</div>`:`<p style="font-size:12px;color:var(--text3)">No next steps yet.</p>`}<button class="add-btn" onclick="openModal('ap-ns','${apId}:${acId}:${m.id}')"><i class="ti ti-plus" style="font-size:11px"></i> Add next step</button></div></div>`;
 }
- 
+
 /* ── ALERTS ── */
 function renderAlerts(){
   const ns=allNS();
   const overdue=ns.filter(n=>!n.done&&n.dueDate&&daysFrom(n.dueDate)<0).sort((a,b)=>a.dueDate.localeCompare(b.dueDate));
   const warn=ns.filter(n=>!n.done&&n.dueDate&&daysFrom(n.dueDate)>=0&&daysFrom(n.dueDate)<=ALERT_DAYS).sort((a,b)=>a.dueDate.localeCompare(b.dueDate));
   const el=document.getElementById('alerts-content');
-  if(!overdue.length&&!warn.length){el.innerHTML='<div class="empty"><i class="ti ti-circle-check"></i><p>No alerts — all next steps on track.</p></div>';return}
+  if(!overdue.length&&!warn.length){el.innerHTML='<div class="empty"><i class="ti ti-circle-check"></i><p>No alerts — all on track.</p></div>';return}
   const card=(n,t)=>`<div class="alert-card ${t}"><div class="alert-icon ${t}"><i class="ti ti-${t==='overdue'?'clock-x':'clock'}"></i></div><div class="alert-body"><div class="alert-title">${n.title}</div><div class="alert-sub">${n._aeName} → ${n._acName} → ${n._mTitle}</div></div><div class="alert-right"><span class="ns-tag ${n.company}">${n.company==='sf'?'SF':'Globant'}</span><span style="font-size:11px;font-weight:600;color:var(--${t==='overdue'?'red-dark':'amber-dark'})">${dLabel(n.dueDate)}</span>${n.person?`<span style="font-size:11px;color:var(--text3)">${n.person}</span>`:''}</div></div>`;
   let html='';
   if(overdue.length)html+=`<div class="alert-section"><div class="alert-section-title"><i class="ti ti-alert-circle" style="color:var(--red-dark)"></i> Overdue (${overdue.length})</div>${overdue.map(n=>card(n,'overdue')).join('')}</div>`;
@@ -793,7 +850,7 @@ function renderAlerts(){
   el.innerHTML=html;
 }
 function updateBadge(){const c=allNS().filter(n=>!n.done&&n.dueDate&&daysFrom(n.dueDate)<=ALERT_DAYS).length;const b=document.getElementById('alerts-badge');if(c){b.textContent=c;b.style.display='';}else b.style.display='none';}
- 
+
 /* ── REPORTS ── */
 function renderReports(){
   const won=db.deals.filter(d=>d.stage==='Won');
@@ -808,29 +865,50 @@ function renderReports(){
   document.getElementById('rep-bars').innerHTML=entries.length?entries.map(([s,v])=>`<div class="bar-row"><span class="bar-lbl">${s.replace(' Cloud','')}</span><div class="bar-bg"><div class="bar-fill" style="width:${Math.round(v/maxV*100)}%;background:${SVC_CLR[s]||'#888780'}"></div></div><span class="bar-val">${fmtEur(v)}</span></div>`).join(''):'<p style="font-size:12px;color:var(--text3)">No closed deals</p>';
   document.getElementById('rep-closed').innerHTML=won.length?[...won].sort((a,b)=>(b.closeDate||'').localeCompare(a.closeDate||'')).slice(0,10).map(d=>`<tr><td>${d.client||'—'}</td><td><span class="badge b-blue" style="font-size:10px">${(d.service||'').replace(' Cloud','')}</span></td><td>${d.value?fmtEur(d.value):'—'}</td><td>${fmtDate(d.closeDate)}</td></tr>`).join(''):'<tr><td colspan="4" style="text-align:center;color:var(--text3);padding:16px">No closed deals</td></tr>';
 }
- 
-/* ── TOGGLES & NS OPS ── */
+
+/* ── TOGGLE ── */
 const tog=(b,c)=>{const el=document.getElementById(b);const cv=document.getElementById(c);if(!el)return;const o=el.classList.contains('open');el.classList.toggle('open',!o);if(cv)cv.style.transform=o?'':'rotate(90deg)';};
+
+/* ── NS OPS (Account Plans) ── */
 function findNS(apId,acId,mId,nsId){const ap=db.aps.find(a=>a.id===apId);if(!ap)return null;const ac=ap.accounts.find(a=>a.id===acId);if(!ac)return null;if(mId==='_'){for(const m of ac.meetings){const n=m.nextSteps.find(x=>x.id===nsId);if(n)return{m,ns:n}}return null;}const m=ac.meetings.find(x=>x.id===mId);if(!m)return null;const ns=m.nextSteps.find(x=>x.id===nsId);return ns?{m,ns}:null;}
 const toggleNS=(apId,acId,mId,nsId)=>{const r=findNS(apId,acId,mId,nsId);if(!r)return;r.ns.done=!r.ns.done;persist();};
 const removeNS=(apId,acId,mId,nsId)=>{const ap=db.aps.find(a=>a.id===apId);if(!ap)return;const ac=ap.accounts.find(a=>a.id===acId);if(!ac)return;const m=ac.meetings.find(x=>x.id===mId);if(!m)return;m.nextSteps=m.nextSteps.filter(x=>x.id!==nsId);persist();};
-const delMeeting=(apId,acId,mId)=>{if(!confirm('Delete this meeting?'))return;const ap=db.aps.find(a=>a.id===apId);if(!ap)return;const ac=ap.accounts.find(a=>a.id===acId);if(!ac)return;ac.meetings=ac.meetings.filter(m=>m.id!==mId);persist();showToast('Deleted');};
+const delAPMeeting=(apId,acId,mId)=>{if(!confirm('Delete this meeting?'))return;const ap=db.aps.find(a=>a.id===apId);if(!ap)return;const ac=ap.accounts.find(a=>a.id===acId);if(!ac)return;ac.meetings=ac.meetings.filter(m=>m.id!==mId);persist();showToast('Deleted');};
 const delAccount=(apId,acId)=>{if(!confirm('Delete this account?'))return;const ap=db.aps.find(a=>a.id===apId);if(!ap)return;ap.accounts=ap.accounts.filter(a=>a.id!==acId);persist();showToast('Deleted');};
 const delAP=(id)=>{if(!confirm('Delete this account plan?'))return;db.aps=db.aps.filter(a=>a.id!==id);persist();showToast('Deleted');};
 const delItem=(col,id)=>{if(!confirm('Delete?'))return;db[col]=db[col].filter(x=>x.id!==id);persist();showToast('Deleted');};
- 
+
 /* ── MODALS ── */
 function openModal(type,extra){
-  const mb=document.getElementById('modal-body');
-  mb.className='modal';
-  const cliOpts=db.clients.map(c=>`<option value="${c.name}">${c.name}</option>`).join('');
-  const fld=(lbl,inner)=>`<div class="field"><label>${lbl}</label>${inner}</div>`;
+  const mb=document.getElementById('modal-body');mb.className='modal';
+  const cliOpts='<option value="">— none —</option>'+db.clients.map(c=>`<option value="${c.name}">${c.name}</option>`).join('');
   const inp=(id,t,val,ph)=>`<input id="${id}" type="${t||'text'}" value="${val||''}" placeholder="${ph||''}" style="width:100%;font-size:13px;padding:7px 9px;border:0.5px solid var(--border2);border-radius:var(--r);background:var(--bg);color:var(--text);font-family:var(--font)">`;
   const sel=(id,opts,val)=>`<select id="${id}" style="width:100%;font-size:13px;padding:7px 9px;border:0.5px solid var(--border2);border-radius:var(--r);background:var(--bg);color:var(--text)">${opts.map(o=>`<option${o===val?' selected':''}>${o}</option>`).join('')}</select>`;
   const ta=(id,val,ph,rows)=>`<textarea id="${id}" rows="${rows||3}" placeholder="${ph||''}" style="width:100%;font-size:13px;padding:7px 9px;border:0.5px solid var(--border2);border-radius:var(--r);background:var(--bg);color:var(--text);resize:vertical;font-family:var(--font)">${val||''}</textarea>`;
+  const fld=(lbl,inner)=>`<div class="field"><label>${lbl}</label>${inner}</div>`;
   const btns=(fn,lbl)=>`<div class="modal-btns"><button class="btn" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="${fn}">${lbl||'Save'}</button></div>`;
- 
-  if(type==='client'||type==='edit-client'){
+
+  if(type==='newmeeting'||type==='editmeeting'){
+    const ex=type==='editmeeting'?db.scheduledMeetings.find(m=>m.id===extra):{};
+    mb.className='modal wide';
+    const agendaVal=(ex.agenda||[]).join('\n');
+    mb.innerHTML=`<h3>${type==='editmeeting'?'Edit':'New'} Meeting</h3>
+    ${fld('Meeting title',inp('f-mtg-title','text',ex.title,'e.g. Q3 Review — Telefónica'))}
+    <div class="two-col-f">${fld('Date & time',`<input id="f-mtg-dt" type="datetime-local" value="${ex.datetime||''}" style="width:100%;font-size:13px;padding:7px 9px;border:0.5px solid var(--border2);border-radius:var(--r);background:var(--bg);color:var(--text)">`)
+    }${fld('Participants / CRM link',`<select id="f-mtg-part" style="width:100%;font-size:13px;padding:7px 9px;border:0.5px solid var(--border2);border-radius:var(--r);background:var(--bg);color:var(--text)">${cliOpts.replace('— none —','— select or leave blank —')}</select>`)}</div>
+    ${fld('Objective <span style="color:var(--text3);font-weight:400">— why does this meeting exist?</span>',inp('f-mtg-obj','text',ex.objective,'e.g. Close Q3 budget, Align on implementation plan...'))}
+    ${fld('Agenda / points to cover <span style="color:var(--text3);font-weight:400">(one per line)</span>',ta('f-mtg-agenda',agendaVal,'Results review\nRoadmap Q3\nNext steps',4))}
+    ${fld('Materials <span style="color:var(--text3);font-weight:400">(link to Drive, PDF, deck...)</span>',inp('f-mtg-mat','url',ex.materials,'https://drive.google.com/...'))}
+    ${fld('Notes',ta('f-mtg-notes',ex.notes,'Pre-meeting notes or context...',2))}
+    ${btns(`saveMtg('${type==='editmeeting'?extra:''}')`,'Save meeting')}`;
+    if(ex.participants)setTimeout(()=>{const e=document.getElementById('f-mtg-part');if(e)e.value=ex.participants;},10);
+  } else if(type==='newaction'){
+    mb.innerHTML=`<h3>New action for today</h3>
+    ${fld('Task',inp('f-af-title','text','','e.g. Send proposal to Client X'))}
+    <div class="two-col-f">${fld('Priority',sel('f-af-prio',PRIOS,'Medium'))}${fld('Time block',sel('f-af-time',TIME_OPTS,'30 min'))}</div>
+    ${fld('Linked client (optional)',`<select id="f-af-cli" style="width:100%;font-size:13px;padding:7px 9px;border:0.5px solid var(--border2);border-radius:var(--r);background:var(--bg);color:var(--text)">${cliOpts}</select>`)}
+    ${btns('saveAction()')}`;
+  } else if(type==='client'||type==='edit-client'){
     const ex=type==='edit-client'?db.clients.find(c=>c.id===extra):{};
     mb.innerHTML=`<h3>${type==='edit-client'?'Edit':'New'} client</h3>
     ${fld('Name',inp('f-name','text',ex.name))}
@@ -841,7 +919,7 @@ function openModal(type,extra){
   } else if(type==='deal'||type==='edit-deal'){
     const ex=type==='edit-deal'?db.deals.find(d=>d.id===extra):{};
     mb.innerHTML=`<h3>${type==='edit-deal'?'Edit':'New'} deal</h3>
-    ${fld('Client',`<select id="f-cli" style="width:100%;font-size:13px;padding:7px 9px;border:0.5px solid var(--border2);border-radius:var(--r);background:var(--bg);color:var(--text)"><option value="">— select —</option>${cliOpts}</select>`)}
+    ${fld('Client',`<select id="f-cli" style="width:100%;font-size:13px;padding:7px 9px;border:0.5px solid var(--border2);border-radius:var(--r);background:var(--bg);color:var(--text)"><option value="">— select —</option>${db.clients.map(c=>`<option value="${c.name}">${c.name}</option>`).join('')}</select>`)}
     <div class="two-col-f">${fld('Service',sel('f-srv',SERVICES,ex.service))}${fld('Value (€)',inp('f-value','number',ex.value))}</div>
     <div class="two-col-f">${fld('Stage',sel('f-stage',STAGES,ex.stage))}${fld('Est. close date',inp('f-date','date',ex.closeDate||today()))}</div>
     ${fld('Notes',ta('f-notes',ex.notes))}
@@ -849,22 +927,18 @@ function openModal(type,extra){
     setTimeout(()=>{const e=document.getElementById('f-cli');if(e&&ex.client)e.value=ex.client;},10);
   } else if(type==='activity'){
     mb.innerHTML=`<h3>Log activity</h3>
-    ${fld('Client',`<select id="f-cli" style="width:100%;font-size:13px;padding:7px 9px;border:0.5px solid var(--border2);border-radius:var(--r);background:var(--bg);color:var(--text)"><option value="">— select —</option>${cliOpts}</select>`)}
+    ${fld('Client',`<select id="f-cli" style="width:100%;font-size:13px;padding:7px 9px;border:0.5px solid var(--border2);border-radius:var(--r);background:var(--bg);color:var(--text)"><option value="">— select —</option>${db.clients.map(c=>`<option value="${c.name}">${c.name}</option>`).join('')}</select>`)}
     <div class="two-col-f">${fld('Type',sel('f-type',ACT_TYPES,''))}${fld('Date',inp('f-date','date',today()))}</div>
-    ${fld('Description',inp('f-desc','text','','Brief title (optional)'))}
+    ${fld('Description',inp('f-desc','text','','Brief title'))}
     ${fld('Attendees',inp('f-att','text','','e.g. Carlos (SF), Maria (Client)'))}
     ${fld('Notes',ta('f-notes','','Key points, decisions...',3))}
-    <div class="field">
-      <label>Next steps</label>
-      <div id="ns-rows" style="display:flex;flex-direction:column;gap:6px;margin-bottom:6px"></div>
-      <button class="add-btn" onclick="addActNSRow()" style="margin-top:0"><i class="ti ti-plus" style="font-size:11px"></i> Add next step</button>
-    </div>
+    <div class="field"><label>Next steps</label><div id="ns-rows" style="display:flex;flex-direction:column;gap:6px;margin-bottom:6px"></div><button class="add-btn" onclick="addActNSRow()"><i class="ti ti-plus" style="font-size:11px"></i> Add next step</button></div>
     <div class="modal-btns"><button class="btn" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="saveActivity()">Save</button></div>`;
     addActNSRow();
   } else if(type==='ae'){
     mb.innerHTML=`<h3>New Account Plan</h3>
     <div class="two-col-f">${fld('AE name',inp('f-ae-n','text','','e.g. Carlos Ruiz'))}${fld('Territory',inp('f-ae-t','text','','SF · Madrid'))}</div>
-    ${fld('Accounts to track <span style="color:var(--text3);font-weight:400">(one per line)</span>',ta('f-ae-c','','Telefónica\nBBVA\nInditex',3))}
+    ${fld('Accounts to track <span style="color:var(--text3);font-weight:400">(one per line)</span>',ta('f-ae-c','','Telefónica\nBBVA',3))}
     ${btns('saveAP()')}`;
   } else if(type==='edit-ae'){
     const ap=db.aps.find(a=>a.id===extra);if(!ap)return;
@@ -876,82 +950,62 @@ function openModal(type,extra){
   } else if(type==='edit-account'){
     const[apId,acId]=extra.split(':');const ap=db.aps.find(a=>a.id===apId);const ac=ap?ap.accounts.find(a=>a.id===acId):null;if(!ac)return;
     mb.innerHTML=`<h3>Edit account</h3>${fld('Name',inp('f-ac-n','text',ac.name))}${btns(`saveEditAccount('${apId}','${acId}')`)}`;
-  } else if(type==='meeting'||type==='edit-meeting'){
+  } else if(type==='ap-meeting'||type==='edit-ap-meeting'){
     const parts=extra.split(':');const apId=parts[0],acId=parts[1],mId=parts[2];
     const ap=db.aps.find(a=>a.id===apId);const ac=ap?ap.accounts.find(a=>a.id===acId):null;
-    const m=type==='edit-meeting'&&ac?ac.meetings.find(x=>x.id===mId):{};if(!ac)return;
-    mb.innerHTML=`<h3>${type==='edit-meeting'?'Edit':'Add'} meeting · <span style="font-weight:400">${ac.name}</span></h3>
+    const m=type==='edit-ap-meeting'&&ac?ac.meetings.find(x=>x.id===mId):{};if(!ac)return;
+    mb.innerHTML=`<h3>${type==='edit-ap-meeting'?'Edit':'Add'} meeting · <span style="font-weight:400">${ac.name}</span></h3>
     ${fld('Title',inp('f-m-t','text',m.title,'e.g. Q2 Planning Session'))}
     ${fld('Date',inp('f-m-d','date',m.date||today()))}
     ${fld('Notes',ta('f-m-n',m.notes,'Key points, decisions...',4))}
-    ${btns(`saveMeeting('${apId}','${acId}','${type==='edit-meeting'?mId:''}')`)}`;
-  } else if(type==='ns'){
+    ${btns(`saveAPMeeting('${apId}','${acId}','${type==='edit-ap-meeting'?mId:''}')`)}`;
+  } else if(type==='ap-ns'){
     const[apId,acId,mId]=extra.split(':');
     const ap=db.aps.find(a=>a.id===apId);const ac=ap?ap.accounts.find(a=>a.id===acId):null;const m=ac?ac.meetings.find(x=>x.id===mId):null;if(!m)return;
     mb.innerHTML=`<h3>Add next step · <span style="font-weight:400">${m.title}</span></h3>
     ${fld('What needs to happen?',inp('f-ns-t','text','','e.g. Send proposal, Book workshop...'))}
-    <div class="two-col-f">${fld('Company',sel('f-ns-co',['globant','sf'],'globant'))}${fld('Person responsible',inp('f-ns-p','text','','e.g. Juan / Carlos'))}</div>
+    <div class="two-col-f">${fld('Company',sel('f-ns-co',['globant','sf'],'globant'))}${fld('Person',inp('f-ns-p','text','','e.g. Juan / Carlos'))}</div>
     ${fld('Due date',inp('f-ns-d','date',today()))}
-    ${btns(`saveNS('${apId}','${acId}','${mId}')`)}`;
+    ${btns(`saveAPNS('${apId}','${acId}','${mId}')`)}`;
   }
   document.getElementById('modal-overlay').classList.add('open');
 }
- 
+
 function addActNSRow(){
   const row=document.createElement('div');
   row.style.cssText='display:grid;grid-template-columns:130px 1fr auto;gap:6px;align-items:center';
-  row.innerHTML=`
-    <input placeholder="Person" style="font-size:12px;padding:5px 7px;border:0.5px solid var(--border2);border-radius:var(--r);background:var(--bg);color:var(--text);font-family:var(--font)" data-ns-person>
-    <input placeholder="Description of next step..." style="font-size:12px;padding:5px 7px;border:0.5px solid var(--border2);border-radius:var(--r);background:var(--bg);color:var(--text);font-family:var(--font)" data-ns-desc>
-    <button onclick="this.closest('div').remove()" style="background:none;border:none;cursor:pointer;color:var(--text3);font-size:16px;padding:2px 4px;flex-shrink:0">×</button>`;
+  row.innerHTML=`<input placeholder="Person" style="font-size:12px;padding:5px 7px;border:0.5px solid var(--border2);border-radius:var(--r);background:var(--bg);color:var(--text);font-family:var(--font)" data-ns-person><input placeholder="Description..." style="font-size:12px;padding:5px 7px;border:0.5px solid var(--border2);border-radius:var(--r);background:var(--bg);color:var(--text);font-family:var(--font)" data-ns-desc><button onclick="this.closest('div').remove()" style="background:none;border:none;cursor:pointer;color:var(--text3);font-size:16px;padding:2px 4px">×</button>`;
   document.getElementById('ns-rows').appendChild(row);
 }
- 
+
 /* ── SAVE FUNCTIONS ── */
-function saveClient(eid){
-  const n=document.getElementById('f-name').value.trim();if(!n){alert('Name required');return}
-  const o={id:eid||uid(),name:n,sector:document.getElementById('f-sector').value.trim(),service:document.getElementById('f-srv').value,value:+document.getElementById('f-value').value||0,status:document.getElementById('f-st').value,nextAction:document.getElementById('f-nxt').value.trim()};
-  if(eid){const i=db.clients.findIndex(c=>c.id===eid);if(i>=0)db.clients[i]=o}else db.clients.push(o);
-  closeModal();persist();showToast('Client saved');
+function saveMtg(eid){
+  const title=document.getElementById('f-mtg-title').value.trim();if(!title){alert('Title required');return}
+  const agenda=document.getElementById('f-mtg-agenda').value.split('\n').map(s=>s.trim()).filter(Boolean);
+  const o={id:eid||uid(),title,datetime:document.getElementById('f-mtg-dt').value,participants:document.getElementById('f-mtg-part').value,objective:document.getElementById('f-mtg-obj').value.trim(),agenda,agendaDone:agenda.map(()=>false),materials:document.getElementById('f-mtg-mat').value.trim(),notes:document.getElementById('f-mtg-notes').value.trim(),createdAt:eid?undefined:now()};
+  if(eid){const existing=db.scheduledMeetings.find(m=>m.id===eid);if(existing){o.agendaDone=existing.agendaDone||agenda.map(()=>false);o.createdAt=existing.createdAt;}const i=db.scheduledMeetings.findIndex(m=>m.id===eid);if(i>=0)db.scheduledMeetings[i]=o;}
+  else db.scheduledMeetings.push(o);
+  closeModal();persist();showToast('Meeting saved');
 }
-function saveDeal(eid){
-  const cli=document.getElementById('f-cli').value;if(!cli){alert('Please select a client');return}
-  const o={id:eid||uid(),client:cli,service:document.getElementById('f-srv').value,value:+document.getElementById('f-value').value||0,stage:document.getElementById('f-stage').value,closeDate:document.getElementById('f-date').value,notes:document.getElementById('f-notes').value.trim()};
-  if(eid){const i=db.deals.findIndex(d=>d.id===eid);if(i>=0)db.deals[i]=o}else db.deals.push(o);
-  closeModal();persist();showToast('Deal saved');
+function saveAction(){
+  const title=document.getElementById('f-af-title').value.trim();if(!title){alert('Task required');return}
+  db.actionsToday.unshift({id:uid(),title,priority:document.getElementById('f-af-prio').value,client:document.getElementById('f-af-cli').value,timeBlock:document.getElementById('f-af-time').value,done:false,createdAt:now()});
+  closeModal();persist();showToast('Action added');
 }
-function saveActivity(){
-  const rows=document.querySelectorAll('#ns-rows > div');
-  const nextSteps=[...rows].map(r=>({person:(r.querySelector('[data-ns-person]')||{}).value?.trim()||'',description:(r.querySelector('[data-ns-desc]')||{}).value?.trim()||''})).filter(ns=>ns.description);
-  db.activities.push({id:uid(),client:document.getElementById('f-cli').value,type:document.getElementById('f-type').value,description:document.getElementById('f-desc').value.trim(),date:document.getElementById('f-date').value,attendees:document.getElementById('f-att').value.trim(),notes:document.getElementById('f-notes').value.trim(),nextSteps});
-  closeModal();persist();showToast('Activity logged');
-}
-function saveAP(){
-  const n=document.getElementById('f-ae-n').value.trim();if(!n){alert('AE name required');return}
-  const accounts=document.getElementById('f-ae-c').value.split('\n').map(s=>s.trim()).filter(Boolean);
-  db.aps.unshift({id:uid(),aeName:n,aeTerritory:document.getElementById('f-ae-t').value.trim(),accounts:accounts.map(name=>({id:uid(),name,meetings:[]}))});
-  closeModal();persist();showToast('Account plan created');
-}
+function saveClient(eid){const n=document.getElementById('f-name').value.trim();if(!n){alert('Name required');return}const o={id:eid||uid(),name:n,sector:document.getElementById('f-sector').value.trim(),service:document.getElementById('f-srv').value,value:+document.getElementById('f-value').value||0,status:document.getElementById('f-st').value,nextAction:document.getElementById('f-nxt').value.trim()};if(eid){const i=db.clients.findIndex(c=>c.id===eid);if(i>=0)db.clients[i]=o}else db.clients.push(o);closeModal();persist();showToast('Client saved');}
+function saveDeal(eid){const cli=document.getElementById('f-cli').value;if(!cli){alert('Please select a client');return}const o={id:eid||uid(),client:cli,service:document.getElementById('f-srv').value,value:+document.getElementById('f-value').value||0,stage:document.getElementById('f-stage').value,closeDate:document.getElementById('f-date').value,notes:document.getElementById('f-notes').value.trim()};if(eid){const i=db.deals.findIndex(d=>d.id===eid);if(i>=0)db.deals[i]=o}else db.deals.push(o);closeModal();persist();showToast('Deal saved');}
+function saveActivity(){const rows=document.querySelectorAll('#ns-rows > div');const nextSteps=[...rows].map(r=>({person:(r.querySelector('[data-ns-person]')||{}).value?.trim()||'',description:(r.querySelector('[data-ns-desc]')||{}).value?.trim()||''})).filter(ns=>ns.description);db.activities.push({id:uid(),client:document.getElementById('f-cli').value,type:document.getElementById('f-type').value,description:document.getElementById('f-desc').value.trim(),date:document.getElementById('f-date').value,attendees:document.getElementById('f-att').value.trim(),notes:document.getElementById('f-notes').value.trim(),nextSteps});closeModal();persist();showToast('Activity logged');}
+function saveAP(){const n=document.getElementById('f-ae-n').value.trim();if(!n){alert('AE name required');return}const accounts=document.getElementById('f-ae-c').value.split('\n').map(s=>s.trim()).filter(Boolean);db.aps.unshift({id:uid(),aeName:n,aeTerritory:document.getElementById('f-ae-t').value.trim(),accounts:accounts.map(name=>({id:uid(),name,meetings:[]}))});closeModal();persist();showToast('Account plan created');}
 function saveEditAP(id){const ap=db.aps.find(a=>a.id===id);if(!ap)return;ap.aeName=document.getElementById('f-ae-n').value.trim()||ap.aeName;ap.aeTerritory=document.getElementById('f-ae-t').value.trim();closeModal();persist();showToast('Updated');}
 function saveAccount(apId){const n=document.getElementById('f-ac-n').value.trim();if(!n){alert('Name required');return}const ap=db.aps.find(a=>a.id===apId);if(!ap)return;ap.accounts.push({id:uid(),name:n,meetings:[]});closeModal();persist();showToast('Account added');}
 function saveEditAccount(apId,acId){const ap=db.aps.find(a=>a.id===apId);if(!ap)return;const ac=ap.accounts.find(a=>a.id===acId);if(!ac)return;ac.name=document.getElementById('f-ac-n').value.trim()||ac.name;closeModal();persist();showToast('Updated');}
-function saveMeeting(apId,acId,mId){
-  const t=document.getElementById('f-m-t').value.trim();if(!t){alert('Title required');return}
-  const ap=db.aps.find(a=>a.id===apId);if(!ap)return;const ac=ap.accounts.find(a=>a.id===acId);if(!ac)return;
-  if(mId){const m=ac.meetings.find(x=>x.id===mId);if(m){m.title=t;m.date=document.getElementById('f-m-d').value;m.notes=document.getElementById('f-m-n').value.trim();}}
-  else ac.meetings.push({id:uid(),title:t,date:document.getElementById('f-m-d').value,notes:document.getElementById('f-m-n').value.trim(),nextSteps:[]});
-  closeModal();persist();showToast('Meeting saved');
-}
-function saveNS(apId,acId,mId){
-  const t=document.getElementById('f-ns-t').value.trim();if(!t){alert('Please describe the next step');return}
-  const ap=db.aps.find(a=>a.id===apId);if(!ap)return;const ac=ap.accounts.find(a=>a.id===acId);if(!ac)return;const m=ac.meetings.find(x=>x.id===mId);if(!m)return;
-  m.nextSteps.push({id:uid(),title:t,company:document.getElementById('f-ns-co').value,person:document.getElementById('f-ns-p').value.trim(),dueDate:document.getElementById('f-ns-d').value,done:false});
-  closeModal();persist();showToast('Next step added');
-}
+function saveAPMeeting(apId,acId,mId){const t=document.getElementById('f-m-t').value.trim();if(!t){alert('Title required');return}const ap=db.aps.find(a=>a.id===apId);if(!ap)return;const ac=ap.accounts.find(a=>a.id===acId);if(!ac)return;if(mId){const m=ac.meetings.find(x=>x.id===mId);if(m){m.title=t;m.date=document.getElementById('f-m-d').value;m.notes=document.getElementById('f-m-n').value.trim();}}else ac.meetings.push({id:uid(),title:t,date:document.getElementById('f-m-d').value,notes:document.getElementById('f-m-n').value.trim(),nextSteps:[]});closeModal();persist();showToast('Meeting saved');}
+function saveAPNS(apId,acId,mId){const t=document.getElementById('f-ns-t').value.trim();if(!t){alert('Please describe the next step');return}const ap=db.aps.find(a=>a.id===apId);if(!ap)return;const ac=ap.accounts.find(a=>a.id===acId);if(!ac)return;const m=ac.meetings.find(x=>x.id===mId);if(!m)return;m.nextSteps.push({id:uid(),title:t,company:document.getElementById('f-ns-co').value,person:document.getElementById('f-ns-p').value.trim(),dueDate:document.getElementById('f-ns-d').value,done:false});closeModal();persist();showToast('Next step added');}
+
 const closeModal=()=>{document.getElementById('modal-overlay').classList.remove('open');document.getElementById('modal-body').className='modal';};
 const saveName=()=>{const v=document.getElementById('cfg-name').value.trim();if(v){localStorage.setItem(NAME_KEY,v);showToast('Name saved');renderDashboard();}};
 function exportCSV(){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([['name,sector,service,value,status',...db.clients.map(c=>`"${c.name}","${c.sector||''}","${c.service||''}",${c.value||0},"${c.status||''}"`)].join('\n')],{type:'text/csv'}));a.download='salestracker.csv';a.click();showToast('Exported');}
-const clearAll=()=>{db={clients:[],deals:[],activities:[],aps:[]};saveLocal();renderAll();showToast('Cleared');};
+const clearAll=()=>{db={clients:[],deals:[],activities:[],aps:[],toComments:[],actionsToday:[],scheduledMeetings:[]};saveLocal();renderAll();showToast('Cleared');};
 function nav(id,el){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
@@ -959,7 +1013,7 @@ function nav(id,el){
   if(el)el.classList.add('active');
   if(id==='reports')renderReports();
   if(id==='alerts'){renderAlerts();updateBadge();}
-  if(id==='daily')renderDaily();
+  if(id==='meetings')renderMeetings();
 }
 const showToast=msg=>{const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);};
 document.getElementById('modal-overlay').addEventListener('click',function(e){if(e.target===this)closeModal()});
