@@ -529,7 +529,7 @@ const DB_KEY='st_db_v8',GAS_KEY='st_gas',TOKEN_KEY='st_token',NAME_KEY='st_name'
 const ALERT_DAYS=2;
 const STAGES=['Lead','Demo','Proposal','Negotiation','Won','Lost'];
 const SERVICES=['Sales Cloud','Service Cloud','Marketing Cloud','Commerce Cloud','Platform','Data Cloud','Agentforce','MuleSoft','Other'];
-const AIPODS=['AIPod 1','AIPod 2','AIPod 3','AIPod 4','AIPod 5','AIPod 6','AIPod 7','AIPod 8'];
+// AIPODS are dynamic — built from existing client data
 const STATUSES=['Lead','Active','Proposal','Negotiation','Inactive'];
 const ACT_TYPES=['Call','Email','Meeting','Proposal sent','Demo','Other'];
 const PRIOS=['High','Medium','Low'];
@@ -601,7 +601,7 @@ function setSyncState(s,l){['sdot','sdot2'].forEach(id=>{const d=document.getEle
 
 /* ── SEED ── */
 function seedDemo(){
-  db.clients=[{id:'cl1',name:'Telefónica',sector:'Telco',aipod:'AIPod 1',service:'Sales Cloud',status:'Active',nextAction:'QBR Q2'},{id:'cl2',name:'BBVA',sector:'Banking',aipod:'AIPod 2',service:'Service Cloud',status:'Active',nextAction:'Renewal Q3'},{id:'cl3',name:'Mapfre',sector:'Insurance',aipod:'AIPod 1',service:'MuleSoft',status:'Proposal',nextAction:'Contract signature'},{id:'cl4',name:'Repsol',sector:'Energy',aipod:'AIPod 3',service:'Agentforce',status:'Negotiation',nextAction:'Final proposal'},];
+  db.clients=[{id:'cl1',name:'Telefónica',sector:'Telco',aipod:'',service:'Sales Cloud',status:'Active',nextAction:'QBR Q2'},{id:'cl2',name:'BBVA',sector:'Banking',aipod:'',service:'Service Cloud',status:'Active',nextAction:'Renewal Q3'},{id:'cl3',name:'Mapfre',sector:'Insurance',aipod:'',service:'MuleSoft',status:'Proposal',nextAction:'Contract signature'},{id:'cl4',name:'Repsol',sector:'Energy',aipod:'',service:'Agentforce',status:'Negotiation',nextAction:'Final proposal'},];
   db.deals=[{id:'d1',client:'Telefónica',service:'Sales Cloud',serviceOther:'',value:42000,stage:'Won',closeDate:'2026-01-15',notes:''},{id:'d2',client:'BBVA',service:'Service Cloud',serviceOther:'',value:61000,stage:'Won',closeDate:'2026-03-10',notes:''},{id:'d3',client:'Mapfre',service:'MuleSoft',serviceOther:'',value:38000,stage:'Proposal',closeDate:'2026-06-30',notes:''},{id:'d4',client:'Repsol',service:'Agentforce',serviceOther:'',value:28000,stage:'Negotiation',closeDate:'2026-07-15',notes:''},{id:'d5',client:'Telefónica',service:'Other',serviceOther:'Revenue Cloud',value:15000,stage:'Demo',closeDate:'2026-09-01',notes:'Evaluating Revenue Cloud pilot'},];
   const t1=addDays(today(),1),y1=addDays(today(),-1);
   db.activities=[
@@ -940,6 +940,8 @@ function renderScheduledMeetings(){
   const el=document.getElementById('mtg-list');
   const sorted=[...db.scheduledMeetings].sort((a,b)=>a.datetime.localeCompare(b.datetime));
   if(!sorted.length){el.innerHTML='<div class="empty"><i class="ti ti-calendar-event"></i>No meetings scheduled.</div>';return;}
+  // Remember which meetings are currently open
+  const openIds=new Set([...document.querySelectorAll('.mtg-body.open')].map(el=>el.id.replace('mtgbody-','')));
   el.innerHTML=sorted.map(m=>{
     const isPast=m.datetime<now();
     return`<div class="mtg-card">
@@ -961,14 +963,45 @@ function renderScheduledMeetings(){
       </div>
       <div class="mtg-body" id="mtgbody-${m.id}">
         ${m.objective?`<div class="mtg-section"><div class="mtg-section-lbl">Objective</div><div class="mtg-text" style="font-weight:500;color:var(--text)">${m.objective}</div></div>`:''}
-        ${m.agenda&&m.agenda.length?`<div class="mtg-section"><div class="mtg-section-lbl">Agenda</div>${m.agenda.filter(a=>a).map((a,i)=>`<div class="mtg-agenda-item"><input type="checkbox" class="mtg-agenda-cb" ${m.agendaDone&&m.agendaDone[i]?'checked':''} onchange="toggleAgenda('${m.id}',${i},this.checked)"><span style="${m.agendaDone&&m.agendaDone[i]?'text-decoration:line-through;color:var(--text3)':''}">${a}</span></div>`).join('')}</div>`:''}
+        ${m.agenda&&m.agenda.length?`<div class="mtg-section">
+          <div class="mtg-section-lbl">Agenda & Discussion</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;border:0.5px solid var(--border);border-radius:var(--r);overflow:hidden">
+            <div style="padding:6px 10px;background:var(--bg2);border-bottom:0.5px solid var(--border);font-size:10px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.4px">Point</div>
+            <div style="padding:6px 10px;background:var(--bg2);border-bottom:0.5px solid var(--border);border-left:0.5px solid var(--border);font-size:10px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.4px">What was discussed / outcome</div>
+            ${m.agenda.filter(a=>a).map((a,i)=>`
+            <div style="padding:8px 10px;border-bottom:0.5px solid var(--border);display:flex;align-items:flex-start;gap:8px;font-size:13px">
+              <input type="checkbox" class="mtg-agenda-cb" ${m.agendaDone&&m.agendaDone[i]?'checked':''} onchange="toggleAgenda('${m.id}',${i},this.checked)" style="margin-top:3px;flex-shrink:0;accent-color:var(--blue)">
+              <span data-agenda-span="${m.id}-${i}" style="${m.agendaDone&&m.agendaDone[i]?'text-decoration:line-through;color:var(--text3)':''}">${a}</span>
+            </div>
+            <div style="padding:6px 8px;border-bottom:0.5px solid var(--border);border-left:0.5px solid var(--border)">
+              <textarea placeholder="What was discussed..." onchange="saveAgendaNote('${m.id}',${i},this.value)" style="width:100%;font-size:12px;font-family:var(--font);padding:4px 6px;border:0.5px solid var(--border);border-radius:5px;background:var(--bg);color:var(--text);resize:none;min-height:36px;line-height:1.4" rows="2">${m.agendaNotes&&m.agendaNotes[i]?m.agendaNotes[i]:''}</textarea>
+            </div>`).join('')}
+          </div>
+        </div>`:''}
         ${m.materials?`<div class="mtg-section"><div class="mtg-section-lbl">Materials</div><a href="${m.materials}" target="_blank" class="mtg-link"><i class="ti ti-link"></i> ${m.materials}</a></div>`:''}
-        ${m.notes?`<div class="mtg-section"><div class="mtg-section-lbl">Notes</div><div class="mtg-text">${m.notes}</div></div>`:''}
+        <div class="mtg-section">
+          <div class="mtg-section-lbl">General notes <span style="font-weight:400;color:var(--text3);text-transform:none;letter-spacing:0">(topics not on the agenda)</span></div>
+          <textarea id="mtg-general-notes-${m.id}" placeholder="Add general notes here — anything that came up outside the agenda..." onchange="saveGeneralNotes('${m.id}',this.value)" style="width:100%;font-size:13px;font-family:var(--font);padding:8px 10px;border:0.5px solid var(--border2);border-radius:var(--r);background:var(--bg);color:var(--text);resize:vertical;min-height:72px;line-height:1.5">${m.generalNotes||''}</textarea>
+        </div>
       </div>
     </div>`;
   }).join('');
+  // Restore open state after re-render
+  openIds.forEach(id=>{
+    const body=document.getElementById('mtgbody-'+id);
+    const chev=document.getElementById('mtgchev-'+id);
+    if(body){body.classList.add('open');if(chev)chev.style.transform='rotate(90deg)';}
+  });
 }
-function toggleAgenda(mId,idx,checked){const m=db.scheduledMeetings.find(x=>x.id===mId);if(!m)return;if(!m.agendaDone)m.agendaDone=m.agenda.map(()=>false);m.agendaDone[idx]=checked;persist();}
+function toggleAgenda(mId,idx,checked){
+  const m=db.scheduledMeetings.find(x=>x.id===mId);if(!m)return;
+  if(!m.agendaDone)m.agendaDone=m.agenda.map(()=>false);
+  m.agendaDone[idx]=checked;
+  // Update the label style in place without re-rendering
+  const spans=document.querySelectorAll('[data-agenda-span="'+mId+'-'+idx+'"]');
+  spans.forEach(s=>s.style.cssText=checked?'text-decoration:line-through;color:var(--text3)':'');
+  saveLocal();if(gasUrl)syncToDrive();
+}
 function deleteMtg(id){if(!confirm('Delete this meeting?'))return;db.scheduledMeetings=db.scheduledMeetings.filter(x=>x.id!==id);persist();showToast('Meeting deleted');}
 
 /* ── CLIENTS ── */
@@ -1073,6 +1106,11 @@ const delAP=(id)=>{if(!confirm('Delete this account plan?'))return;db.aps=db.aps
 const delItem=(col,id)=>{if(!confirm('Delete?'))return;db[col]=db[col].filter(x=>x.id!==id);persist();showToast('Deleted');};
 
 /* ── MODALS ── */
+function getAIPodOptions(){
+  const existing=[...new Set(db.clients.map(c=>c.aipod).filter(Boolean))].sort();
+  return existing.map(a=>`<option value="${a}">`).join('');
+}
+
 function openModal(type,extra){
   const mb=document.getElementById('modal-body');mb.className='modal';
   const cliOpts='<option value="">— none —</option>'+db.clients.map(c=>`<option value="${c.name}">${c.name}</option>`).join('');
@@ -1118,7 +1156,7 @@ function openModal(type,extra){
     const ex=type==='edit-client'?db.clients.find(c=>c.id===extra):{};
     mb.innerHTML=`<h3>${type==='edit-client'?'Edit':'New'} client</h3>
     ${fld('Name',inp('f-name','text',ex.name))}
-    <div class="two-col-f">${fld('Sector',inp('f-sector','text',ex.sector,'Banking, Retail...'))}${fld('AIPod',sel('f-aipod',['','AIPod 1','AIPod 2','AIPod 3','AIPod 4','AIPod 5','AIPod 6','AIPod 7','AIPod 8'],ex.aipod||''))}</div>
+    <div class="two-col-f">${fld('Sector',inp('f-sector','text',ex.sector,'Banking, Retail...'))}${fld('AIPod',`<input id="f-aipod" type="text" list="aipod-list" value="${ex.aipod||''}" placeholder="Type or select AIPod..." style="width:100%;font-size:13px;padding:7px 9px;border:0.5px solid var(--border2);border-radius:var(--r);background:var(--bg);color:var(--text);font-family:var(--font)"><datalist id="aipod-list">${getAIPodOptions()}</datalist>`)}</div>
     <div class="two-col-f">${fld('Service',sel('f-srv',SERVICES,ex.service))}${fld('Status',sel('f-st',STATUSES,ex.status))}</div>
     ${fld('Next action',inp('f-nxt','text',ex.nextAction))}
     ${btns(`saveClient('${type==='edit-client'?extra:''}')`)}`;
@@ -1188,7 +1226,7 @@ function saveMtg(eid){
   const title=document.getElementById('f-mtg-title').value.trim();if(!title){alert('Title required');return}
   const agenda=document.getElementById('f-mtg-agenda').value.split('\n').map(s=>s.trim()).filter(Boolean);
   const existing=eid?db.scheduledMeetings.find(m=>m.id===eid):null;
-  const o={id:eid||uid(),title,datetime:document.getElementById('f-mtg-dt').value,participants:document.getElementById('f-mtg-part').value,objective:document.getElementById('f-mtg-obj').value.trim(),agenda,agendaDone:existing?existing.agendaDone||agenda.map(()=>false):agenda.map(()=>false),materials:document.getElementById('f-mtg-mat').value.trim(),notes:document.getElementById('f-mtg-notes').value.trim(),createdAt:existing?existing.createdAt:now()};
+  const o={id:eid||uid(),title,datetime:document.getElementById('f-mtg-dt').value,participants:document.getElementById('f-mtg-part').value,objective:document.getElementById('f-mtg-obj').value.trim(),agenda,agendaDone:existing?existing.agendaDone||agenda.map(()=>false):agenda.map(()=>false),agendaNotes:existing?existing.agendaNotes||agenda.map(()=>''):agenda.map(()=>''),generalNotes:existing?existing.generalNotes||'':'',materials:document.getElementById('f-mtg-mat').value.trim(),notes:document.getElementById('f-mtg-notes').value.trim(),createdAt:existing?existing.createdAt:now()};
   if(eid){const i=db.scheduledMeetings.findIndex(m=>m.id===eid);if(i>=0)db.scheduledMeetings[i]=o;}
   else db.scheduledMeetings.push(o);
   closeModal();persist();showToast('Meeting saved');
@@ -1210,6 +1248,17 @@ function saveEditAccount(apId,acId){const ap=db.aps.find(a=>a.id===apId);if(!ap)
 function saveAPMeeting(apId,acId,mId){const t=document.getElementById('f-m-t').value.trim();if(!t){alert('Title required');return}const ap=db.aps.find(a=>a.id===apId);if(!ap)return;const ac=ap.accounts.find(a=>a.id===acId);if(!ac)return;if(mId){const m=ac.meetings.find(x=>x.id===mId);if(m){m.title=t;m.date=document.getElementById('f-m-d').value;m.notes=document.getElementById('f-m-n').value.trim();}}else ac.meetings.push({id:uid(),title:t,date:document.getElementById('f-m-d').value,notes:document.getElementById('f-m-n').value.trim(),nextSteps:[]});closeModal();persist();showToast('Meeting saved');}
 function saveAPNS(apId,acId,mId){const t=document.getElementById('f-ns-t').value.trim();if(!t){alert('Please describe the next step');return}const ap=db.aps.find(a=>a.id===apId);if(!ap)return;const ac=ap.accounts.find(a=>a.id===acId);if(!ac)return;const m=ac.meetings.find(x=>x.id===mId);if(!m)return;m.nextSteps.push({id:uid(),title:t,company:document.getElementById('f-ns-co').value,person:document.getElementById('f-ns-p').value.trim(),dueDate:document.getElementById('f-ns-d').value,done:false});closeModal();persist();showToast('Next step added');}
 
+function saveAgendaNote(mId,idx,val){
+  const m=db.scheduledMeetings.find(x=>x.id===mId);if(!m)return;
+  if(!m.agendaNotes)m.agendaNotes=m.agenda.map(()=>'');
+  m.agendaNotes[idx]=val;
+  saveLocal();if(gasUrl)syncToDrive();
+}
+function saveGeneralNotes(mId,val){
+  const m=db.scheduledMeetings.find(x=>x.id===mId);if(!m)return;
+  m.generalNotes=val;
+  saveLocal();if(gasUrl)syncToDrive();
+}
 const closeModal=()=>{document.getElementById('modal-overlay').classList.remove('open');document.getElementById('modal-body').className='modal';};
 const saveName=()=>{const v=document.getElementById('cfg-name').value.trim();if(v){localStorage.setItem(NAME_KEY,v);showToast('Name saved');renderDashboard();}};
 function exportCSV(){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([['name,sector,service,value,status',...db.clients.map(c=>`"${c.name}","${c.sector||''}","${c.service||''}",${c.value||0},"${c.status||''}"`)].join('\n')],{type:'text/csv'}));a.download='salestracker.csv';a.click();showToast('Exported');}
