@@ -266,7 +266,7 @@ tr:hover .row-actions{opacity:1}
 <body>
 <div class="topbar">
   <div><strong>SalesTracker</strong><span>Globant · Salesforce Practice</span></div>
-  <div style="display:flex;align-items:center;gap:7px"><div class="dot" id="sdot"></div><span style="font-size:12px;color:var(--text3)" id="slbl">Loading...</span></div>
+  <div style="display:flex;align-items:center;gap:10px"><div class="dot" id="sdot"></div><span style="font-size:12px;color:var(--text3)" id="slbl">Loading...</span><button onclick="logout()" style="font-size:11px;padding:4px 10px;border:0.5px solid var(--border2);border-radius:var(--r);background:transparent;color:var(--text3);cursor:pointer;font-family:var(--font);display:flex;align-items:center;gap:4px"><i class="ti ti-logout" style="font-size:13px"></i> Logout</button></div>
 </div>
 <div class="app">
   <div class="sidebar">
@@ -1275,7 +1275,8 @@ function nav(id,el){
 }
 const showToast=msg=>{const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);};
 document.getElementById('modal-overlay').addEventListener('click',function(e){if(e.target===this)closeModal()});
-load();
+function initApp(){load();}
+if(checkSession())initApp();
 </script>
 
 <!-- ═══════════════════════════════════════════
@@ -1479,6 +1480,93 @@ function formatAIText(text){
     .replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>')
     .replace(/^- (.+)$/gm,'<span style="display:block;padding-left:10px;position:relative"><span style="position:absolute;left:0;top:6px;width:4px;height:4px;border-radius:50%;background:currentColor;display:inline-block"></span>$1</span>')
     .replace(/\n/g,'<br>');
+}
+</script>
+
+<style>
+#login-screen{position:fixed;inset:0;background:var(--bg3);display:flex;align-items:center;justify-content:center;z-index:9999;font-family:var(--font)}
+#login-box{background:var(--bg);border:0.5px solid var(--border2);border-radius:var(--rl);padding:36px 32px;width:100%;max-width:360px;box-shadow:0 8px 32px rgba(0,0,0,.1)}
+.login-logo{text-align:center;margin-bottom:24px}
+.login-logo strong{font-size:20px;font-weight:700;display:block;color:var(--text)}
+.login-logo span{font-size:13px;color:var(--text3)}
+.login-field{margin-bottom:14px}
+.login-field label{display:block;font-size:12px;font-weight:500;color:var(--text2);margin-bottom:5px}
+.login-field input{width:100%;font-size:14px;font-family:var(--font);padding:9px 12px;border:0.5px solid var(--border2);border-radius:var(--r);background:var(--bg);color:var(--text);transition:border-color .15s}
+.login-field input:focus{outline:none;border-color:var(--blue)}
+.login-btn{width:100%;padding:10px;font-size:14px;font-weight:500;background:var(--blue);color:#fff;border:none;border-radius:var(--r);cursor:pointer;font-family:var(--font);transition:background .1s;margin-top:4px}
+.login-btn:hover{background:var(--blue-dark)}
+.login-error{font-size:12px;color:var(--red-dark);background:var(--red-bg);border-radius:var(--r);padding:8px 12px;margin-bottom:14px;display:none;text-align:center}
+.login-remember{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--text2);margin-bottom:16px;cursor:pointer}
+.login-remember input{accent-color:var(--blue);cursor:pointer}
+.login-footer{text-align:center;font-size:11px;color:var(--text3);margin-top:20px}
+</style>
+<div id="login-screen">
+  <div id="login-box">
+    <div class="login-logo">
+      <strong>SalesTracker</strong>
+      <span>Globant · Salesforce Practice</span>
+    </div>
+    <div class="login-error" id="login-error">Incorrect username or password</div>
+    <div class="login-field">
+      <label>Username</label>
+      <input type="text" id="login-user" placeholder="Username" autocomplete="username" onkeydown="if(event.key==='Enter')doLogin()">
+    </div>
+    <div class="login-field">
+      <label>Password</label>
+      <input type="password" id="login-pwd" placeholder="Password" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()">
+    </div>
+    <label class="login-remember">
+      <input type="checkbox" id="login-remember" checked> Remember me for 30 days
+    </label>
+    <button class="login-btn" onclick="doLogin()">Sign in</button>
+    <div class="login-footer">Your data is stored locally and synced to your Google Drive</div>
+  </div>
+</div>
+<script>
+const USER_HASH='36033babfb48ec64e197c97fb40d65e6c79f81e04c61aeccef3009e01645ab8d';
+const PWD_HASH='ede05422db12669976af997e80608eda63577cb27eb7a6ab72091c73c580d590';
+const SESSION_KEY='st_session';
+
+async function sha256(str){
+  const buf=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(str));
+  return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+}
+
+async function doLogin(){
+  const user=document.getElementById('login-user').value.trim().toLowerCase();
+  const pwd=document.getElementById('login-pwd').value;
+  const [uh,ph]=await Promise.all([sha256(user),sha256(pwd)]);
+  if(uh===USER_HASH&&ph===PWD_HASH){
+    const remember=document.getElementById('login-remember').checked;
+    const expiry=remember?Date.now()+30*24*60*60*1000:0;
+    localStorage.setItem(SESSION_KEY,JSON.stringify({auth:true,expiry}));
+    document.getElementById('login-screen').style.display='none';
+    initApp();
+  }else{
+    const err=document.getElementById('login-error');
+    err.style.display='block';
+    document.getElementById('login-pwd').value='';
+    setTimeout(()=>err.style.display='none',3000);
+  }
+}
+
+function checkSession(){
+  try{
+    const s=JSON.parse(localStorage.getItem(SESSION_KEY)||'{}');
+    if(s.auth&&(s.expiry===0||s.expiry>Date.now()))return true;
+  }catch(e){}
+  return false;
+}
+
+function logout(){
+  localStorage.removeItem(SESSION_KEY);
+  location.reload();
+}
+
+// Boot
+if(checkSession()){
+  document.getElementById('login-screen').style.display='none';
+  // initApp called below after DOM ready
 }
 </script>
 </body>
