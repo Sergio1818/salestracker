@@ -266,7 +266,7 @@ tr:hover .row-actions{opacity:1}
 <body>
 <div class="topbar">
   <div><strong>SalesTracker</strong><span>Globant · Salesforce Practice</span></div>
-  <div style="display:flex;align-items:center;gap:10px"><div class="dot" id="sdot"></div><span style="font-size:12px;color:var(--text3)" id="slbl">Loading...</span><button onclick="logout()" style="font-size:11px;padding:4px 10px;border:0.5px solid var(--border2);border-radius:var(--r);background:transparent;color:var(--text3);cursor:pointer;font-family:var(--font);display:flex;align-items:center;gap:4px"><i class="ti ti-logout" style="font-size:13px"></i> Logout</button></div>
+  <div style="display:flex;align-items:center;gap:10px"><div class="dot" id="sdot"></div><span style="font-size:12px;color:var(--text3)" id="slbl" title="Click to sync" style="cursor:pointer" onclick="manualSync()">Loading...</span><button onclick="logout()" style="font-size:11px;padding:4px 10px;border:0.5px solid var(--border2);border-radius:var(--r);background:transparent;color:var(--text3);cursor:pointer;font-family:var(--font);display:flex;align-items:center;gap:4px"><i class="ti ti-logout" style="font-size:13px"></i> Logout</button></div>
 </div>
 <div class="app">
   <div class="sidebar">
@@ -284,7 +284,7 @@ tr:hover .row-actions{opacity:1}
       <div class="nav-item" onclick="nav('reports',this)"><i class="ti ti-file-analytics"></i> Reports</div>
       <div class="nav-item" onclick="nav('config',this)"><i class="ti ti-settings"></i> Settings</div>
     </div>
-    <div class="sync-bar" onclick="manualSync()"><div class="dot" id="sdot2"></div><span id="slbl2">Loading...</span></div>
+    <div class="sync-bar" onclick="manualSync()" title="Click to sync now"><div class="dot" id="sdot2"></div><span id="slbl2">Loading...</span></div>
   </div>
   <div class="main">
 
@@ -553,25 +553,61 @@ const dLabel=d=>{const x=daysFrom(d);if(x===null)return'';if(x<0)return Math.abs
 const addDays=(dateStr,n)=>{const d=new Date(dateStr);d.setDate(d.getDate()+n);return d.toISOString().slice(0,10)};
 const startOfWeek=dateStr=>{const d=new Date(dateStr);const day=d.getDay();const diff=d.getDate()-(day===0?6:day-1);d.setDate(diff);return d.toISOString().slice(0,10)};
 
-function load(){
-  try{const r=localStorage.getItem(DB_KEY);if(r){const p=JSON.parse(r);Object.keys(db).forEach(k=>{if(p[k]!==undefined)db[k]=p[k];});}}catch(e){}
+async function load(){
+  // Load config (URL, token, name) — always from localStorage (these are settings not data)
   gasUrl=localStorage.getItem(GAS_KEY)||'';
   secToken=localStorage.getItem(TOKEN_KEY)||'';
   try{const n=localStorage.getItem(NAME_KEY);if(n)document.getElementById('cfg-name').value=n;}catch(e){}
   if(gasUrl)document.getElementById('cfg-gas').value=gasUrl;
   if(secToken)document.getElementById('cfg-token').value=secToken;
-  if(!db.clients.length&&!db.aps.length)seedDemo();
-  renderAll();
-  setSyncState(gasUrl?'pending':'ok',gasUrl?'Syncing...':'Local only');
-  if(gasUrl)syncToDrive();
+
+  if(!gasUrl){
+    // No Drive configured — show empty app with prompt to configure
+    setSyncState('error','Configure Drive URL in Settings');
+    renderAll();
+    return;
+  }
+
+  // Always load from Drive — it is the only source of truth
+  setSyncState('syncing','Loading from Drive...');
+  try{
+    const res=await fetch(driveUrl(gasUrl));
+    const data=await res.json();
+    if(data.error)throw new Error(data.error);
+    Object.keys(db).forEach(k=>{if(data[k]!==undefined)db[k]=data[k];});
+    setSyncState('ok','Drive ✓ — '+new Date().toLocaleTimeString('en',{hour:'2-digit',minute:'2-digit'}));
+    renderAll();
+    startAutoSync(); // start periodic sync after successful load
+  }catch(e){
+    setSyncState('error','Drive error: '+e.message);
+    // Show empty state — do NOT load local data to avoid stale data
+    renderAll();
+  }
+}
+
+let autoSyncInterval=null;
+function startAutoSync(){
+  if(autoSyncInterval)clearInterval(autoSyncInterval);
+  // Sync every 2 minutes
+  autoSyncInterval=setInterval(()=>{
+    if(gasUrl&&!isSyncing)syncToDrive();
+  },2*60*1000);
 }
 const saveLocal=()=>{try{localStorage.setItem(DB_KEY,JSON.stringify(db))}catch(e){}};
-const persist=()=>{saveLocal();renderAll();if(gasUrl)syncToDrive();};
+const persist=()=>{
+  renderAll();              // update UI immediately
+  saveLocal();              // cache in localStorage as temp backup only
+  if(gasUrl)syncToDrive();  // sync to Drive in background
+};
 
 /* ── DRIVE ── */
 function driveUrl(base){return secToken?base+'?token='+encodeURIComponent(secToken):base;}
 async function syncToDrive(){
   if(!gasUrl||isSyncing)return;
+  // Safety guard: don't sync if data looks empty/demo
+  if(db.clients.length===0&&db.deals.length===0&&db.aps.length===0){
+    setSyncState('ok','No data to sync');return;
+  }
   isSyncing=true;setSyncState('syncing','Syncing...');
   try{
     const payload={clients:db.clients,deals:db.deals,activities:db.activities,aps:db.aps,toComments:db.toComments,actionsToday:db.actionsToday,scheduledMeetings:db.scheduledMeetings,dismissedAlerts:db.dismissedAlerts};
@@ -592,7 +628,13 @@ async function loadFromDrive(){
     saveLocal();renderAll();setSyncState('ok','Loaded from Drive');showToast('Data loaded from Drive');
   }catch(e){setSyncState('error','Load failed: '+e.message);showToast('Could not load from Drive');}
 }
-function saveGAS(){const v=document.getElementById('cfg-gas').value.trim();if(!v)return;gasUrl=v;localStorage.setItem(GAS_KEY,v);syncToDrive();showToast('Saved — syncing...');}
+function saveGAS(){
+  const v=document.getElementById('cfg-gas').value.trim();if(!v)return;
+  gasUrl=v;localStorage.setItem(GAS_KEY,v);
+  showToast('URL saved. Loading from Drive...');
+  // Load from Drive first to avoid overwriting with local data
+  loadFromDrive();
+}
 function saveToken(){const v=document.getElementById('cfg-token').value.trim();if(!v)return;secToken=v;localStorage.setItem(TOKEN_KEY,v);showToast('Token saved');}
 function manualSync(){if(!gasUrl){showToast('Set up Drive URL in Settings');return;}isSyncing=false;syncToDrive();showToast('Syncing...');}
 function setSyncState(s,l){['sdot','sdot2'].forEach(id=>{const d=document.getElementById(id);d.className='dot'+(s==='syncing'?' syncing':s==='error'?' error':s==='pending'?' pending':'');});document.getElementById('slbl').textContent=l;document.getElementById('slbl2').textContent=l;}
@@ -998,7 +1040,7 @@ function toggleAgenda(mId,idx,checked){
   // Update the label style in place without re-rendering
   const spans=document.querySelectorAll('[data-agenda-span="'+mId+'-'+idx+'"]');
   spans.forEach(s=>s.style.cssText=checked?'text-decoration:line-through;color:var(--text3)':'');
-  saveLocal();if(gasUrl)syncToDrive();
+  saveLocal();if(gasUrl)syncToDrive(); // lightweight save
 }
 function deleteMtg(id){if(!confirm('Delete this meeting?'))return;db.scheduledMeetings=db.scheduledMeetings.filter(x=>x.id!==id);persist();showToast('Meeting deleted');}
 
@@ -1273,7 +1315,13 @@ function nav(id,el){
 }
 const showToast=msg=>{const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);};
 document.getElementById('modal-overlay').addEventListener('click',function(e){if(e.target===this)closeModal()});
-function initApp(){load();}
+function initApp(){
+  load();
+  // Sync to Drive when user closes or navigates away
+  window.addEventListener('beforeunload',()=>{
+    if(gasUrl&&!isSyncing)syncToDrive();
+  });
+}
 if(checkSession())initApp();
 </script>
 
