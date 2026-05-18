@@ -604,13 +604,20 @@ const persist=()=>{
 function driveUrl(base){return secToken?base+'?token='+encodeURIComponent(secToken):base;}
 async function syncToDrive(){
   if(!gasUrl||isSyncing)return;
-  // Safety guard: don't sync if data looks empty/demo
-  if(db.clients.length===0&&db.deals.length===0&&db.aps.length===0){
-    setSyncState('ok','No data to sync');return;
-  }
+  // Safety guard: don't sync if ALL data is completely empty
+  const hasAnyData=db.clients.length>0||db.deals.length>0||db.activities.length>0||db.aps.length>0||db.toComments.length>0||db.actionsToday.length>0||db.scheduledMeetings.length>0;
+  if(!hasAnyData){setSyncState('ok','No data to sync');return;}
   isSyncing=true;setSyncState('syncing','Syncing...');
   try{
-    const payload={clients:db.clients,deals:db.deals,activities:db.activities,aps:db.aps,toComments:db.toComments,actionsToday:db.actionsToday,scheduledMeetings:db.scheduledMeetings,dismissedAlerts:db.dismissedAlerts};
+    // Flatten activities so nextSteps are readable in the sheet
+    const flatActivities=db.activities.map(a=>({
+      ...a,
+      nextSteps_persons:(a.nextSteps||[]).map(n=>n.person||'').join(' | '),
+      nextSteps_descriptions:(a.nextSteps||[]).map(n=>n.description||'').join(' | '),
+      nextSteps_dueDates:(a.nextSteps||[]).map(n=>n.dueDate||'').join(' | '),
+      nextSteps:JSON.stringify(a.nextSteps||[]) // keep full JSON for reload
+    }));
+    const payload={clients:db.clients,deals:db.deals,activities:flatActivities,aps:db.aps,toComments:db.toComments,actionsToday:db.actionsToday,scheduledMeetings:db.scheduledMeetings,dismissedAlerts:db.dismissedAlerts};
     const res=await fetch(driveUrl(gasUrl),{method:'POST',body:JSON.stringify(payload)});
     const data=await res.json();
     if(data.ok){setSyncState('ok','Drive: synced '+new Date().toLocaleTimeString('en',{hour:'2-digit',minute:'2-digit'}));document.getElementById('cfg-sync-desc').textContent='Last sync: '+new Date().toLocaleString('en');}
@@ -1343,7 +1350,7 @@ function initApp(){
     if(gasUrl&&!isSyncing)syncToDrive();
   });
 }
-if(checkSession())initApp();
+// initApp() is called by the login script after checkSession()
 </script>
 
 <!-- ═══════════════════════════════════════════
@@ -1630,10 +1637,10 @@ function logout(){
   location.reload();
 }
 
-// Boot
+// Boot — checkSession is defined here, initApp is defined in main script above
 if(checkSession()){
   document.getElementById('login-screen').style.display='none';
-  // initApp called below after DOM ready
+  initApp();
 }
 </script>
 </body>
